@@ -1,10 +1,17 @@
-.vth-remove-list-styles{
-  &ul {
+.vth-remove-list-styles {
+  ul {
     margin: 0;
     padding: 0;
     li {
       list-style: none;
       padding: 8px;
     }
+  }
+}
+
+.vth-link {
+  cursor: pointer;
+  &:hover {
+    background-color: red;
   }
 }

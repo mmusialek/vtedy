@@ -1,4 +1,16 @@
 .vth-option-panel__container {
   height: 100vh;
   background-color: gray;
+  .vth-option-panel__container__nav-container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    .vth-option-panel__container__nav-container__links{
+      width: 95%
+    }
+    .vth-option-panel__container__nav-container__hider{
+      width: 5%;
+    }
+  }
 }
