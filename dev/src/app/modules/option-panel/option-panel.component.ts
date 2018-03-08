@@ -31,4 +31,8 @@ export class OptionPanelComponent extends VerticalPanelComponent implements OnIn
     this._router.navigate(param);
   }
 
+  toggleOptionPanel(){
+    this.viewModel.isNameVisible = !this.viewModel.isNameVisible;
+  }
+
 }

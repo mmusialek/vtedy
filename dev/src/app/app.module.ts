@@ -9,6 +9,7 @@ import { OptionPanelComponent } from './modules/option-panel/option-panel.compon
 import { ItemListComponent } from './modules/item-list/item-list.component';
 import { AppRoutingModule } from './app.routing';
 import { WelcomeComponent } from './modules/welcome/welcome.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { WelcomeComponent } from './modules/welcome/welcome.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

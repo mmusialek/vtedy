@@ -7,10 +7,12 @@
     flex-direction: row;
 
     .vth-shell-container__main__left-panel {
-      min-width: 20%;
+      min-width: 15%;
+      flex: 0 1 auto;
     }
     .vth-shell-container__main__body {
-      min-width: 80%;
+      min-width: 85%;
+      flex: 0 1 auto;
     }
     .vth-shell-container__main__details {
       position: absolute;

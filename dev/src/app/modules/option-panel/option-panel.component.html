@@ -1,15 +1,16 @@
-<div class="vth-option-panel__container vth-remove-list-styles">
+<div class="vth-option-panel__container
+            vth-remove-list-styles"
+      [class.vth-option-panel__container--short]="!viewModel.isNameVisible">
   <div class="vth-option-panel__container__nav-container">
     <div class="vth-option-panel__container__nav-container__links">
       <ul>
-        <li *ngFor="let item of viewModel.items" >
-          <!--<a [routerLink]="[item.url, item.params && item.params[0]]">{{item.name}}</a>-->
-          <a class="vth-link" (click)="navigateToPage(item)">{{item.name}}</a>
+        <li *ngFor="let item of viewModel.items">
+          <a class="vth-link" (click)="navigateToPage(item)">
+            <span>[{{item.name[0]}}{{item.name[1]}}]</span>
+            <span *ngIf="viewModel.isNameVisible">{{item.name}}</span>
+          </a>
         </li>
       </ul>
-    </div>
-    <div class="vth-option-panel__container__nav-container__hider">
-      <>
     </div>
   </div>
 </div>
