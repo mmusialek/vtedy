@@ -13,5 +13,15 @@
     .vth-option-panel__container__nav-container__links {
       width: 100%;
     }
+
+    .vth-option-panel__container__nav-container__hider {
+      height: 100vw;
+      width: 5%;
+      background-color: green;
+      cursor: pointer;
+      &:hover{
+        background-color: black;
+      }
+    }
   }
 }

@@ -4,7 +4,6 @@
       <span (click)="toggleAddNewItemVisibility()">+</span>
       <div *ngIf="viewModel.isAddNewItemVisible" class="vth-display-inline">
         <input type="text" (keyup)="addNewItem($event)" [(ngModel)]="viewModel.newItem" #newItemInput>
-        <button (click)="addNewItem($event, true)">OK</button>
       </div>
     </li>
   </ul>

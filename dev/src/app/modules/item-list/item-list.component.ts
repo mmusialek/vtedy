@@ -20,8 +20,8 @@ export class ItemListComponent implements OnInit, OnDestroy {
 
     this._routeSubs = this._router.events.subscribe(p => {
       if (p instanceof ActivationEnd) {
-        const page = this._route.snapshot.params['page'];
-        this.refreshView(page);
+        const pageParam = this._route.snapshot.params['page'];
+        this.refreshView(pageParam);
       }
     });
 
@@ -48,12 +48,12 @@ export class ItemListComponent implements OnInit, OnDestroy {
   }
 
   addNewItem(event, isFromActionButton: boolean = false) {
-    if(!this.viewModel.newItem){
+    if (!this.viewModel.newItem) {
       this.toggleAddNewItemVisibility();
       return;
     }
-    if (event.code == "Enter" || isFromActionButton) {
-      this.viewModel.items.push(new ItemListItemViewModel({name: this.viewModel.newItem}));
+    if (event.code === 'Enter' || isFromActionButton) {
+      this.viewModel.items.push(new ItemListItemViewModel({ name: this.viewModel.newItem }));
       this.viewModel.newItem = '';
       this.toggleAddNewItemVisibility();
     }
@@ -68,30 +68,30 @@ export class ItemListComponent implements OnInit, OnDestroy {
       default:
       case PagesRoues.PriorityBox:
         this.viewModel.items.splice(0, this.viewModel.items.length);
-        this.viewModel.items.push(new ItemListItemViewModel({name: 'priority box line 1'}));
-        this.viewModel.items.push(new ItemListItemViewModel({name: 'priority box line 2'}));
-        this.viewModel.items.push(new ItemListItemViewModel({name: 'priority box line 3'}));
+        this.viewModel.items.push(new ItemListItemViewModel({ name: 'priority box line 1' }));
+        this.viewModel.items.push(new ItemListItemViewModel({ name: 'priority box line 2' }));
+        this.viewModel.items.push(new ItemListItemViewModel({ name: 'priority box line 3' }));
         break;
 
       case PagesRoues.Inbox:
         this.viewModel.items.splice(0, this.viewModel.items.length);
-        this.viewModel.items.push(new ItemListItemViewModel({name: 'inbox 1'}));
-        this.viewModel.items.push(new ItemListItemViewModel({name: 'inbox 2'}));
-        this.viewModel.items.push(new ItemListItemViewModel({name: 'inbox 3'}));
+        this.viewModel.items.push(new ItemListItemViewModel({ name: 'inbox 1' }));
+        this.viewModel.items.push(new ItemListItemViewModel({ name: 'inbox 2' }));
+        this.viewModel.items.push(new ItemListItemViewModel({ name: 'inbox 3' }));
         break;
 
       case PagesRoues.Projects:
         this.viewModel.items.splice(0, this.viewModel.items.length);
-        this.viewModel.items.push(new ItemListItemViewModel({name: 'projects 1'}));
-        this.viewModel.items.push(new ItemListItemViewModel({name: 'projects 2'}));
-        this.viewModel.items.push(new ItemListItemViewModel({name: 'projects 3'}));
+        this.viewModel.items.push(new ItemListItemViewModel({ name: 'projects 1' }));
+        this.viewModel.items.push(new ItemListItemViewModel({ name: 'projects 2' }));
+        this.viewModel.items.push(new ItemListItemViewModel({ name: 'projects 3' }));
         break;
 
       case PagesRoues.Calendar:
         this.viewModel.items.splice(0, this.viewModel.items.length);
-        this.viewModel.items.push(new ItemListItemViewModel({name: 'calendar 1'}));
-        this.viewModel.items.push(new ItemListItemViewModel({name: 'calendar 2'}));
-        this.viewModel.items.push(new ItemListItemViewModel({name: 'calendar 3'}));
+        this.viewModel.items.push(new ItemListItemViewModel({ name: 'calendar 1' }));
+        this.viewModel.items.push(new ItemListItemViewModel({ name: 'calendar 2' }));
+        this.viewModel.items.push(new ItemListItemViewModel({ name: 'calendar 3' }));
         break;
     }
   }

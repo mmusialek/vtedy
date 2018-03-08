@@ -1,14 +1,15 @@
 .vth-shell-container {
   display: block;
   width: 100%;
-
   .vth-shell-container__main {
     display: flex;
     flex-direction: row;
-
     .vth-shell-container__main__left-panel {
       min-width: 15%;
       flex: 0 1 auto;
+      &--hidden {
+        min-width: 10%;
+      }
     }
     .vth-shell-container__main__body {
       min-width: 85%;

@@ -1,8 +1,8 @@
 <div class="vth-shell-container">
   <div class="vth-shell-container__main">
 
-    <div class="vth-shell-container__main__left-panel">
-      <vth-option-panel></vth-option-panel>
+    <div class="vth-shell-container__main__left-panel" [class.vth-shell-container__main__left-panel--hidden]="!areOptionPanelNamesVisible">
+      <vth-option-panel [toggleOptionPanelNames]="toggleOptionPanelNames.bind(this)"></vth-option-panel>
       <div class="vth-shell-container__main__left-panel__details">
         <router-outlet></router-outlet>
       </div>
