@@ -1,21 +1,22 @@
 <div class="vth-item-list__container  vth-remove-list-styles">
-  <ul class="vth-item-list__container__list">
-    <li class="vth-item-list__container__list__list-item">
-      <span (click)="toggleAddNewItemVisibility()">+</span>
-      <div *ngIf="viewModel.isAddNewItemVisible" class="vth-display-inline">
-        <input type="text" (keyup)="addNewItem($event)" [(ngModel)]="viewModel.newItem" #newItemInput>
-      </div>
-    </li>
-  </ul>
 
-  <ul class="vth-item-list__container__list">
-    <li class="vth-item-list__container__list__list-item" *ngFor="let item of viewModel.items">{{item.name}}</li>
-  </ul>
+  <div class="">
+    <ul class="vth-item-list__container__list">
+      <li class="vth-item-list__container__list__list-item">
+        <span (click)="toggleAddNewItemVisibility()">+</span>
+        <div *ngIf="viewModel.isAddNewItemVisible" class="vth-display-inline">
+          <input type="text" (keyup)="addNewItem($event)" [(ngModel)]="viewModel.newItem" #newItemInput>
+        </div>
+      </li>
+    </ul>
 
-  <ul class="vth-item-list__container__list">
-    <li class="vth-item-list__container__list__list-item">
-      \/
-    </li>
-  </ul>
+    <ul class="vth-item-list__container__list">
+      <li class="vth-item-list__container__list__list-item" *ngFor="let item of viewModel.items">{{item.name}}</li>
+    </ul>
+  </div>
+
+  <div class="vth-item-list__container__footer">
+    <div>\/ status</div>
+  </div>
 
 </div>

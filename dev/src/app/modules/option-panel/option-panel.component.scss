@@ -1,22 +1,30 @@
 .vth-option-panel__container {
   height: 100vh;
   background-color: gray;
-  &--short {
-    width: 30%;
-  }
+  //&--short {
+  //  width: 30%;
+  //}
 
   .vth-option-panel__container__nav-container {
     display: flex;
     flex-direction: row;
-    width: 100%;
+    justify-content: space-between;
+    //width: 100%;
+    height: 100%;
 
     .vth-option-panel__container__nav-container__links {
-      width: 100%;
+      //width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: calc(100% - 12px);
     }
 
     .vth-option-panel__container__nav-container__hider {
-      height: 100vw;
-      width: 5%;
+      //height: 100%;
+      //width: 5%;
+      width: 10px;
+      margin-left: 2px;
       background-color: green;
       cursor: pointer;
       &:hover{

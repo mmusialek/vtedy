@@ -1,6 +1,7 @@
 <div class="vth-option-panel__container
             vth-remove-list-styles" [class.vth-option-panel__container--short]="!viewModel.isNameVisible">
   <div class="vth-option-panel__container__nav-container">
+
     <div class="vth-option-panel__container__nav-container__links">
       <ul>
         <li *ngFor="let item of viewModel.items">
@@ -11,8 +12,8 @@
         </li>
       </ul>
     </div>
+
     <div class="vth-option-panel__container__nav-container__hider" (click)="toggleOptionPanel()">
-      <p *ngIf="viewModel.isNameVisible">bla</p>
     </div>
   </div>
 </div>

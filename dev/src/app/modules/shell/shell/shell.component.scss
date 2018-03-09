@@ -1,18 +1,20 @@
 .vth-shell-container {
   display: block;
   width: 100%;
+  min-height: 100vh;
+  background-color: #F5F5F5;
   .vth-shell-container__main {
     display: flex;
     flex-direction: row;
     .vth-shell-container__main__left-panel {
-      min-width: 15%;
+      max-width: 15%;
       flex: 0 1 auto;
-      &--hidden {
-        min-width: 10%;
-      }
+      //&--hidden {
+      //  min-width: auto;
+      //}
     }
     .vth-shell-container__main__body {
-      min-width: 85%;
+      width: 100%;
       flex: 0 1 auto;
     }
     .vth-shell-container__main__details {

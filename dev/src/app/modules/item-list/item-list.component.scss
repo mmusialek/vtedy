@@ -1,4 +1,10 @@
 .vth-item-list__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+
+
   .vth-item-list__container__list {
     display: flex;
     flex-direction: column;
@@ -12,5 +18,10 @@
         cursor: pointer;
       }
     }
+  }
+
+  .vth-item-list__container__footer{
+    padding: 8px;
+    border-top: 2px solid darkgray;
   }
 }
