@@ -10,6 +10,7 @@ import { ItemListComponent } from './modules/item-list/item-list.component';
 import { AppRoutingModule } from './app.routing';
 import { WelcomeComponent } from './modules/welcome/welcome.component';
 import { FormsModule } from '@angular/forms';
+import { ItemListService } from './modules/item-list/item-list.service';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    ItemListService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

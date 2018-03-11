@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ItemListItemViewModel, ItemListViewModel } from './item-list.view-model';
 import { ActivatedRoute, ActivationEnd, Router } from '@angular/router';
 import { ISubscription } from 'rxjs/Subscription';
+import { ItemListService, ItemListFilter } from './item-list.service';
 
 @Component({
   selector: 'vth-item-list',
@@ -13,7 +14,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
   @ViewChild('newItemInput') newItemInput;
   private _routeSubs: ISubscription;
 
-  constructor(private _route: ActivatedRoute, private _router: Router) {
+  constructor(private _route: ActivatedRoute, private _router: Router, private _itemListService: ItemListService) {
   }
 
   ngOnInit() {
@@ -62,38 +63,34 @@ export class ItemListComponent implements OnInit, OnDestroy {
   // helper methods
 
   private refreshView(page: string) {
+    const filter = new ItemListFilter();
+    const currDate = new Date(Date.now());
 
     switch (page) {
 
       default:
       case PagesRoues.PriorityBox:
+        filter.date = new Date(Date.UTC(currDate.getFullYear(), currDate.getUTCMonth(), currDate.getUTCDate()));
+
         this.viewModel.items.splice(0, this.viewModel.items.length);
-        this.viewModel.items.push(new ItemListItemViewModel({ name: 'priority box line 1' }));
-        this.viewModel.items.push(new ItemListItemViewModel({ name: 'priority box line 2' }));
-        this.viewModel.items.push(new ItemListItemViewModel({ name: 'priority box line 3' }));
+        this.viewModel.items = this._itemListService.getCurrentItems();
         break;
 
       case PagesRoues.Inbox:
         this.viewModel.items.splice(0, this.viewModel.items.length);
-        this.viewModel.items.push(new ItemListItemViewModel({ name: 'inbox 1' }));
-        this.viewModel.items.push(new ItemListItemViewModel({ name: 'inbox 2' }));
-        this.viewModel.items.push(new ItemListItemViewModel({ name: 'inbox 3' }));
+        this.viewModel.items = this._itemListService.getInboxItems();
         break;
 
       case PagesRoues.Projects:
         this.viewModel.items.splice(0, this.viewModel.items.length);
-        this.viewModel.items.push(new ItemListItemViewModel({ name: 'projects 1' }));
-        this.viewModel.items.push(new ItemListItemViewModel({ name: 'projects 2' }));
-        this.viewModel.items.push(new ItemListItemViewModel({ name: 'projects 3' }));
+        this.viewModel.items = this._itemListService.getProjectsItems();
         break;
 
       case PagesRoues.Calendar:
         this.viewModel.items.splice(0, this.viewModel.items.length);
-        this.viewModel.items.push(new ItemListItemViewModel({ name: 'calendar 1' }));
-        this.viewModel.items.push(new ItemListItemViewModel({ name: 'calendar 2' }));
-        this.viewModel.items.push(new ItemListItemViewModel({ name: 'calendar 3' }));
         break;
     }
+
   }
 
 }

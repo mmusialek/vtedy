@@ -1,6 +1,6 @@
 export class ItemListViewModel {
   items: ItemListItemViewModel[] = [];
-  isAddNewItemVisible: boolean = false;
+  isAddNewItemVisible = false;
   newItem: string;
 }
 
