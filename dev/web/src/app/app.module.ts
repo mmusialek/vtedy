@@ -11,6 +11,9 @@ import { AppRoutingModule } from './app.routing';
 import { WelcomeComponent } from './modules/welcome/welcome.component';
 import { FormsModule } from '@angular/forms';
 import { ItemListService } from './modules/item-list/item-list.service';
+import { ClickOutsideDirective } from './shared/directives/click-outside.directive';
+import { ItemDetailsComponent } from './modules/item-details/item-details.component';
+import { ItemDetailsService } from './modules/item-details/item.details.service';
 
 
 @NgModule({
@@ -20,7 +23,9 @@ import { ItemListService } from './modules/item-list/item-list.service';
     VerticalPanelComponent,
     OptionPanelComponent,
     ItemListComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    ClickOutsideDirective,
+    ItemDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +33,10 @@ import { ItemListService } from './modules/item-list/item-list.service';
     FormsModule
   ],
   providers: [
-    ItemListService],
+    ItemListService,
+    ItemDetailsService
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

@@ -2,7 +2,8 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ItemListItemViewModel, ItemListViewModel } from './item-list.view-model';
 import { ActivatedRoute, ActivationEnd, Router } from '@angular/router';
 import { ISubscription } from 'rxjs/Subscription';
-import { ItemListService, ItemListFilter } from './item-list.service';
+import { ItemListFilter, ItemListService } from './item-list.service';
+import { ItemDetailsService } from '../item-details/item.details.service';
 
 @Component({
   selector: 'vth-item-list',
@@ -14,7 +15,8 @@ export class ItemListComponent implements OnInit, OnDestroy {
   @ViewChild('newItemInput') newItemInput;
   private _routeSubs: ISubscription;
 
-  constructor(private _route: ActivatedRoute, private _router: Router, private _itemListService: ItemListService) {
+  constructor(private _route: ActivatedRoute, private _router: Router, private _itemListService: ItemListService,
+              private _itemDetailsService: ItemDetailsService) {
   }
 
   ngOnInit() {
@@ -37,10 +39,20 @@ export class ItemListComponent implements OnInit, OnDestroy {
     }
   }
 
+  onClickOutsideInput(event) {
+    this.viewModel.isAddNewItemVisible = false;
+  }
+
+  onItemClickHandler(event: MouseEvent, item: ItemListItemViewModel) {
+    const id = item.id;
+    this._itemDetailsService.showItemDetails(id);
+  }
+
   toggleAddNewItemVisibility() {
     this.viewModel.isAddNewItemVisible = !this.viewModel.isAddNewItemVisible;
 
     if (this.viewModel.isAddNewItemVisible) {
+      this._itemDetailsService.hideItemDetails();
       const timerId = setTimeout(() => {
         this.newItemInput.nativeElement.focus();
         clearTimeout(timerId);
@@ -54,7 +66,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
       return;
     }
     if (event.code === 'Enter' || isFromActionButton) {
-      this.viewModel.items.push(new ItemListItemViewModel({ name: this.viewModel.newItem }));
+      this.viewModel.items.push(new ItemListItemViewModel({name: this.viewModel.newItem}));
       this.viewModel.newItem = '';
       this.toggleAddNewItemVisibility();
     }

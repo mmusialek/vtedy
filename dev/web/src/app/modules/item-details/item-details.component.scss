@@ -1,0 +1,19 @@
+.vth-item-details__container {
+  height: 100%;
+  .vth-item-details__container__body {
+    display: flex;
+    flex-direction: column;
+    .vth-item-details__container__body__header {
+      //background-color: green;
+      padding: 5px;
+      .vth-item-details__container__body__header__close {
+        cursor: pointer;
+      }
+    }
+
+    .vth-item-details__container__body__content {
+      //background-color: greenyellow;
+      padding: 5px;
+    }
+  }
+}

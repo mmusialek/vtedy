@@ -1,0 +1,46 @@
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ItemDetailsService } from './item.details.service';
+import { ItemDetailsViewModel } from './item-details.view-model';
+import { ISubscription } from 'rxjs/Subscription';
+
+@Component({
+  selector: 'vth-item-details',
+  templateUrl: './item-details.component.html',
+  styleUrls: ['./item-details.component.scss']
+})
+export class ItemDetailsComponent implements OnInit, OnDestroy {
+
+  viewModel: ItemDetailsViewModel;
+  private _isDialogVisibleSubscription: ISubscription;
+  private _newDataSubscription: ISubscription;
+
+  constructor(private _itemDetailsService: ItemDetailsService) {
+  }
+
+  ngOnInit() {
+    this.viewModel = new ItemDetailsViewModel();
+
+    this._isDialogVisibleSubscription = this._itemDetailsService.isDialogVisible.subscribe(p => {
+      this.viewModel.isVisible = p;
+    });
+
+    this._newDataSubscription = this._itemDetailsService.newDataStream.subscribe(p => {
+      this.viewModel.item = p;
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this._isDialogVisibleSubscription) {
+      this._isDialogVisibleSubscription.unsubscribe();
+    }
+
+    if (this._newDataSubscription) {
+      this._newDataSubscription.unsubscribe();
+    }
+  }
+
+  onCloseHandler() {
+    this._itemDetailsService.hideItemDetails();
+  }
+
+}

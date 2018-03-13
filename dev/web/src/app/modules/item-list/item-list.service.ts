@@ -2,15 +2,14 @@ import { Injectable } from '@angular/core';
 import { ItemListItemViewModel } from './item-list.view-model';
 
 
-
 @Injectable()
 export class ItemListService {
 
   getCurrentItems(filter?: ItemListFilter) {
     const res: ItemListItemViewModel[] = [];
-    res.push(new ItemListItemViewModel({ name: 'priority box line 1' }),
-      new ItemListItemViewModel({ name: 'priority box line 2' }),
-      new ItemListItemViewModel({ name: 'priority box line 3' }));
+    res.push(new ItemListItemViewModel({id: '1', name: 'priority box line 1'}),
+      new ItemListItemViewModel({id: '2', name: 'priority box line 2'}),
+      new ItemListItemViewModel({id: '3', name: 'priority box line 3'}));
 
     return res;
   }
@@ -18,9 +17,9 @@ export class ItemListService {
   getInboxItems(filter?: ItemListFilter) {
     const res: ItemListItemViewModel[] = [];
     res.push(
-      new ItemListItemViewModel({ name: 'inbox 1' }),
-      new ItemListItemViewModel({ name: 'inbox 2' }),
-      new ItemListItemViewModel({ name: 'inbox 3' })
+      new ItemListItemViewModel({id: '1', name: 'inbox 1'}),
+      new ItemListItemViewModel({id: '2', name: 'inbox 2'}),
+      new ItemListItemViewModel({id: '3', name: 'inbox 3'})
     );
     return res;
   }
@@ -28,9 +27,9 @@ export class ItemListService {
   getProjectsItems(filter?: ItemListFilter) {
     const res: ItemListItemViewModel[] = [];
     res.push(
-      new ItemListItemViewModel({ name: 'project 1' }),
-      new ItemListItemViewModel({ name: 'project 2' }),
-      new ItemListItemViewModel({ name: 'project 3' })
+      new ItemListItemViewModel({id: '1', name: 'project 1'}),
+      new ItemListItemViewModel({id: '2', name: 'project 2'}),
+      new ItemListItemViewModel({id: '3', name: 'project 3'})
     );
     return res;
   }
