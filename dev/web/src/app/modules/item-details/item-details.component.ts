@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit, EventEmitter, Output} from '@angular/core';
 import { ItemDetailsService } from './item.details.service';
 import { ItemDetailsViewModel } from './item-details.view-model';
 import { ISubscription } from 'rxjs/Subscription';
@@ -13,6 +13,8 @@ export class ItemDetailsComponent implements OnInit, OnDestroy {
   viewModel: ItemDetailsViewModel;
   private _isDialogVisibleSubscription: ISubscription;
   private _newDataSubscription: ISubscription;
+
+  @Output() closeEvent: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private _itemDetailsService: ItemDetailsService) {
   }
@@ -41,6 +43,7 @@ export class ItemDetailsComponent implements OnInit, OnDestroy {
 
   onCloseHandler() {
     this._itemDetailsService.hideItemDetails();
+    this.closeEvent.emit(true);
   }
 
 }

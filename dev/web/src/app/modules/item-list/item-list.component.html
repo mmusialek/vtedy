@@ -1,22 +1,33 @@
 <div class="vth-item-list__container  vth-remove-list-styles">
 
-  <div>
-    <ul class="vth-item-list__container__list">
-      <li class="vth-item-list__container__list__list-item" (vthClickOutside)="onClickOutsideInput($event)">
-        <span (click)="toggleAddNewItemVisibility()">+</span>
-        <div *ngIf="viewModel.isAddNewItemVisible" class="vth-display-inline">
-          <input type="text" (keyup)="addNewItem($event)" [(ngModel)]="viewModel.newItem" #newItemInput>
-        </div>
-      </li>
-    </ul>
+  <div class="vth-item-list__container__body">
 
-    <ul class="vth-item-list__container__list">
-      <li class="vth-item-list__container__list__list-item" *ngFor="let item of viewModel.items" (click)="onItemClickHandler($event, item)">{{item.name}}</li>
-    </ul>
-
-    <div class="vth-item-list__container__details">
-      <vth-item-details></vth-item-details>
+    <div class="vth-item-list__container__body__header">
+      <ul class="vth-item-list__container__list">
+        <li class="vth-item-list__container__list__list-item" (vthClickOutside)="onClickOutsideInput($event)">
+          <span (click)="toggleAddNewItemVisibility()">+</span>
+          <div *ngIf="viewModel.isAddNewItemVisible" class="vth-display-inline">
+            <input (keyup)="addNewItem($event)" [(ngModel)]="viewModel.newItem" #newItemInput>
+          </div>
+        </li>
+      </ul>
     </div>
+
+    <div class="vth-item-list__container__body__content">
+      <div class="vth-item-list__container__body__content__main">
+        <ul class="vth-item-list__container__list">
+          <li class="vth-item-list__container__list__list-item" *ngFor="let item of viewModel.items" (click)="onItemClickHandler($event, item)">{{item.name}}</li>
+        </ul>
+      </div>
+      <div class="vth-item-list__container__body__content__details" [class.vth-display-none]="!viewModel.areDetailsVisible" (vthClickOutside)="onClickItemDetailsOutsideInput($event)">
+        <vth-item-details (closeEvent)="onCloseDetailsHandler($event)"></vth-item-details>
+      </div>
+    </div>
+
+    <!-- <div class="vth-item-list__container__details"> -->
+    <!-- <div>
+      <vth-item-details></vth-item-details>
+    </div> -->
 
   </div>
 
@@ -25,4 +36,3 @@
   </div>
 
 </div>
-
