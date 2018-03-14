@@ -1,9 +1,9 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ItemListItemViewModel, ItemListViewModel } from './item-list.view-model';
-import { ActivatedRoute, ActivationEnd, Router } from '@angular/router';
-import { ISubscription } from 'rxjs/Subscription';
-import { ItemListFilter, ItemListService } from './item-list.service';
-import { ItemDetailsService } from '../item-details/item.details.service';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {ItemListItemViewModel, ItemListViewModel} from './item-list.view-model';
+import {ActivatedRoute, ActivationEnd, Router} from '@angular/router';
+import {ISubscription} from 'rxjs/Subscription';
+import {ItemListFilter, ItemListService} from './item-list.service';
+import {ItemDetailsService} from '../item-details/item.details.service';
 
 @Component({
   selector: 'vth-item-list',
@@ -41,11 +41,17 @@ export class ItemListComponent implements OnInit, OnDestroy {
   }
 
   onClickOutsideInput(event) {
-    this.viewModel.isAddNewItemVisible = false;
-    this.viewModel.newItem = '';
+    if (event.className !== 'vth-option-panel__container__nav-container__hider') {
+      this.viewModel.isAddNewItemVisible = false;
+      this.viewModel.newItem = '';
+    }
   }
 
   onClickItemDetailsOutsideInput(event) {
+    if (event.className === 'vth-option-panel__container__nav-container__hider') {
+      return;
+    }
+
     if (this.viewModel.areDetailsVisible && event.className !== 'vth-item-list__container__list__list-item') {
       this.viewModel.areDetailsVisible = false;
       this.canHideCss = true;

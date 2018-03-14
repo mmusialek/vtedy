@@ -24,6 +24,7 @@ export class OptionPanelComponent extends VerticalPanelComponent implements OnIn
       new OptionPanelItemViewModel({name: 'Inbox', url: 'item-list', params: ['inbox']}),
       new OptionPanelItemViewModel({name: 'Projects', url: 'item-list', params: ['projects']}),
       new OptionPanelItemViewModel({name: 'Calendar', url: 'item-list', params: ['calendar']}),
+      new OptionPanelItemViewModel({name: 'Notes', url: 'notes'}),
     );
   }
 
