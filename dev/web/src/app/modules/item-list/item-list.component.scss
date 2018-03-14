@@ -56,18 +56,22 @@
         right: 0;
         background-color: transparent;
         height: calc(100% - 41px - 43px);
-        width: 0;
-        display: flex;
+        width: 100%;
+        display: none;
         flex-direction: row;
         overflow: hidden;
+        max-width: 500px;
 
         &--show {
           animation: slide-in 0.5s forwards;
           -webkit-animation: slide-in 0.5s forwards;
+          display: flex;
         }
         &--hide {
           animation: slide-out 0.5s forwards;
           -webkit-animation: slide-out 0.5s forwards;
+
+          display: flex;
         }
 
         .vth-item-list__container__body__content__details__content__shadow {
@@ -116,10 +120,12 @@
 
 @keyframes slide-in {
   0% {
-    width: 0;
+    //width: 0;
+    transform: translateX(30vw);
   }
   100% {
-    width: 30vw;
+    //width: 30vw;
+    transform: translateX(0);
   }
 }
 
@@ -129,10 +135,12 @@
 
 @keyframes slide-out {
   0% {
-    width: 30vw;
+    //width: 30vw;
+    transform: translateX(0);
   }
   100% {
-    width: 0;
+    //width: 0;
+    transform: translateX(30vw);
   }
 }
 

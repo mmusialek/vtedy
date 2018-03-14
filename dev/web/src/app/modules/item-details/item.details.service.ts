@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
-import { ItemDataViewModel } from './item-details.view-model';
+import {Injectable} from '@angular/core';
+import {Subject} from 'rxjs/Subject';
+import {CommentViewModel, ItemDataViewModel, ProjectViewModel, TagViewModel} from './item-details.view-model';
 
 @Injectable()
 export class ItemDetailsService {
@@ -33,20 +33,39 @@ export class ItemDetailsService {
     let result: ItemDataViewModel;
 
 
+    result = new ItemDataViewModel();
+    result.id = '1';
+    result.title = 'item element 1';
+    result.project = new ProjectViewModel({id: 1, name: 'test proj 1', owner: 'Marcin'});
+    result.comments = [];
+    result.comments.push(new CommentViewModel({
+      author: 'Marcin',
+      comment: 'first comment',
+      date: new Date(Date.now())
+    }));
+    result.comments.push(new CommentViewModel({
+      author: 'Marcin',
+      comment: 'second comment',
+      date: new Date(Date.now())
+    }));
+    result.date = new Date(Date.now());
+    result.tags = [];
+    result.tags.push(new TagViewModel({id: 1, name: 'tag_1', owner: 'Marcin'}));
+
     switch (id) {
       case'1':
-        result = new ItemDataViewModel();
         result.id = '1';
+        result.title = 'item element 1';
         break;
 
       case'2':
-        result = new ItemDataViewModel();
         result.id = '2';
+        result.title = 'item element 2';
         break;
 
       case'3':
-        result = new ItemDataViewModel();
         result.id = '3';
+        result.title = 'item element 3';
         break;
     }
 
