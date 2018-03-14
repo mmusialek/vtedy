@@ -1,9 +1,9 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {ItemListItemViewModel, ItemListViewModel} from './item-list.view-model';
-import {ActivatedRoute, ActivationEnd, Router} from '@angular/router';
-import {ISubscription} from 'rxjs/Subscription';
-import {ItemListFilter, ItemListService} from './item-list.service';
-import {ItemDetailsService} from '../item-details/item.details.service';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ItemListItemViewModel, ItemListViewModel } from './item-list.view-model';
+import { ActivatedRoute, ActivationEnd, Router } from '@angular/router';
+import { ISubscription } from 'rxjs/Subscription';
+import { ItemListFilter, ItemListService } from './item-list.service';
+import { ItemDetailsService } from '../item-details/item.details.service';
 
 @Component({
   selector: 'vth-item-list',
@@ -14,7 +14,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
   viewModel: ItemListViewModel = new ItemListViewModel();
   @ViewChild('newItemInput') newItemInput;
   private _routeSubs: ISubscription;
-  private _itemDetailsOutsideClicks = 0;
+  canHideCss = false;
 
   constructor(private _route: ActivatedRoute, private _router: Router, private _itemListService: ItemListService,
               private _itemDetailsService: ItemDetailsService) {
@@ -42,11 +42,13 @@ export class ItemListComponent implements OnInit, OnDestroy {
 
   onClickOutsideInput(event) {
     this.viewModel.isAddNewItemVisible = false;
+    this.viewModel.newItem = '';
   }
 
   onClickItemDetailsOutsideInput(event) {
     if (this.viewModel.areDetailsVisible && event.className !== 'vth-item-list__container__list__list-item') {
       this.viewModel.areDetailsVisible = false;
+      this.canHideCss = true;
     }
   }
 
@@ -58,6 +60,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
 
   onCloseDetailsHandler(event) {
     this.viewModel.areDetailsVisible = false;
+    this.canHideCss = true;
   }
 
   toggleAddNewItemVisibility() {
