@@ -1,6 +1,8 @@
 .vth-option-panel__container {
+  $options-background: #cdcdcd;
+
   height: 100vh;
-  background-color: gray;
+  background-color: $options-background;
   //&--short {
   //  width: 30%;
   //}
@@ -25,10 +27,10 @@
       //width: 5%;
       width: 10px;
       margin-left: 2px;
-      background-color: green;
+      background-color: #673ab7;
       cursor: pointer;
       &:hover{
-        background-color: black;
+        background-color: #512DA8;
       }
     }
   }

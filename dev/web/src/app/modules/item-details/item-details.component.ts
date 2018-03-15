@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, EventEmitter, Output} from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { ItemDetailsService } from './item.details.service';
 import { ItemDetailsViewModel } from './item-details.view-model';
 import { ISubscription } from 'rxjs/Subscription';
@@ -44,6 +44,10 @@ export class ItemDetailsComponent implements OnInit, OnDestroy {
   onCloseHandler() {
     this._itemDetailsService.hideItemDetails();
     this.closeEvent.emit(true);
+  }
+
+  onPinHandler() {
+    this._itemDetailsService.togglePinDialog();
   }
 
 }

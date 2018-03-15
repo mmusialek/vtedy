@@ -1,9 +1,9 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {ItemListItemViewModel, ItemListViewModel} from './item-list.view-model';
-import {ActivatedRoute, ActivationEnd, Router} from '@angular/router';
-import {ISubscription} from 'rxjs/Subscription';
-import {ItemListFilter, ItemListService} from './item-list.service';
-import {ItemDetailsService} from '../item-details/item.details.service';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ItemListItemViewModel, ItemListViewModel } from './item-list.view-model';
+import { ActivatedRoute, ActivationEnd, Router } from '@angular/router';
+import { ISubscription } from 'rxjs/Subscription';
+import { ItemListFilter, ItemListService } from './item-list.service';
+import { ItemDetailsService } from '../item-details/item.details.service';
 
 @Component({
   selector: 'vth-item-list',
@@ -14,7 +14,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
   viewModel: ItemListViewModel = new ItemListViewModel();
   @ViewChild('newItemInput') newItemInput;
   private _routeSubs: ISubscription;
-  canHideCss = false;
+  canHideCss = true;
 
   constructor(private _route: ActivatedRoute, private _router: Router, private _itemListService: ItemListService,
               private _itemDetailsService: ItemDetailsService) {
@@ -41,20 +41,19 @@ export class ItemListComponent implements OnInit, OnDestroy {
   }
 
   onClickOutsideInput(event) {
-    if (event.className !== 'vth-option-panel__container__nav-container__hider') {
+    if (event.className.indexOf('vth-option-panel__container__nav-container__hider') < 0) {
       this.viewModel.isAddNewItemVisible = false;
       this.viewModel.newItem = '';
     }
   }
 
   onClickItemDetailsOutsideInput(event) {
-    if (event.className === 'vth-option-panel__container__nav-container__hider') {
+    if (event.className.indexOf('vth-option-panel__container__nav-container__hider') > 0) {
       return;
     }
 
-    if (this.viewModel.areDetailsVisible && event.className !== 'vth-item-list__container__list__list-item') {
-      this.viewModel.areDetailsVisible = false;
-      this.canHideCss = true;
+    if (this.viewModel.areDetailsVisible && event.className.indexOf('vth-item-list__container__list__list-item') < 0) {
+      this.closeDetails();
     }
   }
 
@@ -65,8 +64,15 @@ export class ItemListComponent implements OnInit, OnDestroy {
   }
 
   onCloseDetailsHandler(event) {
-    this.viewModel.areDetailsVisible = false;
-    this.canHideCss = true;
+    this.closeDetails();
+  }
+
+  private closeDetails() {
+    if (!this._itemDetailsService.isDialogPinned) {
+      this.viewModel.areDetailsVisible = false;
+      this.canHideCss = true;
+      this._itemDetailsService.hideItemDetails();
+    }
   }
 
   toggleAddNewItemVisibility() {
@@ -82,10 +88,10 @@ export class ItemListComponent implements OnInit, OnDestroy {
   }
 
   addNewItem(event, isFromActionButton: boolean = false) {
-    if (!this.viewModel.newItem) {
-      this.toggleAddNewItemVisibility();
-      return;
-    }
+    // if (!this.viewModel.newItem) {
+    //   this.toggleAddNewItemVisibility();
+    //   return;
+    // }
     if (event.code === 'Enter' || isFromActionButton) {
       this.viewModel.items.push(new ItemListItemViewModel({name: this.viewModel.newItem}));
       this.viewModel.newItem = '';

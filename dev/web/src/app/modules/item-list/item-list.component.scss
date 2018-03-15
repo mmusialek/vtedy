@@ -1,3 +1,5 @@
+$details-background: #ebebeb;
+
 .vth-item-list__container {
   display: flex;
   flex-direction: column;
@@ -8,9 +10,9 @@
     flex-direction: column;
     justify-content: center;
     .vth-item-list__container__list__list-item {
-      border-bottom: 1px solid lightgray;
+      border-bottom: 1px solid $details-background;
       &:hover {
-        background-color: lightgray;
+        background-color: $details-background;
         cursor: pointer;
       }
     }
@@ -19,7 +21,7 @@
     display: flex;
     flex-direction: column;
     .vth-item-list__container__body__header {
-      border-bottom: 2px solid lightgray;
+      border-bottom: 2px solid $details-background;
       padding: 5px;
       height: 30px;
       display: flex;
@@ -33,11 +35,11 @@
           cursor: pointer;
         }
         .vth-item-list__container__body__header__new-item__input {
-          background-color: lightgray;
+          //background-color: $details-background;
           font-size: 1.1em;
-          padding: 0 5px;
-          outline: none;
-          border: 1px solid gray;
+          //padding: 0 5px;
+          //outline: none;
+          //border: 1px solid gray;
           width: 30vw;
         }
       }
@@ -56,11 +58,11 @@
         right: 0;
         background-color: transparent;
         height: calc(100% - 41px - 43px);
-        width: 100%;
+        //width: 100%;
         display: none;
         flex-direction: row;
         overflow: hidden;
-        max-width: 500px;
+        //max-width: 500px;
 
         &--show {
           animation: slide-in 0.5s forwards;
@@ -77,11 +79,11 @@
         .vth-item-list__container__body__content__details__content__shadow {
           width: 10px;
           height: 100%;
-          background-image: linear-gradient(90deg, transparent, rgba(100, 100, 100, 1));
+          background-image: linear-gradient(90deg, transparent, rgba($details-background, 1));
         }
 
         .vth-item-list__container__body__content__details__content {
-          background-color: rgba(100, 100, 100, 1);
+          background-color: rgba($details-background, 1);
           width: 100%;
 
         }
@@ -89,15 +91,15 @@
 
     }
   }
-  .vth-item-list__container__details {
-    position: absolute;
-    background-color: gray;
-    top: 0;
-    width: 30%;
-    left: calc(100% - 30%);
-    display: block;
-    box-shadow: -1px 1px 5px 0px red;
-  }
+  //.vth-item-list__container__details {
+  //  position: absolute;
+  //  background-color: gray;
+  //  top: 0;
+  //  width: 30%;
+  //  left: calc(100% - 30%);
+  //  display: block;
+  //  box-shadow: -1px 1px 5px 0px red;
+  //}
 
   .vth-item-list__container__footer {
     padding: 5px;

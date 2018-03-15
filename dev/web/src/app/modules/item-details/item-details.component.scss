@@ -14,6 +14,31 @@
     .vth-item-details__container__body__content {
       //background-color: greenyellow;
       padding: 5px;
+
+      .vth-item-details__container__body__content__item-details {
+        .vth-item-details__container__body__content__item-details__header {
+          .vth-item-details__container__body__content__item-details__header__name {
+
+          }
+          .vth-item-details__container__body__content__item-details__header__date {
+
+          }
+          .vth-item-details__container__body__content__item-details__header__tags {
+
+          }
+        }
+        .vth-item-details__container__body__content__item-details__comments {
+          .vth-item-details__container__body__content__item-details__comments__input-form {
+
+          }
+          .vth-item-details__container__body__content__item-details__comments__comment-entries {
+            .vth-item-details__container__body__content__item-details__comments__comment-entries__entry{
+
+            }
+
+          }
+        }
+      }
     }
   }
 }

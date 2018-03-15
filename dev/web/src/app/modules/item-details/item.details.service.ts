@@ -1,12 +1,13 @@
-import {Injectable} from '@angular/core';
-import {Subject} from 'rxjs/Subject';
-import {CommentViewModel, ItemDataViewModel, ProjectViewModel, TagViewModel} from './item-details.view-model';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
+import { CommentViewModel, ItemDataViewModel, ProjectViewModel, TagViewModel } from './item-details.view-model';
 
 @Injectable()
 export class ItemDetailsService {
 
   private _isDialogVisible: Subject<boolean> = new Subject<boolean>();
   private _newDataStream: Subject<ItemDataViewModel> = new Subject<ItemDataViewModel>();
+  private _pinDialogWindow = false;
 
   get isDialogVisible() {
     return this._isDialogVisible;
@@ -19,14 +20,37 @@ export class ItemDetailsService {
   constructor() {
   }
 
+  get isDialogPinned() {
+    return this._pinDialogWindow;
+  }
+
+  togglePinDialog() {
+    this._pinDialogWindow = !this._pinDialogWindow;
+  }
+
+  pinDialog() {
+    this._pinDialogWindow = true;
+  }
+
+  unPinDialog() {
+    this._pinDialogWindow = false;
+  }
+
   showItemDetails(id: string) {
-    this._isDialogVisible.next(true);
-    const item = this.getItemDetails(id);
-    this._newDataStream.next(item);
+    // if (!this._pinDialogWindow) {
+      this._isDialogVisible.next(true);
+      const item = this.getItemDetails(id);
+      this._newDataStream.next(item);
+    // }
   }
 
   hideItemDetails() {
-    this._isDialogVisible.next(false);
+    if (!this._pinDialogWindow) {
+      const hideTimer = setTimeout(p => {
+        this._isDialogVisible.next(false);
+        clearTimeout(hideTimer);
+      }, 300);
+    }
   }
 
   getItemDetails(id: string) {

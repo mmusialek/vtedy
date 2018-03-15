@@ -15,6 +15,9 @@ import { ClickOutsideDirective } from './shared/directives/click-outside.directi
 import { ItemDetailsComponent } from './modules/item-details/item-details.component';
 import { ItemDetailsService } from './modules/item-details/item.details.service';
 
+import { MatButtonModule, MatDividerModule, MatInputModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -28,9 +31,16 @@ import { ItemDetailsService } from './modules/item-details/item.details.service'
     ItemDetailsComponent
   ],
   imports: [
+    // angular
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+
+    // meterial
+    MatInputModule,
+    MatButtonModule,
+    BrowserAnimationsModule,
+    MatDividerModule,
   ],
   providers: [
     ItemListService,
