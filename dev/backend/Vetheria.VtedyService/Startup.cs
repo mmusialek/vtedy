@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
 using Vetheria.VtedyService.Database;
-
 namespace Vetheria.VtedyService
 {
     public class Startup
@@ -27,6 +20,19 @@ namespace Vetheria.VtedyService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddMvcCore()
+            .AddAuthorization()
+            .AddJsonFormatters();
+
+
+            services.AddAuthentication("Bearer")
+                .AddIdentityServerAuthentication(options =>
+                {
+                    options.Authority = "http://localhost:5000";
+                    options.RequireHttpsMetadata = false;
+
+                    options.ApiName = "api1";
+                });
             //services.AddMvcCore().AddApiExplorer();
 
             services.AddSwaggerGen(c =>
@@ -58,6 +64,7 @@ namespace Vetheria.VtedyService
 
 
             app.UseMvc();
+            app.UseAuthentication();
         }
     }
 }

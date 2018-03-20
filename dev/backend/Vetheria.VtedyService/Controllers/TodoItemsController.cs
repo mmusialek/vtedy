@@ -10,12 +10,12 @@ using Vetheria.VtedyService.Models;
 namespace Vetheria.VtedyService.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Todo")]
-    public class TodoController : Controller
+    [Route("api/TodoItems")]
+    public class TodoItemsController : Controller
     {
         private VtedyContext _context;
 
-        public TodoController(VtedyContext context)
+        public TodoItemsController(VtedyContext context)
         {
             _context = context;
 
@@ -39,14 +39,14 @@ namespace Vetheria.VtedyService.Controllers
         {
             var item = _context.TodoItems.FirstOrDefault(p => p.Id == id);
 
-            if(item == null)
+            if (item == null)
             {
                 return NotFound();
             }
 
             return new ObjectResult(item);
         }
-        
+
         // POST: api/Todo
         [HttpPost]
         public IActionResult Post([FromBody]TodoItem item)
@@ -61,7 +61,7 @@ namespace Vetheria.VtedyService.Controllers
 
             return CreatedAtRoute("Get", new { id = item.Id }, item);
         }
-        
+
         // PUT: api/Todo/5
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody]TodoItem item)
