@@ -5,13 +5,11 @@ using System.Threading.Tasks;
 
 namespace Vetheria.VtedyService.Models
 {
-    public class TodoItem
+    public class Tag
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
-        public bool IsComplete { get; set; }
 
-
-        public virtual ICollection<Tag> Tags { get; set; }
+        public virtual ICollection<TodoItem> TodoItems { get; set; }
     }
 }

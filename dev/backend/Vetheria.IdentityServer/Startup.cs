@@ -17,18 +17,18 @@ namespace Vetheria.IdentityServer
         {
             services.AddMvc();
 
-            services.AddMvcCore()
-                .AddAuthorization()
-                .AddJsonFormatters();
+            //services.AddMvcCore()
+            //    .AddAuthorization()
+            //    .AddJsonFormatters();
 
-            services.AddAuthentication("Bearer")
-                .AddIdentityServerAuthentication(options =>
-                {
-                    options.Authority = "http://localhost:5000";
-                    options.RequireHttpsMetadata = false;
+            //services.AddAuthentication("Bearer")
+            //    .AddIdentityServerAuthentication(options =>
+            //    {
+            //        options.Authority = "http://localhost:5000";
+            //        options.RequireHttpsMetadata = false;
 
-                    options.ApiName = "api1";
-                });
+            //        options.ApiName = "api1";
+            //    });
 
             services.AddIdentityServer()
                 .AddDeveloperSigningCredential()

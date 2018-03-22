@@ -10,7 +10,7 @@ using Vetheria.VtedyService.Models;
 namespace Vetheria.VtedyService.Controllers
 {
     [Produces("application/json")]
-    [Route("api/TodoItems")]
+    [Route("api/[controller]")]
     public class TodoItemsController : Controller
     {
         private VtedyContext _context;

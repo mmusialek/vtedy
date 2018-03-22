@@ -14,6 +14,15 @@ namespace Vetheria.VtedyService.Database
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.TodoItemBuilder();
+            modelBuilder.TagsBuilder();
+        }
+
+
         public DbSet<TodoItem> TodoItems { get; set; }
+        public DbSet<Tag> Tags { get; set; }
     }
 }
+
