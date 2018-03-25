@@ -10,7 +10,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
+using Vetheria.Vtedy.Application.Core;
+using Vetheria.Vtedy.Application.Handlers;
 using Vetheria.VtedyService.Database;
+using Vetheria.VtedyService.Models;
 
 namespace Vetheria.Vtedy.ApiService
 {
@@ -34,6 +37,9 @@ namespace Vetheria.Vtedy.ApiService
             });
 
 
+            services.SetupServicesToInject();
+
+            // add context
             services.AddDbContext<VtedyContext>(opt => opt.UseInMemoryDatabase("VtedyDatabase"));
         }
 

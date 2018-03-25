@@ -7,7 +7,7 @@ using Vetheria.VtedyService.Models;
 
 namespace Vetheria.VtedyService.Database
 {
-    public class VtedyContext : DbContext
+    public class VtedyContext : DbContext, IDbContext
     {
         public VtedyContext(DbContextOptions<VtedyContext> options)
             : base(options)
@@ -19,7 +19,6 @@ namespace Vetheria.VtedyService.Database
             modelBuilder.TodoItemBuilder();
             modelBuilder.TagsBuilder();
         }
-
 
         public DbSet<TodoItem> TodoItems { get; set; }
         public DbSet<Tag> Tags { get; set; }

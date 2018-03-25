@@ -2,18 +2,16 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Vetheria.Vtedy.Application.Core;
 using Vetheria.VtedyService.Database;
 using Vetheria.VtedyService.Models;
 
 namespace Vetheria.Vtedy.Application.Handlers
 {
-    public class GetTodoItemsQueryHandler
+    public class GetTodoItemsQueryHandler : HandlerBase, IQueryHandler<Task<IEnumerable<TodoItem>>>
     {
-        private VtedyContext _context;
-
-        public GetTodoItemsQueryHandler(VtedyContext context)
+        public GetTodoItemsQueryHandler(IDbContext context) : base(context)
         {
-            _context = context;
         }
 
         public async Task<IEnumerable<TodoItem>> Execute()

@@ -1,24 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Vetheria.Vtedy.Application.Core;
 using Vetheria.VtedyService.Database;
 using Vetheria.VtedyService.Models;
 
 namespace Vetheria.Vtedy.Application.Handlers
 {
-    public class GetTagsQueryHandler
+    public class GetTagsQueryHandler : HandlerBase, IQueryHandler<Task<IEnumerable<Tag>>>
     {
-        private VtedyContext _context;
-
-        public GetTagsQueryHandler(VtedyContext context)
+        public GetTagsQueryHandler(IDbContext context) : base(context)
         {
-            _context = context;
         }
 
         public async Task<IEnumerable<Tag>> Execute()
-        {            
+        {
             return await _context.Tags.AsNoTracking().AsNoTracking().ToListAsync();
-            
+
         }
     }
 }

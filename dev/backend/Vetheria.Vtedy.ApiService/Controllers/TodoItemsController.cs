@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Vetheria.Vtedy.Application.Core;
 using Vetheria.Vtedy.Application.Handlers;
 using Vetheria.VtedyService.Database;
 using Vetheria.VtedyService.Models;
@@ -14,91 +15,94 @@ namespace Vetheria.VtedyService.Controllers
     [Route("api/[controller]")]
     public class TodoItemsController : Controller
     {
-        private VtedyContext _context;
+        private IQueryHandler<Task<IEnumerable<TodoItem>>> _getTodoItemsQueryHandler;
+        private IQueryHandler<int, Task<Result<TodoItem>>> _getTodoItemByIdQueryHandler;
+        private ICommandHandler<int, Task<Result<long>>> _deleteTodoItemCommandHandler;
+        private ICommandHandler<TodoItem, Task<Result<long>>> _addTodoItemCommandHandler;
 
-        public TodoItemsController(VtedyContext context)
+        public TodoItemsController(
+            IQueryHandler<Task<IEnumerable<TodoItem>>> getTodoItemsQueryHandler,
+            IQueryHandler<int, Task<Result<TodoItem>>> getTodoItemByIdQueryHandler,
+            ICommandHandler<int, Task<Result<long>>> deleteTodoItemCommandHandler,
+            ICommandHandler<TodoItem, Task<Result<long>>> addTodoItemCommandHandler
+            )
         {
-            _context = context;
-
-            if (_context.TodoItems.Count() == 0)
-            {
-                _context.TodoItems.Add(new TodoItem { Name = "Item1" });
-                _context.SaveChanges();
-            }
+            _getTodoItemsQueryHandler = getTodoItemsQueryHandler;
+            _getTodoItemByIdQueryHandler = getTodoItemByIdQueryHandler;
+            _deleteTodoItemCommandHandler = deleteTodoItemCommandHandler;
+            _addTodoItemCommandHandler = addTodoItemCommandHandler;
         }
 
         // GET: api/Todo
         [HttpGet]
         public async Task<IEnumerable<TodoItem>> Get()
         {
-            var handler = new GetTodoItemsQueryHandler(_context);
-            return await handler.Execute();
+            var res = await _getTodoItemsQueryHandler.Execute();
+            return res;
         }
 
         // GET: api/Todo/5
         [HttpGet("{id}", Name = "Get")]
-        public IActionResult Get(int id)
+        public async Task<IActionResult> GetAsync(int id)
         {
-            var item = _context.TodoItems.FirstOrDefault(p => p.Id == id);
+            var res = await _getTodoItemByIdQueryHandler.ExecuteAsync(id);
 
-            if (item == null)
+            if (!res.IsSuccess)
             {
                 return NotFound();
             }
 
-            return new ObjectResult(item);
+            return new ObjectResult(res);
         }
 
         // POST: api/Todo
         [HttpPost]
-        public IActionResult Post([FromBody]TodoItem item)
+        public async Task<IActionResult> PostAsync([FromBody]TodoItem item)
         {
             if (item == null)
             {
                 return BadRequest();
             }
 
-            _context.TodoItems.Add(item);
-            _context.SaveChanges();
+            var res = await _addTodoItemCommandHandler.ExecuteAsync(item);
+
 
             return CreatedAtRoute("Get", new { id = item.Id }, item);
         }
 
         // PUT: api/Todo/5
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]TodoItem item)
-        {
-            if (item == null || item.Id != id)
-            {
-                return BadRequest();
-            }
+        //[HttpPut("{id}")]
+        //public IActionResult Put(int id, [FromBody]TodoItem item)
+        //{
+        //    if (item == null || item.Id != id)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            var todo = _context.TodoItems.FirstOrDefault(t => t.Id == id);
-            if (todo == null)
-            {
-                return NotFound();
-            }
+        //    var todo = _context.TodoItems.FirstOrDefault(t => t.Id == id);
+        //    if (todo == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            todo.IsComplete = item.IsComplete;
-            todo.Name = item.Name;
+        //    todo.IsComplete = item.IsComplete;
+        //    todo.Name = item.Name;
 
-            _context.TodoItems.Update(todo);
-            _context.SaveChanges();
-            return new NoContentResult();
-        }
+        //    _context.TodoItems.Update(todo);
+        //    _context.SaveChanges();
+        //    return new NoContentResult();
+        //}
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> DeleteAsync(int id)
         {
-            var todo = _context.TodoItems.FirstOrDefault(t => t.Id == id);
-            if (todo == null)
+            var res = await _deleteTodoItemCommandHandler.ExecuteAsync(id);
+            if (!res.IsSuccess)
             {
                 return NotFound();
             }
 
-            _context.TodoItems.Remove(todo);
-            _context.SaveChanges();
             return new NoContentResult();
         }
     }
