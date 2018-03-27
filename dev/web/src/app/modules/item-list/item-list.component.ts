@@ -1,9 +1,9 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ItemListItemViewModel, ItemListViewModel } from './item-list.view-model';
-import { ActivatedRoute, ActivationEnd, Router } from '@angular/router';
-import { ISubscription } from 'rxjs/Subscription';
-import { ItemListFilter, ItemListService } from './item-list.service';
-import { ItemDetailsService } from '../item-details/item.details.service';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {ItemListItemViewModel, ItemListViewModel} from './item-list.view-model';
+import {ActivatedRoute, ActivationEnd, Router} from '@angular/router';
+import {ISubscription} from 'rxjs/Subscription';
+import {ItemListFilter, ItemListService} from './item-list.service';
+import {ItemDetailsService} from '../item-details/item.details.service';
 
 @Component({
   selector: 'vth-item-list',
@@ -75,8 +75,10 @@ export class ItemListComponent implements OnInit, OnDestroy {
     }
   }
 
-  toggleAddNewItemVisibility() {
-    this.viewModel.isAddNewItemVisible = !this.viewModel.isAddNewItemVisible;
+  toggleAddNewItemVisibility(noToggle: boolean = false) {
+    if (!noToggle) {
+      this.viewModel.isAddNewItemVisible = !this.viewModel.isAddNewItemVisible;
+    }
 
     if (this.viewModel.isAddNewItemVisible) {
       this._itemDetailsService.hideItemDetails();
@@ -88,12 +90,13 @@ export class ItemListComponent implements OnInit, OnDestroy {
   }
 
   addNewItem(event, isFromActionButton: boolean = false) {
-    // if (!this.viewModel.newItem) {
-    //   this.toggleAddNewItemVisibility();
-    //   return;
-    // }
     if (event.code === 'Enter' || isFromActionButton) {
       this.viewModel.items.push(new ItemListItemViewModel({name: this.viewModel.newItem}));
+      this.viewModel.newItem = '';
+      this.toggleAddNewItemVisibility(true);
+    }
+
+    if (event.code === 'Escape' || isFromActionButton) {
       this.viewModel.newItem = '';
       this.toggleAddNewItemVisibility();
     }
