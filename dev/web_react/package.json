@@ -1,0 +1,22 @@
+{
+    "name": "vtedy",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "react": "^16.3.1",
+        "react-dom": "^16.3.1",
+        "react-scripts": "1.1.4"
+    },
+    "scripts": {
+        "start": "yarn concurrently  \"yarn scss:watch\" \"react-scripts start\"",
+        "build": "yarn concurrently \"scss:build\" \"react-scripts build\"",
+        "eject": "react-scripts eject",
+        "scss:watch": "node-sass-chokidar --watch src/styles/scss -o src/styles/css",
+        "scss:build": "node-sass-chokidar src/styles/scss -o src/styles/css ",
+        "test": "react-scripts test --env=jsdom"
+    },
+    "devDependencies": {
+        "concurrently": "^3.5.1",
+        "node-sass-chokidar": "^1.2.2"
+    }
+}

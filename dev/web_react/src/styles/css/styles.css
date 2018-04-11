@@ -1,0 +1,25 @@
+.vth-shell {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #F5F5F5; }
+  .vth-shell .vth-shell__main {
+    display: flex;
+    flex-direction: row; }
+    .vth-shell .vth-shell__main .vth-shell__main__left-panel {
+      max-width: 15%;
+      flex: 0 1 auto; }
+    .vth-shell .vth-shell__main .vth-shell__main__body {
+      width: 100%;
+      flex: 0 1 auto; }
+    .vth-shell .vth-shell__main .vth-shell__main__details {
+      position: absolute;
+      background-color: gray;
+      top: 0;
+      width: 30%;
+      left: calc(100% - 30%);
+      display: block;
+      box-shadow: -1px 1px 5px 0px red; }
+
+body {
+  background-color: #f5f5f5; }
