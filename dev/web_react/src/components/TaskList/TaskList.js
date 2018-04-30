@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './TaskList.scss'
+import './TaskList.scss';
 
 export class TaskList extends React.Component {
 
 
   showDetails(item) {
     console.log('details: ' + item.id);
+    if (this.props.onTaskClick) {
+      this.props.onTaskClick(item.id);
+    }
   }
 
   _getTaskList = (item, index) => {
@@ -32,5 +35,6 @@ export class TaskList extends React.Component {
 }
 
 TaskList.propTypes = {
-  items: PropTypes.array
+  items: PropTypes.array,
+  onTaskClick: PropTypes.func
 };

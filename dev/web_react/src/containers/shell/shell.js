@@ -17,6 +17,10 @@ export class Shell extends React.Component {
     this.setState({areDetailsClosed: !this.state.areDetailsClosed});
   };
 
+  _showDetailsClose = (id) => {
+    this.setState({areDetailsClosed: false, taskId: id});
+  };
+
   render() {
     const navigationItems = [];
     navigationItems.push(
@@ -41,31 +45,31 @@ export class Shell extends React.Component {
     const taskItems = [];
     taskItems.push(
       {
-        id: 1,
+        id: '1',
         name: "task 1"
       },
       {
-        id: 2,
+        id: '2',
         name: "task 2"
       },
       {
-        id: 3,
+        id: '3',
         name: "task 3"
       },
       {
-        id: 4,
+        id: '4',
         name: "task 4"
       },
       {
-        id: 5,
+        id: '5',
         name: "task 5"
       },
       {
-        id: 6,
+        id: '6',
         name: "task 6"
       },
       {
-        id: 7,
+        id: '7',
         name: "task 7"
       }
     );
@@ -81,11 +85,11 @@ export class Shell extends React.Component {
         </div>
 
         <div className="vth-shell__body">
-          <TaskList items={taskItems}/>
+          <TaskList items={taskItems} onTaskClick={(id) => this._showDetailsClose(id)}/>
           {/*<div className='vth-shell__body__details'>*/}
 
           {/*</div>*/}
-          <TaskDetails isClosed={this.state.areDetailsClosed} toggleClose={this._toggleDetailsClose}/>
+          <TaskDetails isClosed={this.state.areDetailsClosed} taskId={this.state.taskId} toggleClose={this._toggleDetailsClose}/>
         </div>
 
         <div className="vth-shell__footer">footer</div>

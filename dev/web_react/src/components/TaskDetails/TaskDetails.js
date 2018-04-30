@@ -1,15 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import './TaskDetails.scss'
+import React from "react";
+import PropTypes from "prop-types";
+import "./TaskDetails.scss";
 
 export class TaskDetails extends React.Component {
-
   constructor(props) {
     super(props);
   }
 
   componentWillMount() {
-    this.setState({isClosed: true});
+    this.setState({ isClosed: true });
   }
 
   // _toggleClose = () => {
@@ -19,31 +18,29 @@ export class TaskDetails extends React.Component {
   render() {
     return (
       <React.Fragment>
-        { 1 === 1 &&
-        <div className='vth-task-details'>
-          <div>
-
+        {!this.props.isClosed && (
+          <div className="vth-task-details">
             <div>
-              <a href="#" onClick={this.props.toggleClose}>Close</a>
-            </div>
+              <div>
+                <span>TAKS ID: {this.props.taskId}</span>
+                <a href="#" onClick={this.props.toggleClose}>
+                  Close
+                </a>
+              </div>
 
-            <div>
-              details
-            </div>
+              <div>details</div>
 
-            <div>
-              footer
+              <div>footer</div>
             </div>
-
           </div>
-        </div>}
+        )}
       </React.Fragment>
-
     );
   }
 }
 
 TaskDetails.propTypes = {
   toggleClose: PropTypes.func,
-  isClosed: PropTypes.bool
+  isClosed: PropTypes.bool,
+  taskId: PropTypes.string,
 };
