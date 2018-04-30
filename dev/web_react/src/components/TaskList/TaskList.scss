@@ -1,0 +1,12 @@
+.vth-task-list {
+  ul {
+    li {
+      border-bottom: 1px solid black;
+      padding: 5px;
+      cursor: pointer;
+      &:hover{
+        background-color: #bcbfbd;
+      }
+    }
+  }
+}

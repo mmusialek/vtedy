@@ -1,0 +1,14 @@
+.vth-add-task {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  .vth-add-task__add-label {
+    cursor: pointer;
+  }
+  .vth-add-task__input {
+
+  }
+  .vth-add-task__close-label {
+    cursor: pointer;
+  }
+}

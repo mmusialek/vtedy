@@ -23,23 +23,27 @@ module.exports = {
     filename: 'index_bundle.js',
     publicPath: '/',
   },
+  devtool: '#inline-source-map',
   module: {
     rules: [
       {
         test: /\.(jpg|jpeg|gif|png|ico)$/,
         exclude: /node_modules/,
-        loader:'url-loader?name=[name].[ext]'
+        loader: 'url-loader?limit=1024&name=[path][name].[ext]?[hash]'
       },
       {
         test: /\.(woff|woff2|eot|ttf|svg)$/,
         exclude: /node_modules/,
-        loader: 'url-loader?name=[name].[ext]'
+        loader: 'url-loader?limit=1024&name=[name].[ext]'
       },
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader"
+        loader: "babel-loader",
+        include: [path.resolve(__dirname, "src")],
+        query: {
+          presets: ['react', 'es2015', 'react-hmre'],
+          plugins: ['transform-class-properties']
         }
       },
       {

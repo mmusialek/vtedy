@@ -1,36 +1,100 @@
-import React from 'react';
-import "./shell.scss"
+import React from "react";
+import "./shell.scss";
+import {AddTask} from "../../components/AddTask/AddTask";
+import {NavigationSidebar} from "../../components/NavigationSidebar/NavigationSidebar";
+import {TaskDetails} from "../../components/TaskDetails/TaskDetails";
+import {TaskList} from "../../components/TaskList/TaskList";
 
 export class Shell extends React.Component {
 
+
+  componentWillMount() {
+    this.setState({areDetailsClosed: true});
+  }
+
+
+  _toggleDetailsClose = () => {
+    this.setState({areDetailsClosed: !this.state.areDetailsClosed});
+  };
+
   render() {
+    const navigationItems = [];
+    navigationItems.push(
+      {
+        name: "Task board",
+        url: "#"
+      },
+      {
+        name: "Projects",
+        url: "#"
+      },
+      {
+        name: "Calendar",
+        url: "#"
+      },
+      {
+        name: "Labels",
+        url: "#"
+      }
+    );
+
+    const taskItems = [];
+    taskItems.push(
+      {
+        id: 1,
+        name: "task 1"
+      },
+      {
+        id: 2,
+        name: "task 2"
+      },
+      {
+        id: 3,
+        name: "task 3"
+      },
+      {
+        id: 4,
+        name: "task 4"
+      },
+      {
+        id: 5,
+        name: "task 5"
+      },
+      {
+        id: 6,
+        name: "task 6"
+      },
+      {
+        id: 7,
+        name: "task 7"
+      }
+    );
+
     return (
       <div className="vth-shell">
         <div className="vth-shell__left-sidebar">
-          <ul>
-            <li>item 1</li>
-            <li>item 2</li>
-            <li>item 3</li>
-            <li>item 4</li>
-            <li>item 5</li>
-          </ul>
+          <NavigationSidebar items={navigationItems}/>
         </div>
 
         <div className="vth-shell__header">
-          header
+          <AddTask/>
         </div>
 
         <div className="vth-shell__body">
-          body
-          <img src="/assets/img/structure-light-led-movement-158826.jpeg"/>
+          <TaskList items={taskItems}/>
+          {/*<div className='vth-shell__body__details'>*/}
+
+          {/*</div>*/}
+          <TaskDetails isClosed={this.state.areDetailsClosed} toggleClose={this._toggleDetailsClose}/>
         </div>
 
-        <div className="vth-shell__footer">
-          footer
-        </div>
-
+        <div className="vth-shell__footer">footer</div>
       </div>
     );
   }
-
 }
+
+
+// Shell.propTypes ={
+//   areDetailsClosed: PropTypes.bool
+// };

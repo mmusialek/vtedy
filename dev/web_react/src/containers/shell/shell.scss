@@ -3,8 +3,8 @@
   height: 100vh;
   min-height: 100vh;
   background-color: antiquewhite;
-  grid-template-columns: 70px 200px 1fr;
-  grid-template-rows: 100px auto 100px;
+  grid-template-columns: 70px 130px 1fr;
+  grid-template-rows: 70px auto 70px;
 
   .vth-shell__left-sidebar{
     grid-column: 1 / span 2;
@@ -27,7 +27,7 @@
   .vth-shell__body{
     grid-column: 3;
     grid-row: 2;
-    padding: 5px;
+    //padding: 5px;
     background-color: aquamarine;
     &--extended{
       grid-column: 2 / span 2;

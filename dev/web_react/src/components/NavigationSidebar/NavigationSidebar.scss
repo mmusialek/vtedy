@@ -1,0 +1,14 @@
+.vth-navigation-sidebar {
+  ul {
+    margin: 20px 10px;
+    li{
+      padding: 5px;
+      a{
+        text-decoration: none;
+        &:hover{
+          color: red;
+        }
+      }
+    }
+  }
+}

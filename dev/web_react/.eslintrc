@@ -4,7 +4,7 @@
     "react"
   ],
   "rules": {
-    "max-len": [1, 70, 2, {"ignoreComments": true}],
+    "max-len": [1, 180, 2, {"ignoreComments": true}],
     "react/prop-types": [2]
   },
   "extends": ["eslint:recommended", "plugin:react/recommended"]

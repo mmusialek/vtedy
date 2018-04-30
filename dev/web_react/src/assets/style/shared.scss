@@ -1,0 +1,25 @@
+.vth-remove-list-styles {
+  ul {
+    margin: 0;
+    padding: 0;
+    li {
+      list-style: none;
+      padding: 5px;
+    }
+  }
+}
+
+.vth-link {
+  cursor: pointer;
+  &:hover {
+    background-color: red;
+  }
+}
+
+.vth-display-none {
+  display: none;
+}
+
+.vth-display-inline {
+  display: inline-block;
+}
