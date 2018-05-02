@@ -2,6 +2,7 @@ import React from "react";
 import "./shell.scss";
 import {AddTask} from "../../components/AddTask/AddTask";
 import {NavigationSidebar} from "../../components/NavigationSidebar/NavigationSidebar";
+import {ShellNavigationSidebarRouter} from "../../components/ShellRouter/ShellNavigationSidebarRouter";
 import {TaskDetails} from "../../components/TaskDetails/TaskDetails";
 import {TaskList} from "../../components/TaskList/TaskList";
 
@@ -30,7 +31,7 @@ export class Shell extends React.Component {
       },
       {
         name: "Projects",
-        url: "#"
+        url: "/projects"
       },
       {
         name: "Calendar",
@@ -38,7 +39,7 @@ export class Shell extends React.Component {
       },
       {
         name: "Labels",
-        url: "#"
+        url: "/labels"
       }
     );
 
@@ -78,6 +79,9 @@ export class Shell extends React.Component {
       <div className="vth-shell">
         <div className="vth-shell__left-sidebar">
           <NavigationSidebar items={navigationItems}/>
+          <div className='vth-shell__left-sidebar__additionals'>
+            <ShellNavigationSidebarRouter/>
+          </div>
         </div>
 
         <div className="vth-shell__header">

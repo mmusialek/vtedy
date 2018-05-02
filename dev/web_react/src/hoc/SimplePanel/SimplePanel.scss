@@ -1,0 +1,27 @@
+.vth-simple-panel {
+  position: relative;
+  //top: 0;
+  //left: 200px;
+  height: 100%;
+  min-width: 310px;
+  background-color: #8E44AD;
+
+  .vth-simple-panel__container {
+    background-color: #8E44AD;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    .vth-simple-panel__container__header {
+      height: 70px;
+      padding: 5px;
+    }
+    .vth-simple-panel__container__body {
+      height: calc(100% - 140px);
+      padding: 5px;
+    }
+    .vth-simple-panel__container__footer {
+      height: 70px;
+      padding: 5px;
+    }
+  }
+}

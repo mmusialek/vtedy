@@ -1,4 +1,4 @@
-.vth-shell{
+.vth-shell {
   display: grid;
   height: 100vh;
   min-height: 100vh;
@@ -6,16 +6,25 @@
   grid-template-columns: 70px 130px 1fr;
   grid-template-rows: 70px auto 70px;
 
-  .vth-shell__left-sidebar{
+  .vth-shell__left-sidebar {
     grid-column: 1 / span 2;
     grid-row: 1 / span 3;
     background-color: lightgray;
-    &--collapsed{
+    &--collapsed {
       grid-column: 1;
+    }
+
+    .vth-shell__left-sidebar__additionals {
+      position: absolute;
+      top: 0;
+      left: 200px;
+      display: flex;
+      flex-direction: row;
+      height: 100%;
     }
   }
 
-  .vth-shell__header{
+  .vth-shell__header {
     grid-column: 3;
     grid-row: 1;
     display: flex;
@@ -24,17 +33,17 @@
     background-color: gray;
   }
 
-  .vth-shell__body{
+  .vth-shell__body {
     grid-column: 3;
     grid-row: 2;
     //padding: 5px;
     background-color: aquamarine;
-    &--extended{
+    &--extended {
       grid-column: 2 / span 2;
     }
   }
 
-  .vth-shell__footer{
+  .vth-shell__footer {
     grid-column: 3;
     grid-row: 3;
     display: flex;
@@ -43,6 +52,5 @@
     padding: 5px;
     background-color: gray;
   }
-
 
 }
