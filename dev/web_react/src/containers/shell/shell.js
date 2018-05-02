@@ -2,9 +2,9 @@ import React from "react";
 import "./shell.scss";
 import {AddTask} from "../../components/AddTask/AddTask";
 import {NavigationSidebar} from "../../components/NavigationSidebar/NavigationSidebar";
-import {ShellNavigationSidebarRouter} from "../../components/ShellRouter/ShellNavigationSidebarRouter";
+import {ShellNavigationSidebarRouter} from "../../components/ShellNavigationSidebarRouter/ShellNavigationSidebarRouter";
+import {TaskBoard} from "../../components/TaskBoard/TaskBoard";
 import {TaskDetails} from "../../components/TaskDetails/TaskDetails";
-import {TaskList} from "../../components/TaskList/TaskList";
 
 export class Shell extends React.Component {
 
@@ -27,7 +27,7 @@ export class Shell extends React.Component {
     navigationItems.push(
       {
         name: "Task board",
-        url: "#"
+        url: "/task-board"
       },
       {
         name: "Projects",
@@ -89,7 +89,7 @@ export class Shell extends React.Component {
         </div>
 
         <div className="vth-shell__body">
-          <TaskList items={taskItems} onTaskClick={(id) => this._showDetailsClose(id)}/>
+          <TaskBoard items={taskItems} onTaskClick={(id) => this._showDetailsClose(id)}/>
           {/*<div className='vth-shell__body__details'>*/}
 
           {/*</div>*/}

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './TaskList.scss';
+import './TaskBoard.scss';
 
-export class TaskList extends React.Component {
+export class TaskBoard extends React.Component {
 
 
   showDetails(item) {
@@ -34,7 +34,7 @@ export class TaskList extends React.Component {
   }
 }
 
-TaskList.propTypes = {
+TaskBoard.propTypes = {
   items: PropTypes.array,
   onTaskClick: PropTypes.func
 };
