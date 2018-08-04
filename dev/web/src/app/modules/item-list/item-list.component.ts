@@ -91,7 +91,11 @@ export class ItemListComponent implements OnInit, OnDestroy {
 
   addNewItem(event, isFromActionButton: boolean = false) {
     if (event.code === 'Enter' || isFromActionButton) {
-      this.viewModel.items.push(new ItemListItemViewModel({name: this.viewModel.newItem}));
+      const newItem = new ItemListItemViewModel({name: this.viewModel.newItem});
+      this._itemListService.addItem(newItem).subscribe(p => {
+        this.viewModel.items.push(p);
+      });
+
       this.viewModel.newItem = '';
       this.toggleAddNewItemVisibility(true);
     }
@@ -115,7 +119,9 @@ export class ItemListComponent implements OnInit, OnDestroy {
         filter.date = new Date(Date.UTC(currDate.getFullYear(), currDate.getUTCMonth(), currDate.getUTCDate()));
 
         this.viewModel.items.splice(0, this.viewModel.items.length);
-        this.viewModel.items = this._itemListService.getCurrentItems();
+        this._itemListService.getCurrentItems().subscribe(p => {
+          this.viewModel.items = p;
+        });
         break;
 
       case PagesRoues.Inbox:

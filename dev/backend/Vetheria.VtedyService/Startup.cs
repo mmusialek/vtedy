@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using Vetheria.VtedyService.Database;
+
 namespace Vetheria.VtedyService
 {
     public class Startup
@@ -22,7 +23,8 @@ namespace Vetheria.VtedyService
             services.AddMvc();
             services.AddMvcCore()
             .AddAuthorization()
-            .AddJsonFormatters();
+            .AddJsonFormatters()
+            .AddCors();
 
 
             services.AddAuthentication("Bearer")
@@ -62,6 +64,11 @@ namespace Vetheria.VtedyService
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Vtedy API V1");
             });
 
+            // TODO add CORS configuration here
+            // NOTE temporary solution for frontend development
+            app.UseCors(
+                options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()
+            );
 
             app.UseMvc();
             app.UseAuthentication();

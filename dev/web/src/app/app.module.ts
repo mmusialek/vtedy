@@ -17,6 +17,8 @@ import { ItemDetailsService } from './modules/item-details/item.details.service'
 
 import { MatButtonModule, MatDividerModule, MatInputModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {HttpClientModule} from '@angular/common/http';
+import {VtedyClientService} from './shared/client-services/vtedy.client-service';
 
 
 @NgModule({
@@ -35,6 +37,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
 
     // material
     MatInputModule,
@@ -44,7 +47,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   providers: [
     ItemListService,
-    ItemDetailsService
+    ItemDetailsService,
+    VtedyClientService
   ],
   bootstrap: [AppComponent]
 })
