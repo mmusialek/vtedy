@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { ItemDetailsService } from './item.details.service';
 import { ItemDetailsViewModel } from './item-details.view-model';
-import { ISubscription } from 'rxjs/Subscription';
+import { SubscriptionLike as ISubscription } from 'rxjs';
 
 @Component({
   selector: 'vth-item-details',

@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ItemListItemViewModel, ItemListViewModel} from './item-list.view-model';
 import {ActivatedRoute, ActivationEnd, Router} from '@angular/router';
-import {ISubscription} from 'rxjs/Subscription';
+import {SubscriptionLike as ISubscription} from 'rxjs';
 import {ItemListFilter, ItemListService} from './item-list.service';
 import {ItemDetailsService} from '../item-details/item.details.service';
 
