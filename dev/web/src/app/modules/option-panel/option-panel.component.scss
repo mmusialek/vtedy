@@ -3,19 +3,14 @@
 
   height: 100vh;
   background-color: $options-background;
-  //&--short {
-  //  width: 30%;
-  //}
 
   .vth-option-panel__container__nav-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    //width: 100%;
     height: 100%;
 
     .vth-option-panel__container__nav-container__links {
-      //width: 100%;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -23,8 +18,6 @@
     }
 
     .vth-option-panel__container__nav-container__hider {
-      //height: 100%;
-      //width: 5%;
       width: 10px;
       margin-left: 2px;
       background-color: #673ab7;

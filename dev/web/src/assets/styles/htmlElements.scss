@@ -1,0 +1,11 @@
+.vth-button-warning {
+  background-color: $flat-alizarin;
+}
+
+a {
+  color: $flat-midnight-blue;
+  text-decoration: none;
+  &:hover {
+    color: darken($flat-wisteria, 10%);
+  }
+}

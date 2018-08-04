@@ -35,9 +35,7 @@ export class OptionPanelComponent extends VerticalPanelComponent implements OnIn
   }
 
   toggleOptionPanel() {
-    const val = this.toggleOptionPanelNames();
-    this.viewModel.isNameVisible = val;
-    // this.viewModel.isNameVisible = !this.viewModel.isNameVisible;
+    this.viewModel.isNameVisible = this.toggleOptionPanelNames();
   }
 
 }
