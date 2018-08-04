@@ -8,7 +8,6 @@ using Vetheria.Vtedy.Application.Core;
 using Vetheria.Vtedy.Application.Handlers;
 using Vetheria.VtedyService.Database;
 using Vetheria.VtedyService.Models;
-
 namespace Vetheria.VtedyService.Controllers
 {
     [Produces("application/json")]

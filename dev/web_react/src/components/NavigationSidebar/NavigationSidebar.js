@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
 import React from "react";
-import './NavigationSidebar.scss'
+// import './NavigationSidebar.scss'
 import {Link} from "react-router-dom";
 
 export class NavigationSidebar extends React.Component {
 
-  _getListaData = (item, index) => {
+  _getListData = (item, index) => {
     const res = [];
 
     const url = item.url;
@@ -29,7 +29,7 @@ export class NavigationSidebar extends React.Component {
     return (
       <div className='vth-navigation-sidebar'>
         <ul>
-          {this.props.items && this.props.items.map(this._getListaData)}
+          {this.props.items && this.props.items.map(this._getListData)}
         </ul>
       </div>
     );

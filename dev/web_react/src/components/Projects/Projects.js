@@ -22,7 +22,7 @@ export class Projects extends React.Component {
       name: 'project 3'
     },{
       id: 4,
-      name: 'project 3'
+      name: 'project 4'
     }];
 
     for(let item of projectItems){
@@ -41,10 +41,6 @@ export class Projects extends React.Component {
   render() {
     return (
       <div className='vth-projects'>
-        Projects <br/>
-        isClosed: {this.props.isClosed? 'true' : 'false'}<br/>
-        closeWindow {this.props.closeWindow !== undefined ? 'true' : 'false'}<br/>
-
         <ItemList items={this.state.projects}/>
       </div>
     );

@@ -14,7 +14,7 @@ export class ItemList extends React.Component {
         <ul>
           {this.props.items.map((item, index) => {
             return <li key={index}><Link to={item.url}>{item.name}</Link></li>
-          })};
+          })}
         </ul>
       </div>
     );

@@ -21,8 +21,7 @@ export function SimpleListWrapper(WrappedComponent) {
           <div className="vth-simple-panel">
             <div className='vth-simple-panel__container'>
               <div className='vth-simple-panel__container__header'>
-                <a href="#" onClick={this.props.closeWindow}>Close</a>
-                <span>MENU</span>
+                <a onClick={this.props.closeWindow}>Close</a>
               </div>
 
               <div className='vth-simple-panel__container__body'>
