@@ -1,6 +1,6 @@
 export class OptionPanelViewModel {
   items: OptionPanelItemViewModel[] = [];
-  isNameVisible: boolean = true;
+  isNameVisible = true;
 }
 
 export class OptionPanelItemViewModel {

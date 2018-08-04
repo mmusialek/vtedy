@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { VerticalPanelComponent } from '../shell/vertical-panel/vertical-panel.component';
-import { OptionPanelItemViewModel, OptionPanelViewModel } from './option-panel-item.view-model/option-panel.view-model';
+import { OptionPanelItemViewModel, OptionPanelViewModel } from './option-panel.view-model';
 import { Router } from '@angular/router';
 
 @Component({
