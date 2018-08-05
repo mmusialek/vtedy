@@ -16,7 +16,9 @@ export class ItemListComponent implements OnInit, OnDestroy {
   private _routeSubs: ISubscription;
   canHideCss = true;
 
-  constructor(private _route: ActivatedRoute, private _router: Router, private _itemListService: ItemListService,
+  constructor(private _route: ActivatedRoute,
+              private _router: Router,
+              private _itemListService: ItemListService,
               private _itemDetailsService: ItemDetailsService) {
   }
 

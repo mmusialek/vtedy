@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
-import { CommentViewModel, ItemDataViewModel, ProjectViewModel, TagViewModel } from './item-details.view-model';
+import {Injectable} from '@angular/core';
+import {Observable, Subject} from 'rxjs';
+import {CommentViewModel, ItemDataViewModel, ProjectViewModel, TagViewModel} from './item-details.view-model';
+import {VtedyClientService} from '../../shared/client-services/vtedy.client-service';
 
 @Injectable()
 export class ItemDetailsService {
@@ -9,15 +10,16 @@ export class ItemDetailsService {
   private _newDataStream: Subject<ItemDataViewModel> = new Subject<ItemDataViewModel>();
   private _pinDialogWindow = false;
 
+
+  constructor(private _vtedyService: VtedyClientService) {
+  }
+
   get isDialogVisible() {
     return this._isDialogVisible;
   }
 
   get newDataStream() {
     return this._newDataStream;
-  }
-
-  constructor() {
   }
 
   get isDialogPinned() {
@@ -38,9 +40,10 @@ export class ItemDetailsService {
 
   showItemDetails(id: string) {
     // if (!this._pinDialogWindow) {
-      this._isDialogVisible.next(true);
-      const item = this.getItemDetails(id);
-      this._newDataStream.next(item);
+    this._isDialogVisible.next(true);
+    this.getItemDetails(id).subscribe(p => {
+      this._newDataStream.next(p);
+    });
     // }
   }
 
@@ -56,44 +59,37 @@ export class ItemDetailsService {
   getItemDetails(id: string) {
     let result: ItemDataViewModel;
 
+    return new Observable<ItemDataViewModel>(obs => {
+      const subscriber = this._vtedyService.getItem(id).subscribe(p => {
+        result = new ItemDataViewModel();
+        result.id = p.id;
+        result.title = p.name;
+        result.project = new ProjectViewModel({id: 1, name: 'test proj 1', owner: 'Marcin'});
+        result.comments = [];
+        result.comments.push(new CommentViewModel({
+          author: 'Marcin',
+          comment: 'first comment',
+          date: new Date(Date.now())
+        }));
+        result.comments.push(new CommentViewModel({
+          author: 'Marcin',
+          comment: 'second comment',
+          date: new Date(Date.now())
+        }));
+        result.date = new Date(Date.now());
+        result.tags = [];
+        result.tags.push(new TagViewModel({id: 1, name: 'tag_1', owner: 'Marcin'}));
 
-    result = new ItemDataViewModel();
-    result.id = '1';
-    result.title = 'item element 1';
-    result.project = new ProjectViewModel({id: 1, name: 'test proj 1', owner: 'Marcin'});
-    result.comments = [];
-    result.comments.push(new CommentViewModel({
-      author: 'Marcin',
-      comment: 'first comment',
-      date: new Date(Date.now())
-    }));
-    result.comments.push(new CommentViewModel({
-      author: 'Marcin',
-      comment: 'second comment',
-      date: new Date(Date.now())
-    }));
-    result.date = new Date(Date.now());
-    result.tags = [];
-    result.tags.push(new TagViewModel({id: 1, name: 'tag_1', owner: 'Marcin'}));
+        obs.next(result);
+        obs.complete();
 
-    switch (id) {
-      case'1':
-        result.id = '1';
-        result.title = 'item element 1';
-        break;
-
-      case'2':
-        result.id = '2';
-        result.title = 'item element 2';
-        break;
-
-      case'3':
-        result.id = '3';
-        result.title = 'item element 3';
-        break;
-    }
-
-    return result;
+        if (subscriber) {
+          subscriber.unsubscribe();
+        }
+      }, err => {
+        console.error(err);
+      });
+    });
   }
 
 }

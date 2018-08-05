@@ -21,4 +21,8 @@ export class VtedyClientService {
     return this._httpService.get<TodoItemDto[]>(this._baseApiUrl + '/TodoItems');
   }
 
+  getItem(id: string): Observable<TodoItemDto> {
+    return this._httpService.get<TodoItemDto>(this._baseApiUrl + `/TodoItems/${id}`);
+  }
+
 }

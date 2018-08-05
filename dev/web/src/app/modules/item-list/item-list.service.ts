@@ -9,7 +9,6 @@ import {TodoItemDto} from '../../shared/dto/todo-item.dto';
 export class ItemListService {
 
   constructor(private _vtedyService: VtedyClientService) {
-
   }
 
   addItem(item: ItemListItemViewModel): Observable<ItemListItemViewModel> {
