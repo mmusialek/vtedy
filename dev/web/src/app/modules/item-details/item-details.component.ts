@@ -1,12 +1,11 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { ItemDetailsService } from './item.details.service';
-import { ItemDetailsViewModel } from './item-details.view-model';
-import { SubscriptionLike as ISubscription } from 'rxjs';
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
+import {ItemDetailsService} from './item.details.service';
+import {ItemDetailsViewModel} from './item-details.view-model';
+import {SubscriptionLike as ISubscription} from 'rxjs';
 
 @Component({
   selector: 'vth-item-details',
-  templateUrl: './item-details.component.html',
-  styleUrls: ['./item-details.component.scss']
+  templateUrl: './item-details.component.html'
 })
 export class ItemDetailsComponent implements OnInit, OnDestroy {
 
@@ -48,6 +47,7 @@ export class ItemDetailsComponent implements OnInit, OnDestroy {
 
   onPinHandler() {
     this._itemDetailsService.togglePinDialog();
+    this.viewModel.isDialogPinned = this._itemDetailsService.isDialogPinned;
   }
 
 }

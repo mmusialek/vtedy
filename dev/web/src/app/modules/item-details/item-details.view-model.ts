@@ -1,5 +1,6 @@
 export class ItemDetailsViewModel {
   isVisible: boolean;
+  isDialogPinned = false;
   item: ItemDataViewModel;
 }
 

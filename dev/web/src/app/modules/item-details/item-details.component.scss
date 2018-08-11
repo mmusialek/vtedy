@@ -9,6 +9,10 @@
       .vth-item-details__container__body__header__close {
         cursor: pointer;
       }
+      .vth-item-details__container__body__header__pin {
+        cursor: pointer;
+        margin-left: 5px;
+      }
     }
 
     .vth-item-details__container__body__content {
@@ -32,8 +36,17 @@
 
           }
           .vth-item-details__container__body__content__item-details__comments__comment-entries {
-            .vth-item-details__container__body__content__item-details__comments__comment-entries__entry{
+            .vth-item-details__container__body__content__item-details__comments__comment-entries__entry {
+              padding-bottom: 15px;
+              .vth-item-details__container__body__content__item-details__comments__comment-entries__entry__header{
 
+              }
+              .vth-item-details__container__body__content__item-details__comments__comment-entries__entry__actions{
+
+              }
+              .vth-item-details__container__body__content__item-details__comments__comment-entries__entry__body{
+
+              }
             }
 
           }

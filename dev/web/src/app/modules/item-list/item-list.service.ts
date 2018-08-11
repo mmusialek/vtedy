@@ -35,12 +35,13 @@ export class ItemListService {
     });
   }
 
-  getCurrentItems(filter?: ItemListFilter): Observable<ItemListItemViewModel[]> {
+  getItems(filter?: ItemListFilter): Observable<ItemListItemViewModel[]> {
 
     // TODO add filters
 
     return new Observable(obs => {
       const res: ItemListItemViewModel[] = [];
+
       const subscriber = this._vtedyService.getItems().subscribe((p: any) => {
         for (const item of p) {
           res.push(new ItemListItemViewModel({id: item.id, name: item.name}));
@@ -58,34 +59,11 @@ export class ItemListService {
     });
   }
 
-  getInboxItems(filter?: ItemListFilter) {
-
-    // TODO integrate with API
-
-    const res: ItemListItemViewModel[] = [];
-    res.push(
-      new ItemListItemViewModel({id: '1', name: 'inbox 1'}),
-      new ItemListItemViewModel({id: '2', name: 'inbox 2'}),
-      new ItemListItemViewModel({id: '3', name: 'inbox 3'})
-    );
-    return res;
-  }
-
-  getProjectsItems(filter?: ItemListFilter) {
-
-    // TODO integrate with API
-
-    const res: ItemListItemViewModel[] = [];
-    res.push(
-      new ItemListItemViewModel({id: '1', name: 'project 1'}),
-      new ItemListItemViewModel({id: '2', name: 'project 2'}),
-      new ItemListItemViewModel({id: '3', name: 'project 3'})
-    );
-    return res;
-  }
-
 }
 
 export class ItemListFilter {
   date?: Date;
+  projectId?: number;
+  currentItems: boolean;
+  labels: number[];
 }

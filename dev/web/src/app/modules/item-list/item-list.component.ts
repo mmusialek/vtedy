@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ItemListItemViewModel, ItemListViewModel} from './item-list.view-model';
 import {ActivatedRoute, ActivationEnd, Router} from '@angular/router';
-import {SubscriptionLike as ISubscription} from 'rxjs';
+import {Observable, SubscriptionLike as ISubscription} from 'rxjs';
 import {ItemListFilter, ItemListService} from './item-list.service';
 import {ItemDetailsService} from '../item-details/item.details.service';
 
@@ -114,6 +114,15 @@ export class ItemListComponent implements OnInit, OnDestroy {
     const filter = new ItemListFilter();
     const currDate = new Date(Date.now());
 
+    const getData = (data: Observable<ItemListItemViewModel[]>) => {
+      const subscription = data.subscribe(p => {
+        this.viewModel.items = p;
+        if (subscription) {
+          subscription.unsubscribe();
+        }
+      });
+    };
+
     switch (page) {
 
       default:
@@ -121,19 +130,23 @@ export class ItemListComponent implements OnInit, OnDestroy {
         filter.date = new Date(Date.UTC(currDate.getFullYear(), currDate.getUTCMonth(), currDate.getUTCDate()));
 
         this.viewModel.items.splice(0, this.viewModel.items.length);
-        this._itemListService.getCurrentItems().subscribe(p => {
-          this.viewModel.items = p;
-        });
+
+        // TODO ad filters
+        getData(this._itemListService.getItems());
         break;
 
       case PagesRoues.Inbox:
         this.viewModel.items.splice(0, this.viewModel.items.length);
-        this.viewModel.items = this._itemListService.getInboxItems();
+
+        // TODO ad filters
+        getData(this._itemListService.getItems());
         break;
 
       case PagesRoues.Projects:
         this.viewModel.items.splice(0, this.viewModel.items.length);
-        this.viewModel.items = this._itemListService.getProjectsItems();
+
+        // TODO ad filters
+        getData(this._itemListService.getItems());
         break;
 
       case PagesRoues.Calendar:

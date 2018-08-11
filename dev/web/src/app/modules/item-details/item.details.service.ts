@@ -8,7 +8,7 @@ export class ItemDetailsService {
 
   private _isDialogVisible: Subject<boolean> = new Subject<boolean>();
   private _newDataStream: Subject<ItemDataViewModel> = new Subject<ItemDataViewModel>();
-  private _pinDialogWindow = false;
+  private _isDialogPinned = false;
 
 
   constructor(private _vtedyService: VtedyClientService) {
@@ -23,23 +23,15 @@ export class ItemDetailsService {
   }
 
   get isDialogPinned() {
-    return this._pinDialogWindow;
+    return this._isDialogPinned;
   }
 
   togglePinDialog() {
-    this._pinDialogWindow = !this._pinDialogWindow;
-  }
-
-  pinDialog() {
-    this._pinDialogWindow = true;
-  }
-
-  unPinDialog() {
-    this._pinDialogWindow = false;
+    this._isDialogPinned = !this._isDialogPinned;
   }
 
   showItemDetails(id: string) {
-    // if (!this._pinDialogWindow) {
+    // if (!this._isDialogPinned) {
     this._isDialogVisible.next(true);
     this.getItemDetails(id).subscribe(p => {
       this._newDataStream.next(p);
@@ -48,7 +40,7 @@ export class ItemDetailsService {
   }
 
   hideItemDetails() {
-    if (!this._pinDialogWindow) {
+    if (!this._isDialogPinned) {
       const hideTimer = setTimeout(p => {
         this._isDialogVisible.next(false);
         clearTimeout(hideTimer);

@@ -2,28 +2,30 @@
   <div class="vth-item-details__container__body">
     <div class="vth-item-details__container__body__header">
       <a class="vth-item-details__container__body__header__close" (click)="onCloseHandler()">X</a>
-      <a class="vth-item-details__container__body__header__close" (click)="onPinHandler()">pin</a>
+      <a class="vth-item-details__container__body__header__pin" (click)="onPinHandler()"> {{viewModel.isDialogPinned? 'unpin' : 'pin'}} </a>
     </div>
     <div class="vth-item-details__container__body__content">
       <div class="vth-item-details__container__body__content__item-details">
-        <h2>{{viewModel.item.title}}</h2>
+        <h2>{{viewModel.item?.title}}</h2>
         <div class="vth-item-details__container__body__content__item-details__header">
           <div class="vth-item-details__container__body__content__item-details__header__name">
-            project: {{viewModel.item.project.name}}
+            project: {{viewModel.item?.project.name}}
           </div>
 
           <div class="vth-item-details__container__body__content__item-details__header__date">
-            planned for :{{viewModel.item.date | date:'short'}}
+            planned for :{{viewModel.item?.date | date:'short'}}
           </div>
 
-          <div class="vth-item-details__container__body__content__item-details__header__tags">
+          <div class="vth-item-details__container__body__content__item-details__header__tags" *ngIf="viewModel.item">
             <span *ngFor="let tag of viewModel.item.tags; let i = index">{{tag.name}}
               <em *ngIf="i<viewModel.item.tags.length-1">, </em></span>
           </div>
 
         </div>
 
-        <mat-divider></mat-divider>
+        <div class="vth-divider">
+          <mat-divider></mat-divider>
+        </div>
 
         <div class="vth-item-details__container__body__content__item-details__comments">
           <div class="vth-item-details__container__body__content__item-details__comments__input-form">
@@ -36,15 +38,17 @@
             <button mat-button color="primary">Save</button>
           </div>
 
-          <mat-divider></mat-divider>
+          <div class="vth-divider">
+            <mat-divider></mat-divider>
+          </div>
 
-          <div class="vth-item-details__container__body__content__item-details__comments__comment-entries">
+          <div class="vth-item-details__container__body__content__item-details__comments__comment-entries" *ngIf="viewModel.item">
             <ul>
               <li *ngFor="let com of viewModel.item.comments">
                 <div class="vth-item-details__container__body__content__item-details__comments__comment-entries__entry">
-                  <span>{{com.author}} @ {{com.date | date:'short'}}</span>
-                  <span>edit / delete</span>
-                  <div>{{com.comment}}</div>
+                  <span class="vth-item-details__container__body__content__item-details__comments__comment-entries__entry__header">{{com.author}} @ {{com.date | date:'short'}}</span>
+                  <span class="vth-item-details__container__body__content__item-details__comments__comment-entries__entry__actions">edit / delete</span>
+                  <div class="vth-item-details__container__body__content__item-details__comments__comment-entries__entry__body">{{com.comment}}</div>
                 </div>
               </li>
             </ul>
