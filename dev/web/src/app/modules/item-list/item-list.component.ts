@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {ItemListItemViewModel, ItemListViewModel} from './item-list.view-model';
+import {ItemListItemViewModel, ItemListViewModel, PagesRoues} from './item-list.view-model';
 import {ActivatedRoute, ActivationEnd, Router} from '@angular/router';
 import {Observable, SubscriptionLike as ISubscription} from 'rxjs';
 import {ItemListFilter, ItemListService} from './item-list.service';
@@ -158,10 +158,3 @@ export class ItemListComponent implements OnInit, OnDestroy {
 
 }
 
-export class PagesRoues {
-  // const None = ,
-  static readonly PriorityBox = 'priority-box';
-  static readonly Inbox = 'inbox';
-  static readonly Projects = 'projects';
-  static readonly Calendar = 'calendar';
-}

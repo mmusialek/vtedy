@@ -14,3 +14,12 @@ export class ItemListItemViewModel {
     this.name = param.name;
   }
 }
+
+
+export class PagesRoues {
+  // const None = ,
+  static readonly PriorityBox = 'priority-box';
+  static readonly Inbox = 'inbox';
+  static readonly Projects = 'projects';
+  static readonly Calendar = 'calendar';
+}
