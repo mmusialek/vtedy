@@ -7,9 +7,10 @@ using Vetheria.Vtedy.Application.CommandHandlers.Tags;
 using Vetheria.Vtedy.Application.CommandHandlers.TodoItems;
 using Vetheria.Vtedy.Application.Core;
 using Vetheria.Vtedy.Application.Handlers;
+using Vetheria.Vtedy.Application.Handlers.Tags;
 using Vetheria.Vtedy.Application.Handlers.TodoItems;
-using Vetheria.VtedyService.Database;
-using Vetheria.VtedyService.Models;
+using Vetheria.Vtedy.DataAccess;
+using Vetheria.Vtedy.DataModel.Model;
 
 namespace Vetheria.Vtedy.ApiService
 {

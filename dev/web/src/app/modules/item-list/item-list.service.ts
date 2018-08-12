@@ -66,4 +66,5 @@ export class ItemListFilter {
   projectId?: number;
   currentItems: boolean;
   labels: number[];
+  isCompleted: boolean;
 }

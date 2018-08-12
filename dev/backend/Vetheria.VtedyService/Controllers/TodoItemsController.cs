@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Vetheria.VtedyService.Database;
+using Vetheria.VtedyService.Dtos;
 using Vetheria.VtedyService.Models;
 
 namespace Vetheria.VtedyService.Controllers
@@ -13,13 +14,13 @@ namespace Vetheria.VtedyService.Controllers
     [Route("api/[controller]")]
     public class TodoItemsController : Controller
     {
-        private VtedyContext _context;
+        private readonly VtedyContext _context;
 
         public TodoItemsController(VtedyContext context)
         {
             _context = context;
 
-            if (_context.TodoItems.Count() == 0)
+            if (!_context.TodoItems.Any())
             {
                 _context.TodoItems.Add(new TodoItem { Name = "Item1" });
                 _context.SaveChanges();
@@ -28,7 +29,7 @@ namespace Vetheria.VtedyService.Controllers
 
         // GET: api/Todo
         [HttpGet]
-        public IEnumerable<TodoItem> Get()
+        public IEnumerable<TodoItem> Get([FromQuery] ItemfilterDto itemFilter)
         {
             return _context.TodoItems.ToList();
         }

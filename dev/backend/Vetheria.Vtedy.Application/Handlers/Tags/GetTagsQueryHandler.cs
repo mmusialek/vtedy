@@ -1,11 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Vetheria.Vtedy.Application.Core;
-using Vetheria.VtedyService.Database;
-using Vetheria.VtedyService.Models;
+using Vetheria.Vtedy.DataAccess;
+using Vetheria.Vtedy.DataModel.Model;
 
-namespace Vetheria.Vtedy.Application.Handlers
+namespace Vetheria.Vtedy.Application.Handlers.Tags
 {
     public class GetTagsQueryHandler : HandlerBase, IQueryHandler<Task<IEnumerable<Tag>>>
     {

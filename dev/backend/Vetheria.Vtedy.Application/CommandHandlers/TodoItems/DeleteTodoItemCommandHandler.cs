@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Vetheria.Vtedy.Application.Core;
-using Vetheria.VtedyService.Database;
+using Vetheria.Vtedy.DataAccess;
 
 namespace Vetheria.Vtedy.Application.CommandHandlers.TodoItems
 {

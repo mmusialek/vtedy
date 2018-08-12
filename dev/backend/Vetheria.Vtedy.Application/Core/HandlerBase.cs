@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Vetheria.VtedyService.Database;
+using Vetheria.Vtedy.DataAccess;
 
 namespace Vetheria.Vtedy.Application.Core
 {

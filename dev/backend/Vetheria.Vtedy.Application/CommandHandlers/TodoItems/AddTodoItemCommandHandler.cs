@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Vetheria.Vtedy.Application.Core;
-using Vetheria.VtedyService.Database;
-using Vetheria.VtedyService.Models;
+using Vetheria.Vtedy.DataAccess;
+using Vetheria.Vtedy.DataModel.Model;
 
 namespace Vetheria.Vtedy.Application.CommandHandlers.TodoItems
 {

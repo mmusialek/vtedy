@@ -1,17 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
-using Vetheria.VtedyService.Models;
+using Microsoft.EntityFrameworkCore;
+using Vetheria.Vtedy.DataModel.Model;
 
-namespace Vetheria.VtedyService.Database
+namespace Vetheria.Vtedy.DataAccess
 {
     public interface IDbContext
     {
         DbSet<TodoItem> TodoItems { get;  }
         DbSet<Tag> Tags { get; }
+        DbSet<Project> Projects { get; }
         int SaveChanges();
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken));
     }

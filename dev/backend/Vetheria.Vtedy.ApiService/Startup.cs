@@ -12,8 +12,7 @@ using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
 using Vetheria.Vtedy.Application.Core;
 using Vetheria.Vtedy.Application.Handlers;
-using Vetheria.VtedyService.Database;
-using Vetheria.VtedyService.Models;
+using Vetheria.Vtedy.DataAccess;
 
 namespace Vetheria.Vtedy.ApiService
 {

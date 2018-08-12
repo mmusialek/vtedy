@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Vetheria.Vtedy.Application.Core;
-using Vetheria.VtedyService.Models;
+using Vetheria.Vtedy.DataModel.Model;
 
-namespace Vetheria.VtedyService.Controllers
+namespace Vetheria.Vtedy.ApiService.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]

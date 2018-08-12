@@ -1,11 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Vetheria.VtedyService.Models;
+using Vetheria.Vtedy.DataModel.Model;
 
-namespace Vetheria.VtedyService.Database
+namespace Vetheria.Vtedy.DataAccess
 {
     public class VtedyContext : DbContext, IDbContext
     {
@@ -18,10 +14,12 @@ namespace Vetheria.VtedyService.Database
         {
             modelBuilder.TodoItemBuilder();
             modelBuilder.TagsBuilder();
+            modelBuilder.ProjectsBuilder();
         }
 
         public DbSet<TodoItem> TodoItems { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<Project> Projects { get; set; }
     }
 }
 

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace Vetheria.VtedyService.Dtos
+namespace Vetheria.Vtedy.ApiService.Dto
 {
     public class TagDto
     {

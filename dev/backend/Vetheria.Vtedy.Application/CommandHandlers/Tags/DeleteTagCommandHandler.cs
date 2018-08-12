@@ -5,8 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Vetheria.Vtedy.Application.Core;
-using Vetheria.VtedyService.Database;
-using Vetheria.VtedyService.Models;
+using Vetheria.Vtedy.DataAccess;
 
 namespace Vetheria.Vtedy.Application.CommandHandlers.Tags
 {
