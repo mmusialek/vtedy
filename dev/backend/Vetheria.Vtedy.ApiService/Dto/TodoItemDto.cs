@@ -8,7 +8,7 @@ namespace Vetheria.Vtedy.ApiService.Dto
         public string Name { get; set; }
         public bool IsComplete { get; set; }
 
-
-        public virtual ICollection<TagDto> Tags { get; set; }
+        public ProjectDto Project { get; set; }
+        public List<TagDto> Tags { get; set; } = new List<TagDto>();
     }
 }

@@ -9,21 +9,21 @@ using Vetheria.Vtedy.DataModel.Model;
 
 namespace Vetheria.Vtedy.Application.Handlers.TodoItems
 {
-    public class GetTodoItemByIdQueryHandler : HandlerBase, IQueryHandler<int, Task<Result<TodoItem>>>
+    public class GetTodoItemByIdQueryHandler : HandlerBase, IQueryHandler<int, Task<TodoItem>>
     {
         public GetTodoItemByIdQueryHandler(IDbContext context) : base(context)
         {
         }
 
-        public async Task<Result<TodoItem>> ExecuteAsync(int id)
+        public async Task<TodoItem> ExecuteAsync(int id)
         {
             var item = await _context.TodoItems.FirstOrDefaultAsync(p => p.Id == id);
             if (item != null)
             {
-                return Result<TodoItem>.CreateSuccess(item);
+                return item;
             }
 
-            return await Task.FromResult(Result<TodoItem>.CreateFailure());
+            return await Task.FromResult<TodoItem>(null);
         }
     }
 }

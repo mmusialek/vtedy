@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Vetheria.Vtedy.Application.Core;
 using Vetheria.Vtedy.DataAccess;
@@ -14,7 +15,8 @@ namespace Vetheria.Vtedy.Application.Handlers.TodoItems
 
         public async Task<IEnumerable<TodoItem>> Execute()
         {
-            return await Task.FromResult<IEnumerable<TodoItem>>(null);
+            var res = _context.TodoItems.ToList();
+            return await Task.FromResult<IEnumerable<TodoItem>>(res);
         }
     }
 }

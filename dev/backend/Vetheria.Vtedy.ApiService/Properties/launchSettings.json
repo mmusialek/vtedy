@@ -17,12 +17,11 @@
     },
     "Vetheria.Vtedy.ApiService": {
       "commandName": "Project",
-      "launchBrowser": true,
       "launchUrl": "api/values",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:65524/"
+      "applicationUrl": "http://localhost:5001/"
     }
   }
 }

@@ -9,6 +9,7 @@ namespace Vetheria.Vtedy.DataModel.Model
         public bool IsComplete { get; set; }
 
 
-        public virtual ICollection<Tag> Tags { get; set; }
+        public virtual Project Project { get; set; }
+        public virtual ICollection<TodoItemTag> TodoItemTags { get; set; }
     }
 }

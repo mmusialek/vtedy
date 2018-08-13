@@ -53,6 +53,7 @@ export class ItemDetailsService {
 
     return new Observable<ItemDataViewModel>(obs => {
       const subscriber = this._vtedyService.getItem(id).subscribe(p => {
+
         result = new ItemDataViewModel();
         result.id = p.id;
         result.title = p.name;

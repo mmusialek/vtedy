@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Vetheria.Vtedy.ApiService.Dto;
 using Vetheria.Vtedy.Application.Core;
 using Vetheria.Vtedy.DataModel.Model;
 
@@ -10,30 +12,36 @@ namespace Vetheria.Vtedy.ApiService.Controllers
     [Route("api/[controller]")]
     public class TodoItemsController : Controller
     {
-        private IQueryHandler<Task<IEnumerable<TodoItem>>> _getTodoItemsQueryHandler;
-        private IQueryHandler<int, Task<Result<TodoItem>>> _getTodoItemByIdQueryHandler;
-        private ICommandHandler<int, Task<Result<long>>> _deleteTodoItemCommandHandler;
-        private ICommandHandler<TodoItem, Task<Result<long>>> _addTodoItemCommandHandler;
+        private readonly IQueryHandler<Task<IEnumerable<TodoItem>>> _getTodoItemsQueryHandler;
+        private readonly IQueryHandler<int, Task<TodoItem>> _getTodoItemByIdQueryHandler;
+        private readonly ICommandHandler<int, Task<Result<long>>> _deleteTodoItemCommandHandler;
+        private readonly ICommandHandler<TodoItem, Task<Result<long>>> _addTodoItemCommandHandler;
+        private readonly IMapper _mapper;
 
         public TodoItemsController(
             IQueryHandler<Task<IEnumerable<TodoItem>>> getTodoItemsQueryHandler,
-            IQueryHandler<int, Task<Result<TodoItem>>> getTodoItemByIdQueryHandler,
+            IQueryHandler<int, Task<TodoItem>> getTodoItemByIdQueryHandler,
             ICommandHandler<int, Task<Result<long>>> deleteTodoItemCommandHandler,
-            ICommandHandler<TodoItem, Task<Result<long>>> addTodoItemCommandHandler
+            ICommandHandler<TodoItem, Task<Result<long>>> addTodoItemCommandHandler,
+            IMapper mapper
             )
         {
             _getTodoItemsQueryHandler = getTodoItemsQueryHandler;
             _getTodoItemByIdQueryHandler = getTodoItemByIdQueryHandler;
             _deleteTodoItemCommandHandler = deleteTodoItemCommandHandler;
             _addTodoItemCommandHandler = addTodoItemCommandHandler;
+            _mapper = mapper;
         }
 
         // GET: api/Todo
         [HttpGet]
-        public async Task<IEnumerable<TodoItem>> Get()
+        public async Task<IEnumerable<TodoItemDto>> Get()
         {
             var res = await _getTodoItemsQueryHandler.Execute();
-            return res;
+
+            var dto = _mapper.Map<IEnumerable<TodoItemDto>>(res);
+
+            return dto;
         }
 
         // GET: api/Todo/5
@@ -42,12 +50,16 @@ namespace Vetheria.Vtedy.ApiService.Controllers
         {
             var res = await _getTodoItemByIdQueryHandler.ExecuteAsync(id);
 
-            if (!res.IsSuccess)
+            if (res == null)
             {
                 return NotFound();
             }
 
-            return new ObjectResult(res);
+            var dto = _mapper.Map<TodoItemDto>(res);
+
+
+            var resObj = new ObjectResult(dto);
+            return resObj;
         }
 
         // POST: api/Todo

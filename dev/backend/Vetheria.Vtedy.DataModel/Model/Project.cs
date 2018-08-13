@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 
 namespace Vetheria.Vtedy.DataModel.Model
 {
@@ -10,7 +11,7 @@ namespace Vetheria.Vtedy.DataModel.Model
         public string Name { get; set; }
         public string Description { get; set; }
 
-
-//        public virtual ICollection<IdentityUser> Users { get; set; }
+        public virtual ICollection<TodoItem> TodoItems { get; set; }
+        public virtual ICollection<VtedyIdentityUser> Users { get; set; }
     }
 }

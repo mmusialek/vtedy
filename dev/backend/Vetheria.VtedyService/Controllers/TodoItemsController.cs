@@ -22,7 +22,34 @@ namespace Vetheria.VtedyService.Controllers
 
             if (!_context.TodoItems.Any())
             {
-                _context.TodoItems.Add(new TodoItem { Name = "Item1" });
+                // NOTE temporary solution
+                // NOTE generate some mocked data
+                var tag1 = new Tag { Name = "allegro" };
+                var tag2 = new Tag { Name = "disney" };
+//                tag1.TodoItems = new List<TodoItem>();
+//                tag2.TodoItems = new List<TodoItem>();
+                _context.Tags.Add(tag1);
+                _context.Tags.Add(tag2);
+                _context.SaveChanges();
+
+                for (int i = 0; i < 10; i++)
+                {
+
+                    var todo = new TodoItem
+                    {
+                        Name = "Item_" + i,                        
+                        Tags = new List<Tag> { _context.Tags.First(p => p.Id == 1), _context.Tags.First(p => p.Id == 2) }
+                    };
+
+//                    tag1.TodoItems = new List<TodoItem>();
+//                    tag2.TodoItems = new List<TodoItem>();
+//                    tag1.TodoItems.Add(todo);
+//                    tag2.TodoItems.Add(todo);
+
+                    _context.TodoItems.Add(todo);
+                }
+
+
                 _context.SaveChanges();
             }
         }
