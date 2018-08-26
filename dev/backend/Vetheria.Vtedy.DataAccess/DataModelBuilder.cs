@@ -10,7 +10,7 @@ namespace Vetheria.Vtedy.DataAccess
             var obj = modelBuilder.Entity<TodoItem>();
             obj.HasKey(p => p.Id);
             obj.Property(p => p.Name).HasMaxLength(100).IsRequired();
-            obj.Property(p => p.IsComplete).IsRequired();
+            obj.Property(p => p.IsCompleted).IsRequired();
 
 
             // obj.HasMany(p => p.Tags)

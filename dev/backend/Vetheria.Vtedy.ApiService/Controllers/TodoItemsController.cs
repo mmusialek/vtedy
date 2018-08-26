@@ -35,13 +35,19 @@ namespace Vetheria.Vtedy.ApiService.Controllers
 
         // GET: api/Todo
         [HttpGet]
-        public async Task<IEnumerable<TodoItemDto>> Get()
+        public async Task<IActionResult> Get() //IEnumerable<TodoItemDto>
         {
             var res = await _getTodoItemsQueryHandler.Execute();
 
             var dto = _mapper.Map<IEnumerable<TodoItemDto>>(res);
 
-            return dto;
+            if (res == null)
+            {
+                return NotFound();
+            }
+
+            var resObj = new ObjectResult(dto);
+            return resObj;
         }
 
         // GET: api/Todo/5
@@ -92,7 +98,7 @@ namespace Vetheria.Vtedy.ApiService.Controllers
         //        return NotFound();
         //    }
 
-        //    todo.IsComplete = item.IsComplete;
+        //    todo.IsCompleted = item.IsCompleted;
         //    todo.Name = item.Name;
 
         //    _context.TodoItems.Update(todo);

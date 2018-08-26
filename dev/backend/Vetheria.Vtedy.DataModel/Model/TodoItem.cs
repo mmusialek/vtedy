@@ -6,7 +6,7 @@ namespace Vetheria.Vtedy.DataModel.Model
     {
         public long Id { get; set; }
         public string Name { get; set; }
-        public bool IsComplete { get; set; }
+        public bool IsCompleted { get; set; }
 
 
         public virtual Project Project { get; set; }

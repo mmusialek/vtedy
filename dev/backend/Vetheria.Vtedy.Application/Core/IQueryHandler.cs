@@ -4,13 +4,13 @@ using System.Text;
 
 namespace Vetheria.Vtedy.Application.Core
 {
-    public interface IQueryHandler<TInput, TResult>
+    public interface IQueryHandler<in TInput, out TResult>
     {
         TResult ExecuteAsync(TInput input);
     }
 
 
-    public interface IQueryHandler<TResult>
+    public interface IQueryHandler<out TResult>
     {
         TResult Execute();
     }

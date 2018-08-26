@@ -44,8 +44,10 @@ namespace Vetheria.Vtedy.ApiService
 
             services.SetupServicesToInject();
 
+
             // add context
-            services.AddDbContext<VtedyContext>(opt => opt.UseInMemoryDatabase("VtedyDatabase"));
+            //            services.AddDbContext<VtedyContext>(opt => opt.UseInMemoryDatabase("VtedyDatabase"));
+            services.AddDbContext<VtedyContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("VtedyDatabase")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
