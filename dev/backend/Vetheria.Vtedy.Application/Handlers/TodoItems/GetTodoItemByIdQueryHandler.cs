@@ -9,13 +9,13 @@ using Vetheria.Vtedy.DataModel.Model;
 
 namespace Vetheria.Vtedy.Application.Handlers.TodoItems
 {
-    public class GetTodoItemByIdQueryHandler : HandlerBase, IQueryHandler<int, Task<TodoItem>>
+    public class GetTodoItemByIdQueryHandler : HandlerBase, IQueryHandler<string, Task<TodoItem>>
     {
         public GetTodoItemByIdQueryHandler(IDbContext context) : base(context)
         {
         }
 
-        public async Task<TodoItem> ExecuteAsync(int id)
+        public async Task<TodoItem> ExecuteAsync(string id)
         {
             var item = await _context.TodoItems.FirstOrDefaultAsync(p => p.Id == id);
             if (item != null)

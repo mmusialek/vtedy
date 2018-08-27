@@ -29,9 +29,9 @@ namespace Vetheria.Vtedy.ApiService
 
             // todo items
             services.AddTransient<IQueryHandler<Task<IEnumerable<TodoItem>>>, GetTodoItemsQueryHandler>();
-            services.AddTransient<IQueryHandler<int, Task<TodoItem>>, GetTodoItemByIdQueryHandler>();
-            services.AddTransient<ICommandHandler<int, Task<Result<long>>>, DeleteTodoItemCommandHandler>();
-            services.AddTransient<ICommandHandler<TodoItem, Task<Result<long>>>, AddTodoItemCommandHandler>();
+            services.AddTransient<IQueryHandler<string, Task<TodoItem>>, GetTodoItemByIdQueryHandler>();
+            services.AddTransient<ICommandHandler<string, Task<Result<string>>>, DeleteTodoItemCommandHandler>();
+            services.AddTransient<ICommandHandler<TodoItem, Task<Result<string>>>, AddTodoItemCommandHandler>();
             //services.AddTransient<IDbContext, VtedyContext>();
         }
     }

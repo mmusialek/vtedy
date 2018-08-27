@@ -8,17 +8,17 @@ using Vetheria.Vtedy.DataModel.Model;
 
 namespace Vetheria.Vtedy.Application.CommandHandlers.TodoItems
 {
-    public class AddTodoItemCommandHandler : HandlerBase, ICommandHandler<TodoItem, Task<Result<long>>>
+    public class AddTodoItemCommandHandler : HandlerBase, ICommandHandler<TodoItem, Task<Result<string>>>
     {
         public AddTodoItemCommandHandler(IDbContext context) : base(context)
         {
         }
 
-        public async Task<Result<long>> ExecuteAsync(TodoItem input)
+        public async Task<Result<string>> ExecuteAsync(TodoItem input)
         {
             var res = _context.TodoItems.Add(input);
             await _context.SaveChangesAsync();
-            return await Task.FromResult(Result<long>.CreateSuccess(res.Entity.Id));
+            return await Task.FromResult(Result<string>.CreateSuccess(res.Entity.Id));
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[TodoItemTags]
 (
-    [Id] INT NOT NULL PRIMARY KEY, 
-    [TodoItemId] INT NOT NULL, 
+    [Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [TodoItemId] UNIQUEIDENTIFIER NOT NULL, 
     [TagId] INT NOT NULL
 );
 
