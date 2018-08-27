@@ -12,6 +12,11 @@ namespace Vetheria.Vtedy.ApiService.Converters
     {
         public ContractConverter()
         {
+            CreateMap<string, Guid>().ConvertUsing(Guid.Parse);
+            CreateMap<string, Guid?>().ConvertUsing(s => string.IsNullOrWhiteSpace(s) ? (Guid?)null : Guid.Parse(s));
+            CreateMap<Guid?, string>().ConvertUsing(g => g?.ToString("N"));
+            CreateMap<Guid, string>().ConvertUsing(g => g.ToString("N"));
+
             CreateMap<Tag, TagDto>();
             CreateMap<Project, ProjectDto>();
 

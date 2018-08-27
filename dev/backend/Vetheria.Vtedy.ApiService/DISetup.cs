@@ -14,7 +14,7 @@ using Vetheria.Vtedy.DataModel.Model;
 
 namespace Vetheria.Vtedy.ApiService
 {
-    public static class DISetup
+    public static class DiSetup
     {
         public static void SetupServicesToInject(this IServiceCollection services)
         {

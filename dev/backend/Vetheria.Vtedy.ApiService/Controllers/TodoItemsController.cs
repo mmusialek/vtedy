@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -13,16 +14,16 @@ namespace Vetheria.Vtedy.ApiService.Controllers
     public class TodoItemsController : Controller
     {
         private readonly IQueryHandler<Task<IEnumerable<TodoItem>>> _getTodoItemsQueryHandler;
-        private readonly IQueryHandler<int, Task<TodoItem>> _getTodoItemByIdQueryHandler;
-        private readonly ICommandHandler<int, Task<Result<long>>> _deleteTodoItemCommandHandler;
-        private readonly ICommandHandler<TodoItem, Task<Result<long>>> _addTodoItemCommandHandler;
+        private readonly IQueryHandler<string, Task<TodoItem>> _getTodoItemByIdQueryHandler;
+        private readonly ICommandHandler<string, Task<Result<string>>> _deleteTodoItemCommandHandler;
+        private readonly ICommandHandler<TodoItem, Task<Result<string>>> _addTodoItemCommandHandler;
         private readonly IMapper _mapper;
 
         public TodoItemsController(
             IQueryHandler<Task<IEnumerable<TodoItem>>> getTodoItemsQueryHandler,
-            IQueryHandler<int, Task<TodoItem>> getTodoItemByIdQueryHandler,
-            ICommandHandler<int, Task<Result<long>>> deleteTodoItemCommandHandler,
-            ICommandHandler<TodoItem, Task<Result<long>>> addTodoItemCommandHandler,
+            IQueryHandler<string, Task<TodoItem>> getTodoItemByIdQueryHandler,
+            ICommandHandler<string, Task<Result<string>>> deleteTodoItemCommandHandler,
+            ICommandHandler<TodoItem, Task<Result<string>>> addTodoItemCommandHandler,
             IMapper mapper
             )
         {
@@ -38,7 +39,6 @@ namespace Vetheria.Vtedy.ApiService.Controllers
         public async Task<IActionResult> Get() //IEnumerable<TodoItemDto>
         {
             var res = await _getTodoItemsQueryHandler.Execute();
-
             var dto = _mapper.Map<IEnumerable<TodoItemDto>>(res);
 
             if (res == null)
@@ -52,7 +52,7 @@ namespace Vetheria.Vtedy.ApiService.Controllers
 
         // GET: api/Todo/5
         [HttpGet("{id}", Name = "Get")]
-        public async Task<IActionResult> GetAsync(int id)
+        public async Task<IActionResult> GetAsync(string id)
         {
             var res = await _getTodoItemByIdQueryHandler.ExecuteAsync(id);
 
@@ -108,7 +108,7 @@ namespace Vetheria.Vtedy.ApiService.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync(int id)
+        public async Task<IActionResult> DeleteAsync(string id)
         {
             var res = await _deleteTodoItemCommandHandler.ExecuteAsync(id);
             if (!res.IsSuccess)

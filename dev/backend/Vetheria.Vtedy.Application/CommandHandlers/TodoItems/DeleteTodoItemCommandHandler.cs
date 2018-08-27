@@ -16,12 +16,13 @@ namespace Vetheria.Vtedy.Application.CommandHandlers.TodoItems
 
         public async Task<Result<string>> ExecuteAsync(string input)
         {
-            var item = await _context.TodoItems.FirstOrDefaultAsync(p => p.Id == input);
+            var gInput = Guid.Parse(input);
+            var item = await _context.TodoItems.FirstOrDefaultAsync(p => p.Id == gInput);
             if(item != null)
             {
                 _context.TodoItems.Remove(item);
                 await _context.SaveChangesAsync();
-                return await Task.FromResult(Result<string>.CreateSuccess(item.Id));
+                return await Task.FromResult(Result<string>.CreateSuccess(item.Id.ToString()));
             }
 
             return await Task.FromResult(Result<string>.CreateFailure());

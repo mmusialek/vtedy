@@ -17,7 +17,8 @@ namespace Vetheria.Vtedy.Application.Handlers.TodoItems
 
         public async Task<TodoItem> ExecuteAsync(string id)
         {
-            var item = await _context.TodoItems.FirstOrDefaultAsync(p => p.Id == id);
+            Guid gid = Guid.Parse(id);
+            var item = await _context.TodoItems.Include(p => p.Project).Include(p=>p.TodoItemTags).ThenInclude(p=>p.Tag).FirstOrDefaultAsync(p => p.Id == gid);
             if (item != null)
             {
                 return item;

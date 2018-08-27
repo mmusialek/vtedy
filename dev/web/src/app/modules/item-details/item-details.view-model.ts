@@ -16,12 +16,11 @@ export class ItemDataViewModel {
 export class ProjectViewModel {
   id: number;
   name: string;
+  description: string;
   owner: string;
 
-  constructor(param: { id?: number, name?: string, owner?: string } = {}) {
-    this.id = param.id;
-    this.name = param.name;
-    this.owner = param.owner;
+  constructor(param: Partial<ProjectViewModel>) {
+    Object.assign(this, param);
   }
 }
 
@@ -31,11 +30,8 @@ export class CommentViewModel {
   author: string;
   date: Date;
 
-  constructor(param: {id?: number, comment?: string, author?: string, date?: Date } = {}) {
-    this.id = param.id;
-    this.comment = param.comment;
-    this.author = param.author;
-    this.date = param.date;
+  constructor(param: Partial<CommentViewModel>) {
+    Object.assign(this, param);
   }
 }
 
@@ -44,9 +40,7 @@ export class TagViewModel {
   name: string;
   owner: string;
 
-  constructor(param: { id?: number, name?: string, owner?: string }) {
-    this.id = param.id;
-    this.name = param.name;
-    this.owner = param.owner;
+  constructor(param: Partial<TagViewModel>) {
+    Object.assign(this, param);
   }
 }

@@ -57,7 +57,7 @@ export class ItemDetailsService {
         result = new ItemDataViewModel();
         result.id = p.id;
         result.title = p.name;
-        result.project = new ProjectViewModel({id: 1, name: 'test proj 1', owner: 'Marcin'});
+        result.project = new ProjectViewModel({id: p.project.id, name: p.project.name, description: p.project.description, owner: 'Marcin'});
         result.comments = [];
         result.comments.push(new CommentViewModel({
           author: 'Marcin',
@@ -71,7 +71,13 @@ export class ItemDetailsService {
         }));
         result.date = new Date(Date.now());
         result.tags = [];
-        result.tags.push(new TagViewModel({id: 1, name: 'tag_1', owner: 'Marcin'}));
+
+        if (p.tags) {
+          for (const tag of p.tags) {
+            result.tags.push(new TagViewModel({id: tag.id, name: tag.name, owner: 'Marcin'}));
+          }
+        }
+
 
         obs.next(result);
         obs.complete();

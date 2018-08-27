@@ -18,7 +18,7 @@ namespace Vetheria.Vtedy.Application.CommandHandlers.TodoItems
         {
             var res = _context.TodoItems.Add(input);
             await _context.SaveChangesAsync();
-            return await Task.FromResult(Result<string>.CreateSuccess(res.Entity.Id));
+            return await Task.FromResult(Result<string>.CreateSuccess(res.Entity.Id.ToString()));
         }
     }
 }
