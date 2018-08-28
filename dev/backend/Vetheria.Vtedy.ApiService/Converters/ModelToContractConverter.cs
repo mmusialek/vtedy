@@ -8,24 +8,21 @@ using Vetheria.Vtedy.DataModel.Model;
 
 namespace Vetheria.Vtedy.ApiService.Converters
 {
-    public class ContractConverter : Profile
+    public class ModelToContractConverter : Profile
     {
-        public ContractConverter()
+        public ModelToContractConverter()
         {
             CreateMap<string, Guid>().ConvertUsing(Guid.Parse);
             CreateMap<string, Guid?>().ConvertUsing(s => string.IsNullOrWhiteSpace(s) ? (Guid?)null : Guid.Parse(s));
-            CreateMap<Guid?, string>().ConvertUsing(g => g?.ToString("N"));
-            CreateMap<Guid, string>().ConvertUsing(g => g.ToString("N"));
 
             CreateMap<Tag, TagDto>();
             CreateMap<Project, ProjectDto>();
 
-            //            CreateMap<TodoItem, TodoItemDto>().ForMember(p=>p.Tags, o => o.MapFrom(i => i.TodoItemTags));
-            CreateMap<TodoItem, TodoItemDto>().ForMember(p => p.Tags, o => o.ResolveUsing<TodoItemResolver>());
+            CreateMap<TodoItem, TodoItemDto>().ForMember(p => p.Tags, o => o.ResolveUsing<TodoItemToContractResolver>());
         }
     }
 
-    public class TodoItemResolver : IValueResolver<TodoItem, TodoItemDto, List<TagDto>>
+    public class TodoItemToContractResolver : IValueResolver<TodoItem, TodoItemDto, List<TagDto>>
     {
         public List<TagDto> Resolve(TodoItem source, TodoItemDto destination, List<TagDto> destMember, ResolutionContext context)
         {

@@ -30,8 +30,10 @@ namespace Vetheria.Vtedy.ApiService
             // todo items
             services.AddTransient<IQueryHandler<Task<IEnumerable<TodoItem>>>, GetTodoItemsQueryHandler>();
             services.AddTransient<IQueryHandler<string, Task<TodoItem>>, GetTodoItemByIdQueryHandler>();
-            services.AddTransient<ICommandHandler<string, Task<Result<string>>>, DeleteTodoItemCommandHandler>();
+
+            services.AddTransient<ICommandHandler<string, Task<string>>, DeleteTodoItemCommandHandler>();
             services.AddTransient<ICommandHandler<TodoItem, Task<Result<string>>>, AddTodoItemCommandHandler>();
+            services.AddTransient<ICommandHandler<TodoItem, Task<TodoItem>>, UpdateAllTodoItemCommandHandler>();
             //services.AddTransient<IDbContext, VtedyContext>();
         }
     }
