@@ -53,8 +53,8 @@ namespace Vetheria.Vtedy.ApiService.Controllers
         }
 
         // GET: api/Todo/5
-        [HttpGet("{id}", Name = "Get")]
-        public async Task<IActionResult> GetAsync(string id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(string id)
         {
             var res = await _getTodoItemByIdQueryHandler.ExecuteAsync(id);
 

@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {ItemListItemViewModel} from './item-list.view-model';
 import {Observable} from 'rxjs';
-import {VtedyClientService} from '../../shared/client-services/vtedy.client-service';
-import {TodoItemDto} from '../../shared/dto/todo-item.dto';
+import {VtedyClientService} from '../../client-services/vtedy.client-service';
+import {TodoItemDto} from '../../dto/todo-item.dto';
 
 
 @Injectable()

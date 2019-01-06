@@ -1,9 +1,9 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ItemListItemViewModel, ItemListViewModel, PagesRoues} from './item-list.view-model';
 import {ActivatedRoute, ActivationEnd, Router} from '@angular/router';
 import {Observable, SubscriptionLike as ISubscription} from 'rxjs';
 import {ItemListFilter, ItemListService} from './item-list.service';
-import {ItemDetailsService} from '../item-details/item.details.service';
+import {ItemDetailsService} from '../../../modules/item-details/item.details.service';
 
 @Component({
   selector: 'vth-item-list',
@@ -13,8 +13,12 @@ export class ItemListComponent implements OnInit, OnDestroy {
 
   viewModel: ItemListViewModel = new ItemListViewModel();
   @ViewChild('newItemInput') newItemInput;
+
+  @Input() items: ItemListItemViewModel[];
+
   private _routeSubs: ISubscription;
-  canHideCss = true;
+
+  // canHideCss = true;
 
   constructor(private _route: ActivatedRoute,
               private _router: Router,
@@ -24,16 +28,16 @@ export class ItemListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this._routeSubs = this._router.events.subscribe(p => {
-      if (p instanceof ActivationEnd) {
-        const pageParam = this._route.snapshot.params['page'];
-        this.refreshView(pageParam);
-      }
-    });
-
-    // this is called first time
-    const page = this._route.snapshot.params['page'];
-    this.refreshView(page);
+    // this._routeSubs = this._router.events.subscribe(p => {
+    //   if (p instanceof ActivationEnd) {
+    //     const pageParam = this._route.snapshot.params['page'];
+    //     this.refreshView(pageParam);
+    //   }
+    // });
+    //
+    // // this is called first time
+    // const page = this._route.snapshot.params['page'];
+    // this.refreshView(page);
   }
 
   ngOnDestroy() {
@@ -72,7 +76,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
   private closeDetails() {
     if (!this._itemDetailsService.isDialogPinned) {
       this.viewModel.areDetailsVisible = false;
-      this.canHideCss = true;
+      // this.canHideCss = true;
       this._itemDetailsService.hideItemDetails();
     }
   }
@@ -95,7 +99,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
     if (event.code === 'Enter' || isFromActionButton) {
       const newItem = new ItemListItemViewModel({name: this.viewModel.newItem});
       this._itemListService.addItem(newItem).subscribe(p => {
-        this.viewModel.items.push(p);
+        this.items.push(p);
       });
 
       this.viewModel.newItem = '';
@@ -110,51 +114,51 @@ export class ItemListComponent implements OnInit, OnDestroy {
 
   // helper methods
 
-  private refreshView(page: string) {
-    const filter = new ItemListFilter();
-    const currDate = new Date(Date.now());
-
-    const getData = (data: Observable<ItemListItemViewModel[]>) => {
-      const subscription = data.subscribe(p => {
-        this.viewModel.items = p;
-        if (subscription) {
-          subscription.unsubscribe();
-        }
-      });
-    };
-
-    switch (page) {
-
-      default:
-      case PagesRoues.PriorityBox:
-        filter.date = new Date(Date.UTC(currDate.getFullYear(), currDate.getUTCMonth(), currDate.getUTCDate()));
-
-        this.viewModel.items.splice(0, this.viewModel.items.length);
-
-        // TODO ad filters
-        getData(this._itemListService.getItems());
-        break;
-
-      case PagesRoues.Inbox:
-        this.viewModel.items.splice(0, this.viewModel.items.length);
-
-        // TODO ad filters
-        getData(this._itemListService.getItems());
-        break;
-
-      case PagesRoues.Projects:
-        this.viewModel.items.splice(0, this.viewModel.items.length);
-
-        // TODO ad filters
-        getData(this._itemListService.getItems());
-        break;
-
-      case PagesRoues.Calendar:
-        this.viewModel.items.splice(0, this.viewModel.items.length);
-        break;
-    }
-
-  }
+  // private refreshView(page: string) {
+  //   const filter = new ItemListFilter();
+  //   const currDate = new Date(Date.now());
+  //
+  //   const getData = (data: Observable<ItemListItemViewModel[]>) => {
+  //     const subscription = data.subscribe(p => {
+  //       this.viewModel.items = p;
+  //       if (subscription) {
+  //         subscription.unsubscribe();
+  //       }
+  //     });
+  //   };
+  //
+  //   switch (page) {
+  //
+  //     default:
+  //     case PagesRoues.PriorityBox:
+  //       filter.date = new Date(Date.UTC(currDate.getFullYear(), currDate.getUTCMonth(), currDate.getUTCDate()));
+  //
+  //       this.viewModel.items.splice(0, this.viewModel.items.length);
+  //
+  //       // TODO ad filters
+  //       getData(this._itemListService.getItems());
+  //       break;
+  //
+  //     case PagesRoues.Inbox:
+  //       this.viewModel.items.splice(0, this.viewModel.items.length);
+  //
+  //       // TODO ad filters
+  //       getData(this._itemListService.getItems());
+  //       break;
+  //
+  //     case PagesRoues.Projects:
+  //       this.viewModel.items.splice(0, this.viewModel.items.length);
+  //
+  //       // TODO ad filters
+  //       getData(this._itemListService.getItems());
+  //       break;
+  //
+  //     case PagesRoues.Calendar:
+  //       this.viewModel.items.splice(0, this.viewModel.items.length);
+  //       break;
+  //   }
+  //
+  // }
 
 }
 

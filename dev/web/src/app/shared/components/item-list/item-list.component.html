@@ -16,8 +16,8 @@
 
     <div class="vth-item-list__container__body__content">
       <div class="vth-item-list__container__body__content__main">
-        <ul class="vth-item-list__container__list">
-          <li class="vth-item-list__container__list__list-item" *ngFor="let item of viewModel.items" (click)="onItemClickHandler($event, item)">{{item.name}}</li>
+        <ul class="vth-item-list__container__list" *ngIf="items">
+          <li class="vth-item-list__container__list__list-item" *ngFor="let item of items" (click)="onItemClickHandler($event, item)">{{item.name}}</li>
         </ul>
       </div>
       <div class="vth-item-list__container__body__content__details"
