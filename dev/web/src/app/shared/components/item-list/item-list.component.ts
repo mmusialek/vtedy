@@ -1,43 +1,26 @@
-import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {ItemListItemViewModel, ItemListViewModel, PagesRoues} from './item-list.view-model';
-import {ActivatedRoute, ActivationEnd, Router} from '@angular/router';
-import {Observable, SubscriptionLike as ISubscription} from 'rxjs';
-import {ItemListFilter, ItemListService} from './item-list.service';
+import {Component, Input, OnDestroy, ViewChild} from '@angular/core';
+import {ItemListItemViewModel, ItemListViewModel} from './item-list.view-model';
+import {ActivatedRoute, Router} from '@angular/router';
+import {SubscriptionLike as ISubscription} from 'rxjs';
+import {ItemListService} from './item-list.service';
 import {ItemDetailsService} from '../../../modules/item-details/item.details.service';
 
 @Component({
   selector: 'vth-item-list',
   templateUrl: './item-list.component.html'
 })
-export class ItemListComponent implements OnInit, OnDestroy {
+export class ItemListComponent implements OnDestroy {
 
   viewModel: ItemListViewModel = new ItemListViewModel();
   @ViewChild('newItemInput') newItemInput;
-
   @Input() items: ItemListItemViewModel[];
 
   private _routeSubs: ISubscription;
-
-  // canHideCss = true;
 
   constructor(private _route: ActivatedRoute,
               private _router: Router,
               private _itemListService: ItemListService,
               private _itemDetailsService: ItemDetailsService) {
-  }
-
-  ngOnInit() {
-
-    // this._routeSubs = this._router.events.subscribe(p => {
-    //   if (p instanceof ActivationEnd) {
-    //     const pageParam = this._route.snapshot.params['page'];
-    //     this.refreshView(pageParam);
-    //   }
-    // });
-    //
-    // // this is called first time
-    // const page = this._route.snapshot.params['page'];
-    // this.refreshView(page);
   }
 
   ngOnDestroy() {

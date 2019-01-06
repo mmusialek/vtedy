@@ -3,6 +3,7 @@ import {ItemListItemViewModel} from './item-list.view-model';
 import {Observable} from 'rxjs';
 import {VtedyClientService} from '../../client-services/vtedy.client-service';
 import {TodoItemDto} from '../../dto/todo-item.dto';
+import {ItemListFilter} from '../../models/item-list-filter';
 
 
 @Injectable()
@@ -42,7 +43,7 @@ export class ItemListService {
     return new Observable(obs => {
       const res: ItemListItemViewModel[] = [];
 
-      const subscriber = this._vtedyService.getItems().subscribe((p: any) => {
+      const subscriber = this._vtedyService.getItems(filter).subscribe((p: any) => {
         for (const item of p) {
           res.push(new ItemListItemViewModel({id: item.id, name: item.name}));
         }
@@ -61,10 +62,3 @@ export class ItemListService {
 
 }
 
-export class ItemListFilter {
-  date?: Date;
-  projectId?: number;
-  currentItems: boolean;
-  labels: number[];
-  isCompleted: boolean;
-}
