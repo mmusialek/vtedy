@@ -6,6 +6,7 @@ import {ProjectListComponent} from './modules/project-list/project-list.componen
 import {TaskListComponent} from './modules/task-list/task-list.component';
 import {NotesComponent} from './modules/notes/notes.component';
 import {CalendarComponent} from './modules/calendar/calendar.component';
+import {ProjectManagementComponent} from './modules/project-management/project-management.component';
 
 const routes: Routes = [
   {
@@ -20,7 +21,6 @@ const routes: Routes = [
   },
   {
     path: 'item-list',
-    // component: ItemListComponent,
     children: [
       {
         path: '',
@@ -28,14 +28,11 @@ const routes: Routes = [
       },
       {
         path: 'projects',
-        component: ProjectListComponent,
-        pathMatch: 'full',
-        // outlet: 'option-details'
+        component: ProjectListComponent
       },
       {
         path: ':page',
-        component: TaskListComponent,
-        pathMatch: 'full',
+        component: TaskListComponent
       }
     ]
   },
@@ -48,8 +45,8 @@ const routes: Routes = [
     component: CalendarComponent
   },
   {
-    path: 'project-list',
-    component: ProjectListComponent
+    path: 'project-management',
+    component: ProjectManagementComponent
   }
 
 ];

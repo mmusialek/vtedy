@@ -23,6 +23,7 @@ import { ProjectListComponent } from './modules/project-list/project-list.compon
 import { TaskListComponent } from './modules/task-list/task-list.component';
 import { NotesComponent } from './modules/notes/notes.component';
 import { CalendarComponent } from './modules/calendar/calendar.component';
+import { ProjectManagementComponent } from './modules/project-management/project-management.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { CalendarComponent } from './modules/calendar/calendar.component';
     ProjectListComponent,
     TaskListComponent,
     NotesComponent,
-    CalendarComponent
+    CalendarComponent,
+    ProjectManagementComponent
   ],
   imports: [
     // angular

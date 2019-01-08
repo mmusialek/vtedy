@@ -59,7 +59,6 @@ export class ItemListComponent implements OnDestroy {
   private closeDetails() {
     if (!this._itemDetailsService.isDialogPinned) {
       this.viewModel.areDetailsVisible = false;
-      // this.canHideCss = true;
       this._itemDetailsService.hideItemDetails();
     }
   }

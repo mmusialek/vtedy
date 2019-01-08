@@ -18,8 +18,9 @@ export class ProjectViewModel {
   name: string;
   description: string;
   owner: string;
+  releaseAt: Date;
 
-  constructor(param: Partial<ProjectViewModel>) {
+  constructor(param?: Partial<ProjectViewModel>) {
     Object.assign(this, param);
   }
 }
