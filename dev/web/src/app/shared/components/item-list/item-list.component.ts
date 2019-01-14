@@ -56,6 +56,10 @@ export class ItemListComponent implements OnDestroy {
     this.closeDetails();
   }
 
+  onCloseNewItemClick() {
+    this.toggleAddNewItemVisibility();
+  }
+
   private closeDetails() {
     if (!this._itemDetailsService.isDialogPinned) {
       this.viewModel.areDetailsVisible = false;
