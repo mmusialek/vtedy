@@ -25,4 +25,8 @@ export class ProjectManagementComponent implements OnInit {
     this._router.navigate(['./item-list/projects']);
   }
 
+  onCancelClick() {
+    this._router.navigate(['./item-list/projects']);
+  }
+
 }
