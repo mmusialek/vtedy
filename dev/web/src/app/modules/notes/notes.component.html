@@ -1,15 +1,33 @@
 <div class="vth-notes">
 
-  <div>
-    <ul>
-      <li>tab 1</li>
-      <li>tab 2</li>
-      <li>tab 3</li>
-    </ul>
+  <div class="vth-shared-layout__container">
 
-    <div>
-      <textarea name="" id="" cols="30" rows="10"></textarea>
-    </div>
+    <form (submit)="onFormSave()">
+      <div class="vth-notes__header
+                vth-shared-layout__container__row
+                vth-shared-layout__container__row--center">Leave notes or some important info that you have to write down right now.
+      </div>
+
+      <div class="vth-notes__notes
+                vth-shared-layout__container__row">
+        <mat-form-field>
+          <textarea matInput mat-autosize [matAutosizeMinRows]="10" [matAutosizeMaxRows]="30"
+                    name="notes" placeholder="notes"
+                    [(ngModel)]="viewModel.notes"
+          ></textarea>
+        </mat-form-field>
+      </div>
+
+
+      <div class="vth-shared-layout__container__row">
+        <hr>
+      </div>
+
+      <div class="vth-shared-layout__container__row">
+        <button mat-button color="primary" type="submit">Save</button>
+      </div>
+    </form>
+
   </div>
 
 </div>

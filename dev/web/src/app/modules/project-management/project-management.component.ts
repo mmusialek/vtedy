@@ -1,12 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ProjectManagementViewModel} from './project-management.view-model';
 import {Router} from '@angular/router';
 import {ProjectViewModel} from '../item-details/item-details.view-model';
 
 @Component({
   selector: 'vth-project-management',
-  templateUrl: './project-management.component.html',
-  styleUrls: ['./project-management.component.scss']
+  templateUrl: './project-management.component.html'
 })
 export class ProjectManagementComponent implements OnInit {
 

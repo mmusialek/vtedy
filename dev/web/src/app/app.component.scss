@@ -1,10 +1,15 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
+// all other modules
+// TODO move to ./styles/[component/modules/etc] file
+@import 'shared/components/item-list/item-list.component';
 @import 'modules/option-panel/option-panel.component';
 @import 'modules/task-list/task-list.component';
 @import 'modules/shell/vertical-panel/vertical-panel.component';
 @import 'modules/shell/shell/shell.component';
-@import 'shared/components/item-list/item-list.component';
 @import 'modules/welcome/welcome.component';
 @import 'modules/item-details/item-details.component';
+@import 'modules/project-list/project-list.component';
+@import 'modules/project-management/project-management.component';
+@import 'modules/notes/notes.component';
 

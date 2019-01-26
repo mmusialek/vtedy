@@ -1,0 +1,15 @@
+@mixin vth-shared-layout() {
+  padding: 5px;
+
+  .vth-shared-layout__container {
+    display: flex;
+    flex-direction: column;
+
+    .vth-shared-layout__container__row {
+      &--center {
+        align-self: center;
+      }
+    }
+  }
+
+}

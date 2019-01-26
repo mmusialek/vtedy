@@ -1,12 +1,4 @@
 .vth-project-management {
-  padding: 5px;
 
-  .vth-project-management__container {
-    display: flex;
-    flex-direction: column;
-    .vth-project-management__container__row {
-
-    }
-  }
-
+  @include vth-shared-layout;
 }

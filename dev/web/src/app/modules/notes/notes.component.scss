@@ -1,0 +1,22 @@
+.vth-notes {
+  display: block;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+
+
+  @include vth-shared-layout;
+
+  // TODO create font definitions in separate file
+  .vth-notes__header {
+    text-align: center;
+    color: $font-primary-color;
+    font-size: 1.3em;
+  }
+
+  .vth-notes__notes {
+    mat-form-field {
+      width: 100%;
+    }
+  }
+}
