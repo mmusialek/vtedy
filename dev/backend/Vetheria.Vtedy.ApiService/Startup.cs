@@ -13,8 +13,6 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
 using Vetheria.Vtedy.Application.Core;
-using Vetheria.Vtedy.Application.Handlers;
-using Vetheria.Vtedy.DataAccess;
 
 namespace Vetheria.Vtedy.ApiService
 {
@@ -42,12 +40,12 @@ namespace Vetheria.Vtedy.ApiService
             });
 
 
-            services.SetupServicesToInject();
+            //services.SetupServicesToInject();
 
 
             // add context
             //            services.AddDbContext<VtedyContext>(opt => opt.UseInMemoryDatabase("VtedyDatabase"));
-            services.AddDbContext<VtedyContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("VtedyDatabase")));
+            //services.AddDbContext<VtedyContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("VtedyDatabase")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

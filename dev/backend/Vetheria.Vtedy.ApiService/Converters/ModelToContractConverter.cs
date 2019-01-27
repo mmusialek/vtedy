@@ -26,20 +26,20 @@ namespace Vetheria.Vtedy.ApiService.Converters
     {
         public List<TagDto> Resolve(TodoItem source, TodoItemDto destination, List<TagDto> destMember, ResolutionContext context)
         {
-            if (source.TodoItemTags == null)
-            {
-                return destMember;
-            }
+            //if (source.== null)
+            //{
+            //    return destMember;
+            //}
 
-            foreach (var sourceTodoItemTag in source.TodoItemTags)
-            {
-                TagDto item = new TagDto
-                {
-                    Id = sourceTodoItemTag.Tag.Id,
-                    Name = sourceTodoItemTag.Tag.Name
-                };
-                destMember.Add(item);
-            }
+            //foreach (var sourceTodoItemTag in source.TodoItemTags)
+            //{
+            //    TagDto item = new TagDto
+            //    {
+            //        Id = sourceTodoItemTag.Tag.Id,
+            //        Name = sourceTodoItemTag.Tag.Name
+            //    };
+            //    destMember.Add(item);
+            //}
 
 
             return destMember;

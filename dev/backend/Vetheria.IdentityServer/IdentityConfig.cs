@@ -80,13 +80,13 @@ namespace Vetheria.IdentityServer
         {
             SubjectId = "1",
             Username = "alice",
-            Password = "password"
+            Password = "alice"
         },
         new TestUser
         {
             SubjectId = "2",
             Username = "bob",
-            Password = "password"
+            Password = "bob"
         }
     };
         }

@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[TodoItemTags]
 (
-    [Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [TodoItemTagId] INT NOT NULL PRIMARY KEY IDENTITY, 
     [TodoItemId] UNIQUEIDENTIFIER NOT NULL, 
     [TagId] INT NOT NULL
 );
@@ -10,14 +10,14 @@ GO;
 ALTER TABLE [dbo].[TodoItemTags]
     ADD CONSTRAINT [TodoItemTags_TodoItemIdConstraint]
     FOREIGN KEY (TodoItemId)
-    REFERENCES TodoItems(Id);
+    REFERENCES TodoItems(TodoItemId);
 
 GO;
 
 ALTER TABLE [dbo].[TodoItemTags]
     ADD CONSTRAINT [TodoItemTags_TagIdConstraint]
     FOREIGN KEY (TagId)
-    REFERENCES Tags(Id);
+    REFERENCES Tags(TagId);
 
 GO;
 

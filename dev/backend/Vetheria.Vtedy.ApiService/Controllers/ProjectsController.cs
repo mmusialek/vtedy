@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Vetheria.Vtedy.ApiService.DataAccess.Queries;
 using Vetheria.Vtedy.ApiService.Dto;
 
 namespace Vetheria.Vtedy.ApiService.Controllers
@@ -11,16 +12,24 @@ namespace Vetheria.Vtedy.ApiService.Controllers
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
-    public class ProjectsController : Controller
+    public class ProjectsController : ControllerBase
     {
         // GET: api/Projects
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var res = new ProjectDto[] {
-                new ProjectDto { Id = 1, Name = "Project 1", ReleaseAt = DateTime.Now },
-                new ProjectDto { Id = 2, Name = "Project 2", ReleaseAt = DateTime.Now.AddDays(1) }
-            };
+            //var res = new ProjectDto[] {
+            //    new ProjectDto { Id = 1, Name = "Project 1", ReleaseAt = DateTime.Now },
+            //    new ProjectDto { Id = 2, Name = "Project 2", ReleaseAt = DateTime.Now.AddDays(1) }
+            //};
+
+            var projects = await ProjectQueries.GetProjectsAsync();
+            var res = new List<ProjectDto>();
+
+            foreach (var item in projects)
+            {
+                res.Add(new ProjectDto { Id = item.Id, Name = item.Name, Description = item.Description });
+            }
 
             var resObj = new ObjectResult(res);
             return resObj;

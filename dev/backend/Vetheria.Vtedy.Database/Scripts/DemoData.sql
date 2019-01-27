@@ -1,13 +1,13 @@
 ﻿-- users
-INSERT INTO dbo.VtedyUsers(Id, UserName, Email, EmailConfirmed, PhoneNumberConfirmed, TwoFactorEnabled, LockoutEnabled, AccessFailedCount) VALUES(N'QWERTYUIOP123456', 'test', 'test@test.pl', 1, 1, 0, 0, 0);
+INSERT INTO dbo.UserAccounts(UserName, Email, Password) VALUES('test', 'test@test.pl', '1234567890');
 
 GO
 
 -- projects
-INSERT INTO dbo.Projects(Name, VtedyUserId) VALUES('Project_1', N'QWERTYUIOP123456');
-INSERT INTO dbo.Projects(Name, VtedyUserId) VALUES('Project_2', N'QWERTYUIOP123456');
-INSERT INTO dbo.Projects(Name, VtedyUserId) VALUES('Project_3', N'QWERTYUIOP123456');
-INSERT INTO dbo.Projects(Name, VtedyUserId) VALUES('Project_4', N'QWERTYUIOP123456');
+INSERT INTO dbo.Projects(Name, UserAccountId) VALUES('Project_1', 1);
+INSERT INTO dbo.Projects(Name, UserAccountId) VALUES('Project_2', 1);
+INSERT INTO dbo.Projects(Name, UserAccountId) VALUES('Project_3', 1);
+INSERT INTO dbo.Projects(Name, UserAccountId) VALUES('Project_4', 1);
 
 GO
 
@@ -15,7 +15,7 @@ GO
 -- todo items
 declare @project_id int;
 
-SELECT TOP(1) @project_id=id from dbo.Projects;
+SELECT TOP(1) @project_id=ProjectId from dbo.Projects;
 INSERT INTO dbo.TodoItems(Name, IsCompleted, ProjectId) VALUES('todoitem_1', 0, @project_id);
 INSERT INTO dbo.TodoItems(Name, IsCompleted, ProjectId) VALUES('todoitem_2', 0, @project_id);
 INSERT INTO dbo.TodoItems(Name, IsCompleted, ProjectId) VALUES('todoitem_3', 0, @project_id);
@@ -35,8 +35,8 @@ GO
 declare @tagId int;
 declare @todoitemId nvarchar(36);
 
-SELECT TOP(1) @tagId=id from dbo.Tags;
-SELECT TOP(1) @todoitemId=id from dbo.TodoItems;
+SELECT TOP(1) @tagId=TagId from dbo.Tags;
+SELECT TOP(1) @todoitemId=TodoItemId from dbo.TodoItems;
 
 INSERT INTO dbo.TodoItemTags(TagId, TodoItemId) VALUES(@tagId, @todoitemId);
 

@@ -6,9 +6,8 @@ namespace Vetheria.Vtedy.DataModel.Model
 {
     public class TodoItemTag
     {
+        public int Id { get; set; }
         public Guid TodoItemId { get; set; }
-        public virtual TodoItem TodoItem{ get; set; }
         public int TagId { get; set; }
-        public virtual Tag Tag { get; set; }
     }
 }
