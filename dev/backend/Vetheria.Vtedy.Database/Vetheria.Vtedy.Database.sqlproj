@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\dbo.Projects.sql" />
+    <Build Include="StoredProcedures\dbo.Projects_get.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Vetheria.Vtedy.Database.refactorlog" />

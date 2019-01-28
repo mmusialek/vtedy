@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -6,14 +7,19 @@ using System.Threading.Tasks;
 
 namespace Vetheria.Vtedy.ApiService.DataAccess
 {
-    public class ConnectionFactory
+    public class ConnectionFactory : IConnectionFactory
     {
-        private static readonly string connectionString = "Server=(localdb)\\v13.0;Database=VtedyDatabase;Trusted_Connection=True;MultipleActiveResultSets=true";
+        private readonly string _connectionString;
 
-        public static SqlConnection GetSqlConnection()
+        public ConnectionFactory(IConfiguration configuration) {
+            _connectionString = configuration.GetConnectionString("VtedyDatabase");
+        }
+
+        public SqlConnection OpenSqlConnection()
         {
-            var connection = new SqlConnection(connectionString);
+            var connection = new SqlConnection(_connectionString);
             connection.Open();
+
             return connection;
         }
     }

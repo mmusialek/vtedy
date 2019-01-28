@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
@@ -12,7 +13,10 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
+using Vetheria.Vtedy.ApiService.DataAccess;
+using Vetheria.Vtedy.ApiService.DataAccess.Queries;
 using Vetheria.Vtedy.Application.Core;
+using Vetheria.Vtedy.DataModel.Model;
 
 namespace Vetheria.Vtedy.ApiService
 {
@@ -39,13 +43,9 @@ namespace Vetheria.Vtedy.ApiService
                 c.SwaggerDoc("v1", new Info { Title = "Vtedy API", Version = "v1" });
             });
 
+            services.AddTransient<IConnectionFactory, ConnectionFactory>();
+            services.AddTransient<IDataProvider<Project>, ProjectDataProvider > ();
 
-            //services.SetupServicesToInject();
-
-
-            // add context
-            //            services.AddDbContext<VtedyContext>(opt => opt.UseInMemoryDatabase("VtedyDatabase"));
-            //services.AddDbContext<VtedyContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("VtedyDatabase")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
