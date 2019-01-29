@@ -45,7 +45,6 @@ namespace Vetheria.Vtedy.ApiService
 
             services.AddTransient<IConnectionFactory, ConnectionFactory>();
             services.AddTransient<IDataProvider<Project>, ProjectDataProvider > ();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

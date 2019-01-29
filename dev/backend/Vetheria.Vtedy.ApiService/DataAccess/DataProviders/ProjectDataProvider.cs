@@ -23,7 +23,7 @@ namespace Vetheria.Vtedy.ApiService.DataAccess.Queries
             using (var sqlConnection = _connectionFactory.OpenSqlConnection())
             {
                 return await sqlConnection.QueryAsync<Project>(
-                    "dbo.Projects_Get",
+                    "[dbo].[Projects_Get]",
                     commandType: CommandType.StoredProcedure);
             }
         }
