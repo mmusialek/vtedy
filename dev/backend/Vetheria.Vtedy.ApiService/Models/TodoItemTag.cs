@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Vetheria.Vtedy.DataModel.Model
+namespace Vetheria.Vtedy.ApiService.Models
 {
     public class TodoItemTag
     {

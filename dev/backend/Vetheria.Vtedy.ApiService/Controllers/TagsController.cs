@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Vetheria.Vtedy.ApiService.Models;
 using Vetheria.Vtedy.Application.Core;
-using Vetheria.Vtedy.DataModel.Model;
 
 namespace Vetheria.Vtedy.ApiService.Controllers
 {

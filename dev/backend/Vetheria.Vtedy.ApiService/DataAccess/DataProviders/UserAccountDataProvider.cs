@@ -5,7 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Vetheria.Vtedy.ApiService.DataAccess.Queries;
-using Vetheria.Vtedy.DataModel.Model;
+using Vetheria.Vtedy.ApiService.Models;
 
 namespace Vetheria.Vtedy.ApiService.DataAccess.DataProviders
 {

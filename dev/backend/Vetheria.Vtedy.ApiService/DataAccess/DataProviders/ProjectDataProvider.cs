@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
-using Vetheria.Vtedy.DataModel.Model;
 using Dapper;
 using System.Data;
+using Vetheria.Vtedy.ApiService.Models;
 
 namespace Vetheria.Vtedy.ApiService.DataAccess.Queries
 {

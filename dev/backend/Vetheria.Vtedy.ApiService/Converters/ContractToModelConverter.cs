@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Vetheria.Vtedy.ApiService.Dto;
-using Vetheria.Vtedy.DataModel.Model;
+using Vetheria.Vtedy.ApiService.Models;
 
 namespace Vetheria.Vtedy.ApiService.Converters
 {

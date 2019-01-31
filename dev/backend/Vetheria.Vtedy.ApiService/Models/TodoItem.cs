@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace Vetheria.Vtedy.DataModel.Model
+namespace Vetheria.Vtedy.ApiService.Models
 {
     public class TodoItem
     {

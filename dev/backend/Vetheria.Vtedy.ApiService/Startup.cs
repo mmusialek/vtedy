@@ -4,8 +4,11 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using AutoMapper;
+using IdentityServer4.Services;
+using IdentityServer4.Validation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,9 +17,11 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
 using Vetheria.Vtedy.ApiService.DataAccess;
+using Vetheria.Vtedy.ApiService.DataAccess.DataProviders;
 using Vetheria.Vtedy.ApiService.DataAccess.Queries;
+using Vetheria.Vtedy.ApiService.IdentityServer;
+using Vetheria.Vtedy.ApiService.Models;
 using Vetheria.Vtedy.Application.Core;
-using Vetheria.Vtedy.DataModel.Model;
 
 namespace Vetheria.Vtedy.ApiService
 {
@@ -32,11 +37,26 @@ namespace Vetheria.Vtedy.ApiService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddIdentityServer()
+                .AddDeveloperSigningCredential()
+                .AddInMemoryIdentityResources(IdentityServerConfig.GetIdentityResources())
+                .AddInMemoryApiResources(IdentityServerConfig.GetApis())
+                .AddInMemoryClients(IdentityServerConfig.GetClients())
+                .AddProfileService<ProfileService>();
+            //.AddTestUsers(IdentityServerConfig.GetUsers());
+
             services.AddAutoMapper();
-            services.AddMvc().AddJsonOptions(options =>
+            services.AddMvcCore(options =>
                 {
-                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                });
+                    options.RespectBrowserAcceptHeader = true; // false by default
+                })
+                .AddJsonFormatters()
+                .AddJsonOptions(options =>
+                    {
+                        options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                    })
+                .AddApiExplorer();
 
             services.AddSwaggerGen(c =>
             {
@@ -44,7 +64,12 @@ namespace Vetheria.Vtedy.ApiService
             });
 
             services.AddTransient<IConnectionFactory, ConnectionFactory>();
-            services.AddTransient<IDataProvider<Project>, ProjectDataProvider > ();
+            services.AddTransient<IDataProvider<Project>, ProjectDataProvider>();
+            services.AddTransient<IDataProvider<UserAccount>, UserAccountDataProvider>();
+
+            // identityserver
+            services.AddTransient<IResourceOwnerPasswordValidator, ResourceOwnerPasswordValidator>();
+            services.AddTransient<IProfileService, ProfileService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +79,9 @@ namespace Vetheria.Vtedy.ApiService
             {
                 app.UseDeveloperExceptionPage();
             }
+
+
+            app.UseIdentityServer();
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
