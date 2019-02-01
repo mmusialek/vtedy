@@ -7,6 +7,7 @@ using IdentityModel;
 using IdentityServer4.Models;
 using IdentityServer4.Validation;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
+using Vetheria.Vtedy.ApiService.DataAccess;
 using Vetheria.Vtedy.ApiService.DataAccess.Queries;
 using Vetheria.Vtedy.ApiService.Models;
 
@@ -14,9 +15,9 @@ namespace Vetheria.Vtedy.ApiService.IdentityServer
 {
     public class ResourceOwnerPasswordValidator : IResourceOwnerPasswordValidator
     {
-        private IDataProvider<UserAccount> _userDataProvider;
+        private IUserAccountDataProvider _userDataProvider;
 
-        public ResourceOwnerPasswordValidator(IDataProvider<UserAccount> userDataProvider)
+        public ResourceOwnerPasswordValidator(IUserAccountDataProvider userDataProvider)
         {
             _userDataProvider = userDataProvider;
         }
@@ -26,8 +27,7 @@ namespace Vetheria.Vtedy.ApiService.IdentityServer
             try
             {
                 //get your user model from db (by username - in my case its email)
-                //var user = await _userDataProvider.FindAsync(context.UserName);
-                var user = new UserAccount { Id = 1, Email = "bob@gmail.com", Password = "bob", UserName = "bob" };
+                var user = await _userDataProvider.GetAsync(context.UserName);
 
                 if (user != null)
                 {

@@ -65,7 +65,7 @@ namespace Vetheria.Vtedy.ApiService
 
             services.AddTransient<IConnectionFactory, ConnectionFactory>();
             services.AddTransient<IDataProvider<Project>, ProjectDataProvider>();
-            services.AddTransient<IDataProvider<UserAccount>, UserAccountDataProvider>();
+            services.AddTransient<IUserAccountDataProvider, UserAccountDataProvider>();
 
             // identityserver
             services.AddTransient<IResourceOwnerPasswordValidator, ResourceOwnerPasswordValidator>();

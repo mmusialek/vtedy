@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
+using Vetheria.Vtedy.ApiService.DataAccess;
 using Vetheria.Vtedy.ApiService.DataAccess.Queries;
 using Vetheria.Vtedy.ApiService.Models;
 
@@ -11,9 +12,9 @@ namespace Vetheria.Vtedy.ApiService.IdentityServer
 {
     public class ProfileService : IProfileService
     {
-        private IDataProvider<UserAccount> _userDataProvider;
+        private IUserAccountDataProvider _userDataProvider;
 
-        public ProfileService(IDataProvider<UserAccount> userDataProvider)
+        public ProfileService(IUserAccountDataProvider userDataProvider)
         {
             _userDataProvider = userDataProvider;
         }
@@ -26,7 +27,6 @@ namespace Vetheria.Vtedy.ApiService.IdentityServer
                 if (!string.IsNullOrEmpty(context.Subject.Identity.Name))
                 {
                     //get user from db (in my case this is by email)
-                    //var user = await _userRepository.FindAsync(context.Subject.Identity.Name);
                     var user = new UserAccount { Id = 1, Email = "bob@gmail.com", Password = "bob", UserName = "bob" };
 
                     if (user != null)
@@ -46,8 +46,7 @@ namespace Vetheria.Vtedy.ApiService.IdentityServer
                     if (!string.IsNullOrEmpty(userId?.Value) && long.Parse(userId.Value) > 0)
                     {
                         //get user from db (find user by user id)
-                        //var user = await _userRepository.FindAsync(long.Parse(userId.Value));
-                        var user = new UserAccount { Id = 1, Email = "bob@gmail.com", Password = "bob", UserName = "bob" };
+                        var user = _userDataProvider.GetByIdAsync(int.Parse(userId.Value));
 
                         // issue the claims for the user
                         if (user != null)

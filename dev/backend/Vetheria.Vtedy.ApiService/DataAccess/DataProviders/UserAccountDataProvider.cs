@@ -9,7 +9,7 @@ using Vetheria.Vtedy.ApiService.Models;
 
 namespace Vetheria.Vtedy.ApiService.DataAccess.DataProviders
 {
-    public class UserAccountDataProvider : IDataProvider<UserAccount>
+    public class UserAccountDataProvider : IUserAccountDataProvider
     {
         private IConnectionFactory _connectionFactory;
 
@@ -27,5 +27,35 @@ namespace Vetheria.Vtedy.ApiService.DataAccess.DataProviders
                     commandType: CommandType.StoredProcedure);
             }
         }
+
+        public async Task<UserAccount> GetAsync(string userName)
+        {
+            using (var sqlConnection = _connectionFactory.OpenSqlConnection())
+            {
+                return await sqlConnection.QuerySingleAsync<UserAccount>(
+                    "[dbo].[UserAccounts_get_by_usename]",
+                    param: new
+                    {
+                        @userName = userName
+                    },
+                    commandType: CommandType.StoredProcedure);
+            }
+        }
+
+
+        public async Task<UserAccount> GetByIdAsync(int userId)
+        {
+            using (var sqlConnection = _connectionFactory.OpenSqlConnection())
+            {
+                return await sqlConnection.QuerySingleAsync<UserAccount>(
+                    "[dbo].[UserAccounts_get_by_id]",
+                    param: new
+                    {
+                        @userId = userId
+                    },
+                    commandType: CommandType.StoredProcedure);
+            }
+        }        
+
     }
 }
