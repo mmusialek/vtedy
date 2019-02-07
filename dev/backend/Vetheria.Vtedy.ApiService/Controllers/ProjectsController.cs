@@ -15,8 +15,8 @@ namespace Vetheria.Vtedy.ApiService.Controllers
     [ApiController]
     public class ProjectsController : ControllerBase
     {
-        private IDataProvider<Project> _dataProvider;
-        public ProjectsController(IDataProvider<Project> dataProvider)
+        private IProjectDataProvider _dataProvider;
+        public ProjectsController(IProjectDataProvider dataProvider)
         {
             _dataProvider = dataProvider;
         }
@@ -24,7 +24,9 @@ namespace Vetheria.Vtedy.ApiService.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var projects = await _dataProvider.GetAsync();
+            // TODO get user id from token
+            var userId = 1;
+            var projects = await _dataProvider.GetByUserIdAsync(userId);
             var res = new List<ProjectDto>();
 
             foreach (var item in projects)
@@ -37,10 +39,18 @@ namespace Vetheria.Vtedy.ApiService.Controllers
         }
 
         // GET: api/Projects/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        [HttpGet("{projectId}")]
+        public async Task<IActionResult> GetById(int projectId)
         {
-            var res = new ProjectDto { Id = id, Name = "Project " + id, ReleaseAt = DateTime.Now };
+            // TODO get user id from token
+            var userId = 1;
+            var projects = await _dataProvider.GetByProjectIdAsync(userId, projectId);
+            var res = new List<ProjectDto>();
+
+            foreach (var item in projects)
+            {
+                res.Add(new ProjectDto { Id = item.Id, Name = item.Name, Description = item.Description });
+            }
 
             var resObj = new ObjectResult(res);
             return resObj;
@@ -48,9 +58,30 @@ namespace Vetheria.Vtedy.ApiService.Controllers
 
         // POST: api/Projects
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] ProjectDto projectDto)
         {
-            return null;
+            // TODO get user id from token
+            var userId = 1;
+
+            // TODO create converter
+            var project = new Project
+            {
+                Name = projectDto.Name,
+                Description = projectDto.Description,
+                UserAccountId = userId
+            };
+
+            var projectModel = await _dataProvider.Add(project);
+
+            var res = new ProjectDto
+            {
+                Id = projectModel.Id,
+                Name = projectModel.Name,
+                Description = projectModel.Description
+            };
+
+            var resObj = new ObjectResult(res);
+            return resObj;
         }
 
         // PUT: api/Projects/5

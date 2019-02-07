@@ -2,7 +2,7 @@
     @username nvarchar(250) = 0
 AS
     SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
-    SELECT TOP(1) [UserAccountId]
+    SELECT TOP(1) [UserAccountId] AS Id
       ,[UserName]
       ,[Email]
       ,[Password]
