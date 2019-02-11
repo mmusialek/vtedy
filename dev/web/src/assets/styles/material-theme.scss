@@ -1,0 +1,16 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+
+// NOTE test values for theme for now
+
+$vtedy-theme-primary: mat-palette($mat-brown, 700, 300, 900);
+$vtedy-theme-accent: mat-palette($mat-deep-orange, 300);
+$vtedy-theme-warn: mat-palette($mat-red, 600);
+
+$vtedy-theme: mat-light-theme(
+    $vtedy-theme-primary,
+    $vtedy-theme-accent,
+    $vtedy-theme-warn
+);
