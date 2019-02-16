@@ -24,6 +24,7 @@ import { TaskListComponent } from './modules/task-list/task-list.component';
 import { NotesComponent } from './modules/notes/notes.component';
 import { CalendarComponent } from './modules/calendar/calendar.component';
 import { ProjectManagementComponent } from './modules/project-management/project-management.component';
+import { GenericListComponent } from './shared/components/generic-list/generic-list.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { ProjectManagementComponent } from './modules/project-management/project
     TaskListComponent,
     NotesComponent,
     CalendarComponent,
-    ProjectManagementComponent
+    ProjectManagementComponent,
+    GenericListComponent
   ],
   imports: [
     // angular

@@ -1,9 +1,9 @@
 import {Component, Input, OnDestroy, ViewChild} from '@angular/core';
-import {ItemListItemViewModel, ItemListViewModel} from './item-list.view-model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SubscriptionLike as ISubscription} from 'rxjs';
-import {ItemListService} from './item-list.service';
 import {ItemDetailsService} from '../../../modules/item-details/item.details.service';
+import {ItemListService} from './item-list.service';
+import {ItemListItemViewModel, ItemListViewModel} from './item-list.view-model';
 
 @Component({
   selector: 'vth-item-list',

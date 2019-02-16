@@ -9,9 +9,8 @@
 
   // TODO create font definitions in separate file
   .vth-notes__header {
+    @include vth-font-header;
     text-align: center;
-    color: $font-primary-color;
-    font-size: 1.3em;
   }
 
   .vth-notes__notes {

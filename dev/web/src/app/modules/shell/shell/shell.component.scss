@@ -2,16 +2,13 @@
   display: block;
   width: 100%;
   min-height: 100vh;
-  background-color: #F5F5F5;
+  background-color: $primary-color;
   .vth-shell-container__main {
     display: flex;
     flex-direction: row;
     .vth-shell-container__main__left-panel {
       max-width: 15%;
       flex: 0 1 auto;
-      //&--hidden {
-      //  min-width: auto;
-      //}
     }
     .vth-shell-container__main__body {
       width: 100%;
@@ -19,12 +16,12 @@
     }
     .vth-shell-container__main__details {
       position: absolute;
-      background-color: gray;
+      background-color: $third-color;
       top: 0;
       width: 30%;
       left: calc(100% - 30%);
       display: block;
-      box-shadow: -1px 1px 5px 0px red;
+      box-shadow: -1px 1px 5px 0px $secondary-accent-color;
     }
   }
 }

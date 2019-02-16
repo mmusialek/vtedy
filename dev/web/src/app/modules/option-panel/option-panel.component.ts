@@ -20,8 +20,8 @@ export class OptionPanelComponent extends VerticalPanelComponent implements OnIn
 
   ngOnInit() {
     this.viewModel.items.push(
-      new OptionPanelItemViewModel({name: 'Priority box', url: 'item-list', params: ['priority-box']}),
-      new OptionPanelItemViewModel({name: 'Inbox', url: 'item-list', params: ['inbox']}),
+      new OptionPanelItemViewModel({name: 'Priority box', url: 'item-list/priority-box'}),
+      new OptionPanelItemViewModel({name: 'Inbox', url: 'item-list/inbox'}),
       new OptionPanelItemViewModel({name: 'Projects', url: 'item-list/projects'}),
       new OptionPanelItemViewModel({name: 'Calendar', url: 'calendar'}),
       new OptionPanelItemViewModel({name: 'Notes', url: 'notes'}),

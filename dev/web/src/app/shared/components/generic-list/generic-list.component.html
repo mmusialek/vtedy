@@ -1,0 +1,37 @@
+<div class="vth-generic-list__container vth-remove-list-styles">
+
+  <div class="vth-generic-list__container__body">
+
+    <div class="vth-generic-list__container__body__header">
+      <div class="vth-generic-list__container__body__header__new-item" (vthClickOutside)="onClickOutsideInput($event)">
+        <span class="vth-generic-list__container__body__header__new-item__icon" (click)="onAddNewItemVisibilityClick($event)">+</span>
+        <ng-content select="[header]"></ng-content>
+      </div>
+    </div>
+
+    <div class="vth-generic-list__container__body__content">
+      <div class="vth-generic-list__container__body__content__main">
+        <ul class="vth-generic-list__container__list" *ngIf="items">
+          <li class="vth-generic-list__container__list__list-item" *ngFor="let item of items" (click)="onItemClickHandler($event, item)">{{item.name}}</li>
+        </ul>
+      </div>
+      <div class="vth-generic-list__container__body__content__details"
+           [class.vth-generic-list__container__body__content__details--show]="viewModel.areDetailsVisible"
+           (vthClickOutside)="onClickItemDetailsOutsideInput($event)">
+        <div class="vth-generic-list__container__body__content__details__content__shadow">
+        </div>
+
+        <div class="vth-generic-list__container__body__content__details__content">
+          <ng-content select="[details]"></ng-content>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="vth-generic-list__container__footer">
+    <div>all items ({{items.length}})</div>
+  </div>
+
+</div>

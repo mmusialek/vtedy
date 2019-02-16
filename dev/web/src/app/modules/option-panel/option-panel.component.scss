@@ -20,10 +20,10 @@
     .vth-option-panel__container__nav-container__hider {
       width: 10px;
       margin-left: 2px;
-      background-color: #673ab7;
+      background-color: $secondary-accent-color;
       cursor: pointer;
       &:hover{
-        background-color: #512DA8;
+        background-color: $primary-accent-color;
       }
     }
   }

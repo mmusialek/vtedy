@@ -1,11 +1,7 @@
 <div class="vth-project-list">
-  <button mat-button color="primary" type="submit" (click)="onAddProjectClick()">+ Add project</button>
 
-  <br>
-  <br>
-
-  <div>
-    <div>project list</div>
-  </div>
+  <vth-generic-list [items]="viewModel.projectsToList"
+                    [addNewVisibilityHandler]="addNewVisibilityHandler">
+  </vth-generic-list>
 
 </div>

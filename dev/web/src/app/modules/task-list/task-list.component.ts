@@ -5,6 +5,7 @@ import {ItemListService} from '../../shared/components/item-list/item-list.servi
 import {PagesRoues} from '../../shared/components/item-list/item-list.view-model';
 import {TaskListItemViewModel, TaskListViewModel} from './task-list.view-model';
 import {ItemListFilter} from '../../shared/models/item-list-filter';
+import {takeWhile} from 'rxjs/operators';
 
 @Component({
   selector: 'vth-task-list',
@@ -12,7 +13,7 @@ import {ItemListFilter} from '../../shared/models/item-list-filter';
 })
 export class TaskListComponent implements OnInit {
 
-  private _routeSubs: ISubscription;
+  private _isAlive: boolean;
   viewModel: TaskListViewModel;
 
   constructor(private _route: ActivatedRoute,
@@ -22,13 +23,19 @@ export class TaskListComponent implements OnInit {
 
   ngOnInit() {
     this.viewModel = new TaskListViewModel();
+    this._isAlive = true;
 
-    this._routeSubs = this._router.events.subscribe(p => {
-      if (p instanceof ActivationEnd) {
-        const pageParam = this._route.snapshot.params['page'];
-        this.refreshView(pageParam);
-      }
-    });
+    this._router.events.pipe(takeWhile(() => this._isAlive)).subscribe(p => {
+        if (p instanceof ActivationEnd) {
+          const pageType = this._route.snapshot.data['type'];
+          this.refreshView(pageType);
+        }
+      },
+      () => {
+      },
+      () => {
+        this._isAlive = false;
+      });
 
     // this is called first time
     const page = this._route.snapshot.params['page'];

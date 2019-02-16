@@ -1,44 +1,21 @@
 <div class="vth-item-list__container  vth-remove-list-styles">
+  <vth-generic-list [addNewOutsideHandler]="onClickOutsideInput.bind(this)"
+                    [addNewVisibilityHandler]="toggleAddNewItemVisibility.bind(this)"
+                    [itemClickHandler]="onItemClickHandler.bind(this)"
+                    [clickItemDetailsOutsideInputHandler]="onClickItemDetailsOutsideInput.bind(this)"
+  >
 
-  <div class="vth-item-list__container__body">
-
-    <div class="vth-item-list__container__body__header">
-      <div class="vth-item-list__container__body__header__new-item" (vthClickOutside)="onClickOutsideInput($event)">
-        <span class="vth-item-list__container__body__header__new-item__icon" (click)="toggleAddNewItemVisibility()">+</span>
-        <div *ngIf="viewModel.isAddNewItemVisible" class="vth-display-inline">
-          <mat-form-field class="example-full-width vth-item-list__container__body__header__new-item__input" floatLabel="never">
-            <input matInput placeholder="Item title" (keyup)="addNewItem($event)" [(ngModel)]="viewModel.newItem" #newItemInput>
-          </mat-form-field>
-          <span class="vth-item-list__container__body__header__new-item__close" (click)="onCloseNewItemClick()">+</span>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="vth-item-list__container__body__content">
-      <div class="vth-item-list__container__body__content__main">
-        <ul class="vth-item-list__container__list" *ngIf="items">
-          <li class="vth-item-list__container__list__list-item" *ngFor="let item of items" (click)="onItemClickHandler($event, item)">{{item.name}}</li>
-        </ul>
-      </div>
-      <div class="vth-item-list__container__body__content__details"
-           [class.vth-item-list__container__body__content__details--show]="viewModel.areDetailsVisible"
-           [class.vth-item-list__container__body__content__details--hide]="!viewModel.areDetailsVisible"
-           (vthClickOutside)="onClickItemDetailsOutsideInput($event)">
-        <div class="vth-item-list__container__body__content__details__content__shadow">
-        </div>
-
-        <div class="vth-item-list__container__body__content__details__content">
-          <vth-item-details (closeEvent)="onCloseDetailsHandler($event)"></vth-item-details>
-        </div>
-
+    <div header>
+      <div *ngIf="viewModel.isAddNewItemVisible" class="vth-display-inline">
+        <mat-form-field class="vth-item-list__container__input" floatLabel="never">
+          <input matInput placeholder="Item title" (keyup)="addNewItem($event)" [(ngModel)]="viewModel.newItem" #newItemInput>
+        </mat-form-field>
+        <span class="vth-item-list__container__close" (click)="onCloseNewItemClick()">+</span>
       </div>
     </div>
 
-  </div>
-
-  <div class="vth-item-list__container__footer">
-    <div>\/ status</div>
-  </div>
-
+    <div details>
+      <vth-item-details (closeEvent)="onCloseDetailsHandler($event)"></vth-item-details>
+    </div>
+  </vth-generic-list>
 </div>

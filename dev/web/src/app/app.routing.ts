@@ -7,6 +7,7 @@ import {TaskListComponent} from './modules/task-list/task-list.component';
 import {NotesComponent} from './modules/notes/notes.component';
 import {CalendarComponent} from './modules/calendar/calendar.component';
 import {ProjectManagementComponent} from './modules/project-management/project-management.component';
+import {PagesRoues} from './shared/components/item-list/item-list.view-model';
 
 const routes: Routes = [
   {
@@ -27,13 +28,19 @@ const routes: Routes = [
         component: WelcomeComponent
       },
       {
+        path: 'inbox',
+        component: TaskListComponent,
+        data: {type: PagesRoues.Inbox}
+      },
+      {
+        path: 'priority-box',
+        component: TaskListComponent,
+        data: {type: PagesRoues.PriorityBox}
+      },
+      {
         path: 'projects',
         component: ProjectListComponent
       },
-      {
-        path: ':page',
-        component: TaskListComponent
-      }
     ]
   },
   {
