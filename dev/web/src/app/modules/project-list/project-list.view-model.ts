@@ -6,7 +6,7 @@ export class ProjectListViewModel {
 }
 
 export class ProjectListItemViewModel {
-  id: string;
+  id: number;
   name: string;
   description: string;
 

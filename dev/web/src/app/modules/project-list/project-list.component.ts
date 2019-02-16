@@ -29,7 +29,7 @@ export class ProjectListComponent implements OnInit {
 
       this.viewModel.projectsToList = this.viewModel.projects.map(item => {
         {
-          return GenericListItemViewModel.new({id: item.id, name: item.name});
+          return GenericListItemViewModel.new({id: item.id.toString(10), name: item.name});
         }
       });
 
