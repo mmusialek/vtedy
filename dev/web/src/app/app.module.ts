@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { ItemListService } from './shared/components/item-list/item-list.service';
 import { ClickOutsideDirective } from './shared/directives/click-outside.directive';
 import { ItemDetailsComponent } from './modules/item-details/item-details.component';
-import { ItemDetailsService } from './modules/item-details/item.details.service';
+import { ItemDetailsComponentService } from './modules/item-details/item-details.component.service';
 
 import { MatButtonModule, MatDividerModule, MatInputModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -59,7 +59,7 @@ import { GenericListComponent } from './shared/components/generic-list/generic-l
   ],
   providers: [
     ItemListService,
-    ItemDetailsService,
+    ItemDetailsComponentService,
     VtedyClientService
   ],
   bootstrap: [AppComponent]

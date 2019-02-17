@@ -4,7 +4,7 @@ import {CommentViewModel, ItemDataViewModel, ProjectViewModel, TagViewModel} fro
 import {VtedyClientService} from '../../shared/client-services/vtedy.client-service';
 
 @Injectable()
-export class ItemDetailsService {
+export class ItemDetailsComponentService {
 
   private _isDialogVisible: Subject<boolean> = new Subject<boolean>();
   private _newDataStream: Subject<ItemDataViewModel> = new Subject<ItemDataViewModel>();

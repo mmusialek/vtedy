@@ -1,7 +1,7 @@
 import {Component, Input, OnDestroy, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SubscriptionLike as ISubscription} from 'rxjs';
-import {ItemDetailsService} from '../../../modules/item-details/item.details.service';
+import {ItemDetailsComponentService} from '../../../modules/item-details/item-details.component.service';
 import {ItemListService} from './item-list.service';
 import {ItemListItemViewModel, ItemListViewModel} from './item-list.view-model';
 
@@ -20,7 +20,7 @@ export class ItemListComponent implements OnDestroy {
   constructor(private _route: ActivatedRoute,
               private _router: Router,
               private _itemListService: ItemListService,
-              private _itemDetailsService: ItemDetailsService) {
+              private _itemDetailsService: ItemDetailsComponentService) {
   }
 
   ngOnDestroy() {
@@ -48,7 +48,7 @@ export class ItemListComponent implements OnDestroy {
 
   onItemClickHandler(event: MouseEvent, item: ItemListItemViewModel) {
     const id = item.id;
-    this.viewModel.areDetailsVisible = true;
+    // this.viewModel.areDetailsVisible = true;
     this._itemDetailsService.showItemDetails(id);
   }
 

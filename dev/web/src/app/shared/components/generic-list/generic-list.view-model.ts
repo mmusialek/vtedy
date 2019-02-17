@@ -1,8 +1,5 @@
 export class GenericListViewModel {
-  // items: ItemListItemViewModel[] = [];
-  isAddNewItemVisible = false;
   areDetailsVisible = false;
-  newItem: string;
 }
 
 export class GenericListItemViewModel {

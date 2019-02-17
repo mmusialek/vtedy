@@ -39,7 +39,7 @@ export class GenericListComponent implements OnDestroy {
       return;
     }
 
-    if (this.viewModel.areDetailsVisible && event.className.indexOf('vth-item-list__container__list__list-item') < 0) {
+    if (this.viewModel.areDetailsVisible && event.className.indexOf('vth-generic-list__container__list__list-item') < 0) {
       this.closeDetails();
       if (this.clickItemDetailsOutsideInputHandler) {
         this.clickItemDetailsOutsideInputHandler(event);
