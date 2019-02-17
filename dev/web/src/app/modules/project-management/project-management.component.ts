@@ -1,7 +1,7 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {ProjectManagementViewModel} from './project-management.view-model';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {ProjectViewModel} from '../item-details/item-details.view-model';
+import {ProjectManagementViewModel} from './project-management.view-model';
 
 @Component({
   selector: 'vth-project-management',

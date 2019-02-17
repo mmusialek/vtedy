@@ -1,7 +1,7 @@
-import {Component, Input, OnDestroy, ViewChild} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SubscriptionLike as ISubscription} from 'rxjs';
-import {ItemDetailsComponentService} from '../../../modules/item-details/item-details.component.service';
+import {ItemDetailsService} from '../../../modules/item-details/item-details.service';
 import {ItemListService} from './item-list.service';
 import {ItemListItemViewModel, ItemListViewModel} from './item-list.view-model';
 
@@ -9,7 +9,7 @@ import {ItemListItemViewModel, ItemListViewModel} from './item-list.view-model';
   selector: 'vth-item-list',
   templateUrl: './item-list.component.html'
 })
-export class ItemListComponent implements OnDestroy {
+export class ItemListComponent implements OnInit, OnDestroy {
 
   viewModel: ItemListViewModel = new ItemListViewModel();
   @ViewChild('newItemInput') newItemInput;
@@ -20,7 +20,16 @@ export class ItemListComponent implements OnDestroy {
   constructor(private _route: ActivatedRoute,
               private _router: Router,
               private _itemListService: ItemListService,
-              private _itemDetailsService: ItemDetailsComponentService) {
+              private _itemDetailsService: ItemDetailsService) {
+  }
+
+  ngOnInit() {
+    this.viewModel.genericListConfig = {
+      addNewOutsideHandler: this.onClickOutsideInput.bind(this),
+      addNewVisibilityHandler: this.toggleAddNewItemVisibility.bind(this),
+      itemClickHandler: this.onListItemClickHandler.bind(this),
+      clickItemDetailsOutsideInputHandler: this.onClickItemDetailsOutsideInput.bind(this)
+    };
   }
 
   ngOnDestroy() {
@@ -41,14 +50,13 @@ export class ItemListComponent implements OnDestroy {
       return;
     }
 
-    if (this.viewModel.areDetailsVisible && event.className.indexOf('vth-item-list__container__list__list-item') < 0) {
+    if (event.className.indexOf('vth-item-list__container__list__list-item') < 0) {
       this.closeDetails();
     }
   }
 
-  onItemClickHandler(event: MouseEvent, item: ItemListItemViewModel) {
+  onListItemClickHandler(event, item) {
     const id = item.id;
-    // this.viewModel.areDetailsVisible = true;
     this._itemDetailsService.showItemDetails(id);
   }
 
@@ -56,18 +64,17 @@ export class ItemListComponent implements OnDestroy {
     this.closeDetails();
   }
 
-  onCloseNewItemClick() {
-    this.toggleAddNewItemVisibility();
+  onCloseNewItemClick(event) {
+    this.toggleAddNewItemVisibility(event);
   }
 
   private closeDetails() {
     if (!this._itemDetailsService.isDialogPinned) {
-      this.viewModel.areDetailsVisible = false;
       this._itemDetailsService.hideItemDetails();
     }
   }
 
-  toggleAddNewItemVisibility(noToggle: boolean = false) {
+  toggleAddNewItemVisibility(event, noToggle: boolean = false) {
     if (!noToggle) {
       this.viewModel.isAddNewItemVisible = !this.viewModel.isAddNewItemVisible;
     }
@@ -94,7 +101,7 @@ export class ItemListComponent implements OnDestroy {
 
     if (event.code === 'Escape' || isFromActionButton) {
       this.viewModel.newItem = '';
-      this.toggleAddNewItemVisibility();
+      this.toggleAddNewItemVisibility(event);
     }
   }
 

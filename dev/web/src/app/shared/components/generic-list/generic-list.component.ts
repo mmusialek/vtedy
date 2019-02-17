@@ -1,36 +1,29 @@
-import {Component, Input, OnDestroy, ViewChild} from '@angular/core';
+import {Component, Input, ViewChild} from '@angular/core';
 import {GenericListItemViewModel, GenericListViewModel} from './generic-list.view-model';
 
 @Component({
   selector: 'vth-generic-list',
   templateUrl: './generic-list.component.html'
 })
-export class GenericListComponent implements OnDestroy {
-
-  viewModel: GenericListViewModel = new GenericListViewModel();
-  @ViewChild('newItemInput') newItemInput;
-  @Input() items: GenericListItemViewModel[];
-
-  @Input() addNewOutsideHandler = (event) => {};
-  @Input() addNewVisibilityHandler = () => {};
-  @Input() itemClickHandler = (event, item: GenericListItemViewModel) => {};
-  @Input() clickItemDetailsOutsideInputHandler = (event) => {};
+export class GenericListComponent {
 
   constructor() {
   }
 
-  ngOnDestroy() {
-  }
+  viewModel: GenericListViewModel = new GenericListViewModel();
+  @ViewChild('newItemInput') newItemInput;
+  @Input() items: GenericListItemViewModel[];
+  @Input() config: IGenericListComponentConfig;
 
   onClickOutsideInput(event) {
-    if (this.addNewOutsideHandler) {
-      this.addNewOutsideHandler(event);
+    if (this.config && this.config.addNewOutsideHandler) {
+      this.config.addNewOutsideHandler(event);
     }
   }
 
   onAddNewItemVisibilityClick(event) {
-    if (this.addNewVisibilityHandler) {
-      this.addNewVisibilityHandler();
+    if (this.config && this.config.addNewVisibilityHandler) {
+      this.config.addNewVisibilityHandler(event);
     }
   }
 
@@ -41,16 +34,17 @@ export class GenericListComponent implements OnDestroy {
 
     if (this.viewModel.areDetailsVisible && event.className.indexOf('vth-generic-list__container__list__list-item') < 0) {
       this.closeDetails();
-      if (this.clickItemDetailsOutsideInputHandler) {
-        this.clickItemDetailsOutsideInputHandler(event);
+      if (this.config && this.config.clickItemDetailsOutsideInputHandler) {
+        this.config.clickItemDetailsOutsideInputHandler(event);
       }
     }
   }
 
-  onItemClickHandler(event: MouseEvent, item: GenericListItemViewModel) {
+  onItemClickHandler(event, item) {
     this.viewModel.areDetailsVisible = true;
-    if (this.itemClickHandler) {
-      this.itemClickHandler(event, item);
+
+    if (this.config && this.config.itemClickHandler) {
+      this.config.itemClickHandler(event, item);
     }
   }
 
@@ -65,3 +59,11 @@ export class GenericListComponent implements OnDestroy {
 
 }
 
+
+export interface IGenericListComponentConfig {
+  addNewOutsideHandler?: (event) => void;
+  addNewVisibilityHandler?: (event) => void;
+  itemClickHandler?: (event, item) => void;
+  clickItemDetailsOutsideInputHandler?: (event) => void;
+  isItemDetailAvailable?: boolean;
+}

@@ -21,6 +21,11 @@ export class ProjectListComponent implements OnInit {
   ngOnInit(): void {
     this.viewModel = new ProjectListViewModel();
     this._isAlive = true;
+
+    this.viewModel.genericListConfig = {
+      addNewVisibilityHandler: this.addNewVisibilityHandler.bind(this)
+    };
+
     this._projectListService.getProjects().pipe(takeWhile(() => this._isAlive)).subscribe(data => {
       this.viewModel.projects = this.viewModel.projects.splice(0, this.viewModel.projects.length);
       this.viewModel.projectsToList = this.viewModel.projectsToList.splice(0, this.viewModel.projectsToList.length);
@@ -41,7 +46,7 @@ export class ProjectListComponent implements OnInit {
 
 
   addNewVisibilityHandler() {
-    alert('add project dialog');
+    this._router.navigate(['../project-management']);
   }
 
   onAddProjectClick() {

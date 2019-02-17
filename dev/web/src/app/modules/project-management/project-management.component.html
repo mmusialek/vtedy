@@ -1,15 +1,15 @@
 <div class="vth-project-management">
 
   <div class="vth-shared-layout__container">
-    <form #myForm="ngForm" (submit)="onFormSave()">
+    <form #myForm="ngForm" (submit)="onFormSave()" class="vth-project-management__form">
 
-      <div class="vth-shared-layout__container__row">
+      <div class="vth-shared-layout__container__row vth-project-management__form--full-width">
         <mat-form-field class="example-full-width vth-item-list__container__body__header__new-item__input" floatLabel="never">
           <input matInput name="name" placeholder="Project name" [(ngModel)]="viewModel.project.name" required>
         </mat-form-field>
       </div>
 
-      <div class="vth-shared-layout__container__row">
+      <div class="vth-shared-layout__container__row vth-project-management__form--full-width">
         <mat-form-field class="example-full-width">
           <textarea matInput name="description" placeholder="Description" matTextareaAutosize matAutosizeMinRows="10" matAutosizeMaxRows="10" [(ngModel)]="viewModel.project.description"></textarea>
         </mat-form-field>
@@ -28,10 +28,6 @@
       <div class="vth-shared-layout__container__row">
         <button mat-button type="button" (click)="onCancelClick()">Cancel</button>
         <button mat-button color="primary" [disabled]="myForm.invalid" type="submit">Save</button>
-      </div>
-
-      <div class="vth-shared-layout__container__row">
-        <p>viewModel: {{viewModel.project | json}}</p>
       </div>
 
     </form>

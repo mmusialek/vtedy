@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
-import {ItemDetailsComponentService} from './item-details.component.service';
+import {ItemDetailsService} from './item-details.service';
 import {ItemDetailsViewModel} from './item-details.view-model';
 import {SubscriptionLike as ISubscription} from 'rxjs';
 
@@ -15,7 +15,7 @@ export class ItemDetailsComponent implements OnInit, OnDestroy {
 
   @Output() closeEvent: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private _itemDetailsService: ItemDetailsComponentService) {
+  constructor(private _itemDetailsService: ItemDetailsService) {
   }
 
   ngOnInit() {

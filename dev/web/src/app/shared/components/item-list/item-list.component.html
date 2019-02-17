@@ -1,16 +1,12 @@
 <div class="vth-item-list__container  vth-remove-list-styles">
-  <vth-generic-list [addNewOutsideHandler]="onClickOutsideInput.bind(this)"
-                    [addNewVisibilityHandler]="toggleAddNewItemVisibility.bind(this)"
-                    [itemClickHandler]="onItemClickHandler.bind(this)"
-                    [clickItemDetailsOutsideInputHandler]="onClickItemDetailsOutsideInput.bind(this)"
-  >
+  <vth-generic-list [config]="viewModel.genericListConfig">
 
     <div header>
       <div *ngIf="viewModel.isAddNewItemVisible" class="vth-display-inline">
         <mat-form-field class="vth-item-list__container__input" floatLabel="never">
           <input matInput placeholder="Item title" (keyup)="addNewItem($event)" [(ngModel)]="viewModel.newItem" #newItemInput>
         </mat-form-field>
-        <span class="vth-item-list__container__close" (click)="onCloseNewItemClick()">+</span>
+        <span class="vth-item-list__container__close" (click)="onCloseNewItemClick($event)">+</span>
       </div>
     </div>
 

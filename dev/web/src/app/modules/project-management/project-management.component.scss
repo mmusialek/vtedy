@@ -1,4 +1,11 @@
 .vth-project-management {
-
   @include vth-shared-layout;
+
+  .vth-project-management__form {
+    .vth-project-management__form--full-width {
+      mat-form-field {
+        width: 100%;
+      }
+    }
+  }
 }
