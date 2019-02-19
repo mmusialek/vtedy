@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {takeWhile} from 'rxjs/operators';
-import {GenericListItemViewModel} from '../../shared/components/generic-list/generic-list.view-model';
+import {GenericListItemViewModel} from '../../../shared/components/generic-list/generic-list.view-model';
 import {ProjectListService} from './project-list.service';
 import {ProjectListViewModel} from './project-list.view-model';
 
@@ -14,6 +14,7 @@ export class ProjectListComponent implements OnInit {
   private _isAlive: boolean;
 
   constructor(private _router: Router,
+              private _route: ActivatedRoute,
               private _projectListService: ProjectListService) {
   }
 
@@ -46,7 +47,7 @@ export class ProjectListComponent implements OnInit {
 
 
   addNewVisibilityHandler() {
-    this._router.navigate(['../project-management']);
+    this._router.navigate(['../create'], { relativeTo: this._route });
   }
 
   onAddProjectClick() {

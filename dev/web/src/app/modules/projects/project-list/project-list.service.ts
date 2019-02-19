@@ -2,7 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {takeWhile} from 'rxjs/operators';
-import {ProjectDto} from '../../shared/dto/project.dto';
+import {ProjectDto} from '../../../shared/dto/project.dto';
 import {ProjectListItemViewModel} from './project-list.view-model';
 
 @Injectable({

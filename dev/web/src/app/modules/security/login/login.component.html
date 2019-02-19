@@ -1,0 +1,22 @@
+<div class="vth-login">
+  <form #myForm="ngForm" (submit)="onFormSave()" class="vth-login__form">
+
+    <div class="vth-login__form__row">
+      <mat-form-field class="example-full-width">
+        <input matInput name="username" placeholder="Username" [(ngModel)]="viewModel.username">
+      </mat-form-field>
+    </div>
+
+    <div class="vth-login__form__row">
+      <mat-form-field class="example-full-width">
+        <input matInput name="password" placeholder="Password" [(ngModel)]="viewModel.password">
+      </mat-form-field>
+    </div>
+
+
+    <div class="vth-login__form__row">
+      <button mat-button color="primary" [disabled]="myForm.invalid" type="submit">Save</button>
+    </div>
+
+  </form>
+</div>

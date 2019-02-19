@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {ProjectViewModel} from '../item-details/item-details.view-model';
+import {ProjectViewModel} from '../../item-details/item-details.view-model';
 import {ProjectManagementViewModel} from './project-management.view-model';
 
 @Component({
@@ -21,11 +21,11 @@ export class ProjectManagementComponent implements OnInit {
   }
 
   onFormSave() {
-    this._router.navigate(['./item-list/projects']);
+    this._router.navigate(['./panel/projects']);
   }
 
   onCancelClick() {
-    this._router.navigate(['./item-list/projects']);
+    this._router.navigate(['./panel/projects']);
   }
 
 }
