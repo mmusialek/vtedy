@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {UserAuthenticationService} from '../user-authentication.service';
 import {LoginViewModel} from './login.view-model';
 
 @Component({
@@ -11,17 +12,16 @@ export class LoginComponent implements OnInit {
 
   viewModel: LoginViewModel;
 
-  constructor(private _router: Router) {
+  constructor(private _router: Router,
+              private _authenticationService: UserAuthenticationService) {
   }
 
   ngOnInit() {
     this.viewModel = new LoginViewModel();
   }
 
-  onCancelClick() {
-  }
-
   onFormSave() {
+    this._authenticationService.authenticate(this.viewModel.username, this.viewModel.password);
     this._router.navigate(['./panel']);
   }
 }

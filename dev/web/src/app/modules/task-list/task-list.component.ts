@@ -25,20 +25,8 @@ export class TaskListComponent implements OnInit {
     this.viewModel = new TaskListViewModel();
     this._isAlive = true;
 
-    this._router.events.pipe(takeWhile(() => this._isAlive)).subscribe(p => {
-        if (p instanceof ActivationEnd) {
-          const pageType = this._route.snapshot.data['type'];
-          this.refreshView(pageType);
-        }
-      },
-      () => {
-      },
-      () => {
-        this._isAlive = false;
-      });
-
     // this is called first time
-    const page = this._route.snapshot.params['page'];
+    const page = this._route.snapshot.data.type;
     this.refreshView(page);
   }
 
