@@ -86,9 +86,30 @@ namespace Vetheria.Vtedy.ApiService.Controllers
 
         // PUT: api/Projects/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] string value)
-        {
-            return null;
+        public async Task<IActionResult> Put(int id, [FromBody] ProjectDto projectDto)
+        {            // TODO get user id from token
+            var userId = 1;
+
+            // TODO create converter
+            var project = new Project
+            {
+                Id = id,
+                Name = projectDto.Name,
+                Description = projectDto.Description,
+                UserAccountId = userId
+            };
+
+            var projectModel = await _dataProvider.UpdateAsync(project);
+
+            var res = new ProjectDto
+            {
+                Id = projectModel.Id,
+                Name = projectModel.Name,
+                Description = projectModel.Description
+            };
+
+            var resObj = new ObjectResult(res);
+            return resObj;
         }
 
         // DELETE: api/ApiWithActions/5

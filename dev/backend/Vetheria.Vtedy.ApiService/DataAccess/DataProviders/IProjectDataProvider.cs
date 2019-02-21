@@ -9,5 +9,6 @@ namespace Vetheria.Vtedy.ApiService.DataAccess.Queries
         Task<IEnumerable<Project>> GetByUserIdAsync(int userId);
         Task<IEnumerable<Project>> GetByProjectIdAsync(int userId, int projectId);
         Task<Project> Add(Project project);
+        Task<Project> UpdateAsync(Project project);
     }
 }

@@ -62,5 +62,22 @@ namespace Vetheria.Vtedy.ApiService.DataAccess.Queries
                     commandType: CommandType.StoredProcedure);
             }
         }
+
+        public async Task<Project> UpdateAsync(Project project)
+        {
+            using (var sqlConnection = _connectionFactory.OpenSqlConnection())
+            {
+                return await sqlConnection.QuerySingleAsync<Project>(
+                    "[dbo].[Projects_update]",
+                    param: new
+                    {
+                        @id = project.Id,
+                        @name = project.Name,
+                        @description = project.Description,
+                        @userAccountId = project.UserAccountId
+                    },
+                    commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }

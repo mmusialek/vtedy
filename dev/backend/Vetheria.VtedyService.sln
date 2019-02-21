@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vetheria.IdentityServer", "Vetheria.IdentityServer\Vetheria.IdentityServer.csproj", "{A970710E-BE16-4663-800F-FC207314181D}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{66239368-F886-40A8-929D-68D9330771E5}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VtedyService", "VtedyService", "{B4053374-CAF6-4EAB-A39C-6ED00639C6D7}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Vetheria.Vtedy.Database", "Vetheria.Vtedy.Database\Vetheria.Vtedy.Database.sqlproj", "{176D9F20-1372-41C7-A7CC-3C2A7BD28C51}"
@@ -19,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A970710E-BE16-4663-800F-FC207314181D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A970710E-BE16-4663-800F-FC207314181D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A970710E-BE16-4663-800F-FC207314181D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A970710E-BE16-4663-800F-FC207314181D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{176D9F20-1372-41C7-A7CC-3C2A7BD28C51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{176D9F20-1372-41C7-A7CC-3C2A7BD28C51}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{176D9F20-1372-41C7-A7CC-3C2A7BD28C51}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -37,7 +29,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{A970710E-BE16-4663-800F-FC207314181D} = {66239368-F886-40A8-929D-68D9330771E5}
 		{176D9F20-1372-41C7-A7CC-3C2A7BD28C51} = {B4053374-CAF6-4EAB-A39C-6ED00639C6D7}
 		{5A20F1B6-9E76-4A9C-841C-280223A028AD} = {B4053374-CAF6-4EAB-A39C-6ED00639C6D7}
 	EndGlobalSection
