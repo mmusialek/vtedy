@@ -3,7 +3,7 @@
     [TodoItemId] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY DEFAULT NEWID(), 
     [Name] NVARCHAR(100) NOT NULL, 
     [IsCompleted] BIT NOT NULL DEFAULT 0,
-    [ProjectId] INT NULL
+    [ProjectId] INT NOT NULL
 
 );
 
