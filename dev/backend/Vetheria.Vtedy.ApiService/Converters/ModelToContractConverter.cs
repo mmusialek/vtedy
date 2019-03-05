@@ -17,14 +17,15 @@ namespace Vetheria.Vtedy.ApiService.Converters
 
             CreateMap<Tag, TagDto>();
             CreateMap<Project, ProjectDto>();
+            CreateMap<ToDoItemFilter, ToDoItemFilterDto>();
 
-            CreateMap<TodoItem, TodoItemDto>().ForMember(p => p.Tags, o => o.ResolveUsing<TodoItemToContractResolver>());
+            CreateMap<TodoItem, TodoItemDto>().ForMember(p => p.Project, o => o.ResolveUsing<TodoItemToContractResolver>());
         }
     }
 
-    public class TodoItemToContractResolver : IValueResolver<TodoItem, TodoItemDto, List<TagDto>>
+    public class TodoItemToContractResolver : IValueResolver<TodoItem, TodoItemDto, ProjectDto>
     {
-        public List<TagDto> Resolve(TodoItem source, TodoItemDto destination, List<TagDto> destMember, ResolutionContext context)
+        public ProjectDto Resolve(TodoItem source, TodoItemDto destination, ProjectDto destMember, ResolutionContext context)
         {
             //if (source.== null)
             //{
@@ -40,6 +41,11 @@ namespace Vetheria.Vtedy.ApiService.Converters
             //    };
             //    destMember.Add(item);
             //}
+
+            destination.Project = new ProjectDto
+            {
+                Id = source.ProjectId
+            };
 
 
             return destMember;

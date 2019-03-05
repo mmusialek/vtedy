@@ -15,37 +15,27 @@ namespace Vetheria.Vtedy.ApiService.Controllers
     public class TodoItemsController : ControllerBase
     {
         private ITodoItemDataProvider _dataProvider;
-        public TodoItemsController(ITodoItemDataProvider dataProvider)
+        private IMapper _mapper;
+
+        public TodoItemsController(ITodoItemDataProvider dataProvider, IMapper mapper)
         {
             _dataProvider = dataProvider;
+            _mapper = mapper;
         }
 
         // GET: api/Todo
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] ToDoItemFilterDto parm) //IEnumerable<TodoItemDto>
+        public async Task<IActionResult> Get([FromQuery] ToDoItemFilterDto filterDto) //IEnumerable<TodoItemDto>
         {
-            var res = new List<TodoItemDto>();
             // TODO get user id from token
             var userId = 1;
 
 
-            var filter = new ToDoItemFilter();
+            var filter = _mapper.Map<ToDoItemFilter>(filterDto);
             filter.UserAccountId = userId;
 
             var todos = await _dataProvider.Get(filter);
-
-            // TODO user automapper
-            foreach (var item in todos)
-            {
-                var todo = new TodoItemDto
-                {
-                    Id = item.Id.ToString(),
-                    IsCompleted = item.IsCompleted,
-                    Name = item.Name,
-                    Project = new ProjectDto { Id = item.ProjectId }
-                };
-                res.Add(todo);
-            }
+            var res = _mapper.Map<List<TodoItemDto>>(todos);
 
             var resObj = new ObjectResult(res);
             return resObj;
@@ -65,23 +55,11 @@ namespace Vetheria.Vtedy.ApiService.Controllers
         {
             // TODO get user id from token
             var userAccountId = 1;
-            var todo = new TodoItem
-            {
-                IsCompleted = item.IsCompleted,
-                Name = item.Name,
-                ProjectId = item.Project.Id
-            };
+            var todo = _mapper.Map<TodoItem>(item);
+
 
             var addedItem = await _dataProvider.Add(todo, userAccountId);
-            
-            // TODO user automapper
-            var res = new TodoItemDto
-            {
-                Id = addedItem.Id.ToString(),
-                IsCompleted = addedItem.IsCompleted,
-                Name = addedItem.Name
-            };
-
+            var res = _mapper.Map<TodoItemDto>(addedItem);
 
             var resObj = new ObjectResult(res);
             return resObj;

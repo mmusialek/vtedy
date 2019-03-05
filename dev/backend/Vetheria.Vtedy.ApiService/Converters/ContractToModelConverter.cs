@@ -12,42 +12,42 @@ namespace Vetheria.Vtedy.ApiService.Converters
     {
         public ContractToModelConverter()
         {
-            CreateMap<Guid?, string>().ConvertUsing(g => g?.ToString("N"));
-            CreateMap<Guid, string>().ConvertUsing(g => g.ToString("N"));
+            CreateMap<Guid?, string>().ConvertUsing(g => g?.ToString());
+            CreateMap<Guid, string>().ConvertUsing(g => g.ToString());
 
 
             CreateMap<TagDto, Tag>();
             CreateMap<ProjectDto, Project>();
+            CreateMap<ToDoItemFilterDto, ToDoItemFilter>();
 
-
-            //CreateMap<TodoItemDto, TodoItem>().ForMember(p => p.TodoItemTags, o => o.ResolveUsing<TodoItemToModelResolver>());
+            CreateMap<TodoItemDto, TodoItem>()
+                .ForMember(p => p.ProjectId, o => o.ResolveUsing<TodoItemToModelResolver>());
         }
     }
 
-    public class TodoItemToModelResolver : IValueResolver<TodoItemDto, TodoItem, ICollection<TodoItemTag>>
+    public class TodoItemToModelResolver : IValueResolver<TodoItemDto, TodoItem, int>
     {
-        public ICollection<TodoItemTag> Resolve(TodoItemDto source, TodoItem destination, ICollection<TodoItemTag> destMember, ResolutionContext context)
+        public int Resolve(TodoItemDto source, TodoItem destination, int destMember, ResolutionContext context)
         {
 
-            if (source.Tags == null)
-            {
-                return destMember;
-            }
+            //if (source.Tags == null)
+            //{
+            //    return destMember;
+            //}
 
 
-            foreach (var sourceTodoItemTag in source.Tags)
-            {
-                var item = new TodoItemTag
-                {
-                    TagId = sourceTodoItemTag.Id,
-                    TodoItemId = Guid.Parse(source.Id)
-                };
-                destMember.Add(item);
-            }
+            //foreach (var sourceTodoItemTag in source.Tags)
+            //{
+            //    var item = new TodoItemTag
+            //    {
+            //        TagId = sourceTodoItemTag.Id,
+            //        TodoItemId = Guid.Parse(source.Id)
+            //    };
+            //    destMember.Add(item);
+            //}
 
 
-            return destMember;
-
+            return source.Project.Id;
 //            throw new NotImplementedException();
         }
     }

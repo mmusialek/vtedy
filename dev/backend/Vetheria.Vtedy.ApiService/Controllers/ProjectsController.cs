@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Vetheria.Vtedy.ApiService.DataAccess.Queries;
@@ -16,10 +17,14 @@ namespace Vetheria.Vtedy.ApiService.Controllers
     public class ProjectsController : ControllerBase
     {
         private IProjectDataProvider _dataProvider;
-        public ProjectsController(IProjectDataProvider dataProvider)
+        private IMapper _mapper;
+
+        public ProjectsController(IProjectDataProvider dataProvider, IMapper mapper)
         {
             _dataProvider = dataProvider;
+            _mapper = mapper;
         }
+
         // GET: api/Projects
         [HttpGet]
         public async Task<IActionResult> Get()
@@ -27,12 +32,7 @@ namespace Vetheria.Vtedy.ApiService.Controllers
             // TODO get user id from token
             var userId = 1;
             var projects = await _dataProvider.GetByUserIdAsync(userId);
-            var res = new List<ProjectDto>();
-
-            foreach (var item in projects)
-            {
-                res.Add(new ProjectDto { Id = item.Id, Name = item.Name, Description = item.Description });
-            }
+            var res = _mapper.Map<List<ProjectDto>>(projects);
 
             var resObj = new ObjectResult(res);
             return resObj;
@@ -45,12 +45,7 @@ namespace Vetheria.Vtedy.ApiService.Controllers
             // TODO get user id from token
             var userId = 1;
             var projects = await _dataProvider.GetByProjectIdAsync(userId, projectId);
-            var res = new List<ProjectDto>();
-
-            foreach (var item in projects)
-            {
-                res.Add(new ProjectDto { Id = item.Id, Name = item.Name, Description = item.Description });
-            }
+            var res = _mapper.Map<List<ProjectDto>>(projects);
 
             var resObj = new ObjectResult(res);
             return resObj;
@@ -63,22 +58,10 @@ namespace Vetheria.Vtedy.ApiService.Controllers
             // TODO get user id from token
             var userId = 1;
 
-            // TODO create converter
-            var project = new Project
-            {
-                Name = projectDto.Name,
-                Description = projectDto.Description,
-                UserAccountId = userId
-            };
-
+            var project = _mapper.Map<Project>(projectDto);
+            project.UserAccountId = userId;
             var projectModel = await _dataProvider.Add(project);
-
-            var res = new ProjectDto
-            {
-                Id = projectModel.Id,
-                Name = projectModel.Name,
-                Description = projectModel.Description
-            };
+            var res = _mapper.Map<ProjectDto>(projectModel);
 
             var resObj = new ObjectResult(res);
             return resObj;
@@ -91,22 +74,10 @@ namespace Vetheria.Vtedy.ApiService.Controllers
             var userId = 1;
 
             // TODO create converter
-            var project = new Project
-            {
-                Id = id,
-                Name = projectDto.Name,
-                Description = projectDto.Description,
-                UserAccountId = userId
-            };
-
+            var project = _mapper.Map<Project>(projectDto);
+            project.UserAccountId = userId;
             var projectModel = await _dataProvider.UpdateAsync(project);
-
-            var res = new ProjectDto
-            {
-                Id = projectModel.Id,
-                Name = projectModel.Name,
-                Description = projectModel.Description
-            };
+            var res = _mapper.Map<ProjectDto>(projectModel);
 
             var resObj = new ObjectResult(res);
             return resObj;
