@@ -25,7 +25,10 @@ namespace Vetheria.Vtedy.ApiService.DataAccess.DataProviders
                     "[dbo].[TodoItems_get]",
                     param: new
                     {
-                        @userAccountId = filter.UserAccountId
+                        @userAccountId = filter.UserAccountId,
+                        @projectId = filter.ProjectId,
+                        @isCurrent = filter.IsCurrentItem,
+                        @statusId = filter.StatusId
                     },
                     commandType: CommandType.StoredProcedure);
             }
@@ -40,9 +43,28 @@ namespace Vetheria.Vtedy.ApiService.DataAccess.DataProviders
                     param: new
                     {
                         @userAccountId = userAccountId,
-                        @isCompleted = todoItem.IsCompleted,
+                        @isCurrent = todoItem.IsCurrent,
+                        @statusId = todoItem.StatusId,
                         @name = todoItem.Name,
                         @projectId = todoItem.ProjectId
+                    },
+                    commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public async Task<TodoItem> Update(TodoItem item)
+        {
+            using (var sqlConnection = _connectionFactory.OpenSqlConnection())
+            {
+                return await sqlConnection.QuerySingleAsync<TodoItem>(
+                    "[dbo].[TodoItems_update]",
+                    param: new
+                    {
+                        @id = item.Id,
+                        @name = item.Name,
+                        @isCurrent = item.IsCurrent,
+                        @statusId = item.StatusId,
+                        @projectId = item.ProjectId
                     },
                     commandType: CommandType.StoredProcedure);
             }

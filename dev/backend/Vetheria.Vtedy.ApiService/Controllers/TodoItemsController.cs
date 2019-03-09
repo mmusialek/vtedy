@@ -69,7 +69,16 @@ namespace Vetheria.Vtedy.ApiService.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(string id, [FromBody]TodoItemDto item)
         {
-            var resObj = new ObjectResult(null);
+            // TODO get user id from token
+            var userAccountId = 1;
+            item.Id = id;
+            var todo = _mapper.Map<TodoItem>(item);
+
+
+            var addedItem = await _dataProvider.Update(todo);
+            var res = _mapper.Map<TodoItemDto>(addedItem);
+
+            var resObj = new ObjectResult(res);
             return resObj;
         }
 

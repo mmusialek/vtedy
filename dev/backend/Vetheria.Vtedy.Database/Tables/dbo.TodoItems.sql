@@ -1,9 +1,10 @@
 ﻿CREATE TABLE [dbo].[TodoItems]
 (
     [TodoItemId] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY DEFAULT NEWID(), 
-    [Name] NVARCHAR(100) NOT NULL, 
-    [IsCompleted] BIT NOT NULL DEFAULT 0,
-    [ProjectId] INT NOT NULL
+    [Name] NVARCHAR(100) NOT NULL,
+    [ProjectId] INT NOT NULL,
+    [IsCurrent] BIT NOT NULL,
+    [StatusId] INT NOT NULL
 
 );
 

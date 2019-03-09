@@ -1,11 +1,12 @@
 ﻿CREATE PROCEDURE [dbo].[TodoItems_add]
     @userAccountId int,
-    @isCompleted bit,
+    @isCurrent bit,
+    @statusId INT,
     @name nvarchar(100),
     @projectId INT
 
 AS
     
-INSERT INTO dbo.TodoItems(Name, IsCompleted, ProjectId)
-OUTPUT INSERTED.[TodoItemId] as Id, INSERTED.[Name], INSERTED.[IsCompleted], INSERTED.[ProjectId]
-VALUES(@name, @isCompleted, @projectId)
+INSERT INTO dbo.TodoItems(Name, IsCurrent, StatusId, ProjectId)
+OUTPUT INSERTED.[TodoItemId] as Id, INSERTED.[Name], INSERTED.[IsCurrent], INSERTED.[StatusId], INSERTED.[ProjectId]
+VALUES(@name, @isCurrent, @statusId, @projectId)

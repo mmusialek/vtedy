@@ -80,6 +80,7 @@
     <Build Include="StoredProcedures\dbo.Projects_update.sql" />
     <Build Include="StoredProcedures\dbo.TodoItems_get.sql" />
     <Build Include="StoredProcedures\dbo.TodoItems_add.sql" />
+    <Build Include="StoredProcedures\dbo.TodoItems_update.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Vetheria.Vtedy.Database.refactorlog" />

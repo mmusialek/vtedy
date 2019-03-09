@@ -8,5 +8,6 @@ namespace Vetheria.Vtedy.ApiService.DataAccess.DataProviders
     {
         Task<IEnumerable<TodoItem>> Get(ToDoItemFilter filter);
         Task<TodoItem> Add(TodoItem todoItem, int userAccountId);
+        Task<TodoItem> Update(TodoItem item);
     }
 }

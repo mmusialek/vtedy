@@ -16,11 +16,11 @@ GO
 declare @project_id int;
 
 SELECT TOP(1) @project_id=ProjectId from dbo.Projects;
-INSERT INTO dbo.TodoItems(Name, IsCompleted, ProjectId) VALUES('todoitem_1', 0, @project_id);
-INSERT INTO dbo.TodoItems(Name, IsCompleted, ProjectId) VALUES('todoitem_2', 0, @project_id);
-INSERT INTO dbo.TodoItems(Name, IsCompleted, ProjectId) VALUES('todoitem_3', 0, @project_id);
-INSERT INTO dbo.TodoItems(Name, IsCompleted, ProjectId) VALUES('todoitem_4', 0, @project_id);
-INSERT INTO dbo.TodoItems(Name, IsCompleted, ProjectId) VALUES('todoitem_5', 1, @project_id);
+INSERT INTO dbo.TodoItems(Name, IsCurrent, StatusId, ProjectId) VALUES('todoitem_1', 0, 0, @project_id);
+INSERT INTO dbo.TodoItems(Name, IsCurrent, StatusId, ProjectId) VALUES('todoitem_2', 0, 0, @project_id);
+INSERT INTO dbo.TodoItems(Name, IsCurrent, StatusId, ProjectId) VALUES('todoitem_3', 0, 0, @project_id);
+INSERT INTO dbo.TodoItems(Name, IsCurrent, StatusId, ProjectId) VALUES('todoitem_4', 0, 0, @project_id);
+INSERT INTO dbo.TodoItems(Name, IsCurrent, StatusId, ProjectId) VALUES('todoitem_5', 1, 1, @project_id);
 
 GO
 

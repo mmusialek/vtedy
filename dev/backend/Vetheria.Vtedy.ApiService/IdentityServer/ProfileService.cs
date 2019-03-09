@@ -60,7 +60,7 @@ namespace Vetheria.Vtedy.ApiService.IdentityServer
             }
             catch (Exception ex)
             {
-                //log your error
+                // TODO: log your error
             }
 
             return Task.FromResult(1);

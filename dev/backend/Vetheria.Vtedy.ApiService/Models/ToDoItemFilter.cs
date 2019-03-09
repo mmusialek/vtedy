@@ -10,7 +10,6 @@ namespace Vetheria.Vtedy.ApiService.Models
         public int UserAccountId { get; set; }
         public int? ProjectId { get; set; }
         public bool? IsCurrentItem { get; set; }
-        public bool? IsNewItem { get; set; }
-        public bool? IsCompleted { get; set; }
+        public int StatusId { get; set; }
     }
 }
