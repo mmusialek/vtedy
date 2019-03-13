@@ -69,5 +69,20 @@ namespace Vetheria.Vtedy.ApiService.DataAccess.DataProviders
                     commandType: CommandType.StoredProcedure);
             }
         }
+
+        public async Task<int> Delete(string todoitemId, int userAccountId)
+        {
+            using (var sqlConnection = _connectionFactory.OpenSqlConnection())
+            {
+                return await sqlConnection.QuerySingleAsync<int>(
+                    "[dbo].[TodoItems_delete]",
+                    param: new
+                    {
+                        @userAccountId = userAccountId,
+                        @todoitemId = todoitemId
+                    },
+                    commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }

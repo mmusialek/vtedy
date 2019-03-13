@@ -90,7 +90,7 @@ namespace Vetheria.Vtedy.ApiService
                 options.RequireHttpsMetadata = false;
                 options.SupportedTokens = SupportedTokens.Jwt;
             })
-            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
+            //.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
             //.AddJwtBearer("Bearer", options =>
             //{
             //    options.SaveToken = true;

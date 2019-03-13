@@ -83,9 +83,14 @@ namespace Vetheria.Vtedy.ApiService.Controllers
         }
 
         // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync(string id)
+        [HttpDelete("{todoItemId}")]
+        public async Task<IActionResult> DeleteAsync(string todoItemId)
         {
+            // TODO get user id from token
+            var userAccountId = 1;
+
+            var addedItem = await _dataProvider.Delete(todoItemId, userAccountId);
+
             return new NoContentResult();
         }
     }
