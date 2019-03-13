@@ -8,3 +8,4 @@ DELETE ti FROM [dbo].[TodoItems] ti INNER JOIN [dbo].[Projects] ua
           WHERE ti.TodoItemId=@todoitemId AND ua.UserAccountId=@userAccountId
 
 
+return @@ROWCOUNT
