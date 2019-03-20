@@ -20,6 +20,9 @@ namespace Vetheria.Vtedy.ApiService.Converters
             CreateMap<ToDoItemFilter, ToDoItemFilterDto>();
 
             CreateMap<TodoItem, TodoItemDto>().ForMember(p => p.Project, o => o.ResolveUsing<TodoItemToContractResolver>());
+
+            CreateMap<Comment, CommentDto>();
+            CreateMap<CommentFilter, CommentFilterDto>();
         }
     }
 
@@ -27,21 +30,6 @@ namespace Vetheria.Vtedy.ApiService.Converters
     {
         public ProjectDto Resolve(TodoItem source, TodoItemDto destination, ProjectDto destMember, ResolutionContext context)
         {
-            //if (source.== null)
-            //{
-            //    return destMember;
-            //}
-
-            //foreach (var sourceTodoItemTag in source.TodoItemTags)
-            //{
-            //    TagDto item = new TagDto
-            //    {
-            //        Id = sourceTodoItemTag.Tag.Id,
-            //        Name = sourceTodoItemTag.Tag.Name
-            //    };
-            //    destMember.Add(item);
-            //}
-
             destination.Project = new ProjectDto
             {
                 Id = source.ProjectId

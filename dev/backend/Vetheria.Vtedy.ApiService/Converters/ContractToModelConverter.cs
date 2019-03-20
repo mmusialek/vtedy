@@ -22,6 +22,9 @@ namespace Vetheria.Vtedy.ApiService.Converters
 
             CreateMap<TodoItemDto, TodoItem>()
                 .ForMember(p => p.ProjectId, o => o.ResolveUsing<TodoItemToModelResolver>());
+
+            CreateMap<CommentDto, Comment>();
+            CreateMap<CommentFilterDto, CommentFilter>();
         }
     }
 
@@ -29,26 +32,7 @@ namespace Vetheria.Vtedy.ApiService.Converters
     {
         public int Resolve(TodoItemDto source, TodoItem destination, int destMember, ResolutionContext context)
         {
-
-            //if (source.Tags == null)
-            //{
-            //    return destMember;
-            //}
-
-
-            //foreach (var sourceTodoItemTag in source.Tags)
-            //{
-            //    var item = new TodoItemTag
-            //    {
-            //        TagId = sourceTodoItemTag.Id,
-            //        TodoItemId = Guid.Parse(source.Id)
-            //    };
-            //    destMember.Add(item);
-            //}
-
-
             return source.Project.Id;
-//            throw new NotImplementedException();
         }
     }
 }
