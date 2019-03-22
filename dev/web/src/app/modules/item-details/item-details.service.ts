@@ -1,18 +1,24 @@
-import {Injectable} from '@angular/core';
-import {Observable, Subject} from 'rxjs';
-import {CommentViewModel, ItemDataViewModel, ProjectViewModel, TagViewModel} from './item-details.view-model';
-import {VtedyClientService} from '../../shared/client-services/vtedy.client-service';
+import { TodoItemDto } from './../../shared/dto/todo-item.dto';
+import { Injectable } from '@angular/core';
+import { Observable, Subject, of } from 'rxjs';
+import {
+  CommentViewModel,
+  ItemDataViewModel,
+  ProjectViewModel,
+  TagViewModel
+} from './item-details.view-model';
+import { VtedyClientService } from '../../shared/client-services/vtedy.client-service';
+import { takeWhile, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class ItemDetailsService {
-
   private _isDialogVisible: Subject<boolean> = new Subject<boolean>();
-  private _newDataStream: Subject<ItemDataViewModel> = new Subject<ItemDataViewModel>();
+  private _newDataStream: Subject<ItemDataViewModel> = new Subject<
+    ItemDataViewModel
+  >();
   private _isDialogPinned = false;
 
-
-  constructor(private _vtedyService: VtedyClientService) {
-  }
+  constructor(private _vtedyService: VtedyClientService) {}
 
   get isDialogVisible() {
     return this._isDialogVisible;
@@ -50,45 +56,67 @@ export class ItemDetailsService {
 
   getItemDetails(id: string) {
     let result: ItemDataViewModel;
+    let isAlive = true;
 
     return new Observable<ItemDataViewModel>(obs => {
-      const subscriber = this._vtedyService.getItem(id).subscribe(p => {
+      this._vtedyService
+        .getItem(id)
+        .pipe(
+          catchError(err => {
+            return of([]);
+          }),
+          takeWhile(() => isAlive)
+        )
+        .subscribe(
+          (p: TodoItemDto) => {
+            result = new ItemDataViewModel();
+            result.id = p.id;
+            result.title = p.name;
+            result.project = new ProjectViewModel({
+              id: p.project.id,
+              name: p.project.name,
+              description: p.project.description,
+              owner: 'Marcin'
+            });
+            result.comments = [];
+            result.comments.push(
+              new CommentViewModel({
+                author: 'Marcin',
+                comment: 'first comment',
+                date: new Date(Date.now())
+              })
+            );
+            result.comments.push(
+              new CommentViewModel({
+                author: 'Marcin',
+                comment: 'second comment',
+                date: new Date(Date.now())
+              })
+            );
+            result.date = new Date(Date.now());
+            result.tags = [];
 
-        result = new ItemDataViewModel();
-        result.id = p.id;
-        result.title = p.name;
-        result.project = new ProjectViewModel({id: p.project.id, name: p.project.name, description: p.project.description, owner: 'Marcin'});
-        result.comments = [];
-        result.comments.push(new CommentViewModel({
-          author: 'Marcin',
-          comment: 'first comment',
-          date: new Date(Date.now())
-        }));
-        result.comments.push(new CommentViewModel({
-          author: 'Marcin',
-          comment: 'second comment',
-          date: new Date(Date.now())
-        }));
-        result.date = new Date(Date.now());
-        result.tags = [];
+            if (p.tags) {
+              for (const tag of p.tags) {
+                result.tags.push(
+                  new TagViewModel({
+                    id: tag.id,
+                    name: tag.name,
+                    owner: 'Marcin'
+                  })
+                );
+              }
+            }
 
-        if (p.tags) {
-          for (const tag of p.tags) {
-            result.tags.push(new TagViewModel({id: tag.id, name: tag.name, owner: 'Marcin'}));
+            obs.next(result);
+            obs.complete();
+
+            isAlive = false;
+          },
+          err => {
+            console.error(err);
           }
-        }
-
-
-        obs.next(result);
-        obs.complete();
-
-        if (subscriber) {
-          subscriber.unsubscribe();
-        }
-      }, err => {
-        console.error(err);
-      });
+        );
     });
   }
-
 }
