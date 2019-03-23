@@ -61,6 +61,9 @@
     <Folder Include="StoredProcedures" />
     <Folder Include="Schemas" />
     <Folder Include="Tables" />
+    <Folder Include="StoredProcedures\Projects" />
+    <Folder Include="StoredProcedures\TodoItems" />
+    <Folder Include="StoredProcedures\UserAccounts" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />
@@ -71,17 +74,19 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\dbo.Projects.sql" />
-    <Build Include="StoredProcedures\dbo.Projects_get.sql" />
-    <Build Include="StoredProcedures\dbo.UserAccounts_get.sql" />
-    <Build Include="StoredProcedures\dbo.UserAccounts_get_by_usename.sql" />
-    <Build Include="StoredProcedures\dbo.UserAccounts_get_by_id.sql" />
-    <Build Include="StoredProcedures\dbo.Projects_add.sql" />
-    <Build Include="StoredProcedures\dbo.Project_get_by_id.sql" />
-    <Build Include="StoredProcedures\dbo.Projects_update.sql" />
-    <Build Include="StoredProcedures\dbo.TodoItems_get.sql" />
-    <Build Include="StoredProcedures\dbo.TodoItems_add.sql" />
-    <Build Include="StoredProcedures\dbo.TodoItems_update.sql" />
-    <Build Include="StoredProcedures\dbo.TodoItems_delete.sql" />
+    <Build Include="Tables\dbo.ProjectComments.sql" />
+    <Build Include="Tables\dbo.TodoItemComments.sql" />
+    <Build Include="StoredProcedures\Projects\dbo.Project_get_by_id.sql" />
+    <Build Include="StoredProcedures\Projects\dbo.Projects_add.sql" />
+    <Build Include="StoredProcedures\Projects\dbo.Projects_get.sql" />
+    <Build Include="StoredProcedures\Projects\dbo.Projects_update.sql" />
+    <Build Include="StoredProcedures\TodoItems\dbo.TodoItems_add.sql" />
+    <Build Include="StoredProcedures\TodoItems\dbo.TodoItems_delete.sql" />
+    <Build Include="StoredProcedures\TodoItems\dbo.TodoItems_get.sql" />
+    <Build Include="StoredProcedures\TodoItems\dbo.TodoItems_update.sql" />
+    <Build Include="StoredProcedures\UserAccounts\dbo.UserAccounts_get.sql" />
+    <Build Include="StoredProcedures\UserAccounts\dbo.UserAccounts_get_by_id.sql" />
+    <Build Include="StoredProcedures\UserAccounts\dbo.UserAccounts_get_by_usename.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Vetheria.Vtedy.Database.refactorlog" />
