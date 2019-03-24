@@ -20,8 +20,8 @@ export class ProjectViewModel {
   owner: string;
   releaseAt: Date;
 
-  constructor(param?: Partial<ProjectViewModel>) {
-    Object.assign(this, param);
+  static newInstance(param: any) {
+    return Object.assign(new ProjectViewModel(), param);
   }
 }
 

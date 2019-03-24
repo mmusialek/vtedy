@@ -15,7 +15,6 @@ namespace Vetheria.Vtedy.ApiService.Controllers
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class ProjectsController : ControllerBase
     {
         private IProjectDataProvider _dataProvider;

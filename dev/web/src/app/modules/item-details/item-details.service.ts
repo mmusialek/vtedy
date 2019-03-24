@@ -72,7 +72,7 @@ export class ItemDetailsService {
             result = new ItemDataViewModel();
             result.id = p.id;
             result.title = p.name;
-            result.project = new ProjectViewModel({
+            result.project = ProjectViewModel.newInstance({
               id: p.project.id,
               name: p.project.name,
               description: p.project.description,

@@ -13,7 +13,7 @@ export class ProjectListItemViewModel {
   name: string;
   description: string;
 
-  static new(params?: Partial<ProjectListItemViewModel>) {
-    return Object.create(params);
+  static new(params?: any) {
+    return Object.assign(new ProjectListItemViewModel(), params);
   }
 }

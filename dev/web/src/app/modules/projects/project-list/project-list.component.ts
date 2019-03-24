@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {takeWhile} from 'rxjs/operators';
-import {GenericListItemViewModel} from '../../../shared/components/generic-list/generic-list.view-model';
-import {ProjectListService} from './project-list.service';
-import {ProjectListViewModel} from './project-list.view-model';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { takeWhile } from 'rxjs/operators';
+import { GenericListItemViewModel } from '../../../shared/components/generic-list/generic-list.view-model';
+import { ProjectListService } from './project-list.service';
+import { ProjectListViewModel } from './project-list.view-model';
 
 @Component({
   selector: 'vth-project-list',
@@ -13,11 +13,11 @@ export class ProjectListComponent implements OnInit {
   viewModel: ProjectListViewModel;
   private _isAlive: boolean;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              private _projectListService: ProjectListService) {
-  }
-
+  constructor(
+    private _router: Router,
+    private _route: ActivatedRoute,
+    private _projectListService: ProjectListService
+  ) {}
 
   ngOnInit(): void {
     this.viewModel = new ProjectListViewModel();
@@ -27,24 +27,37 @@ export class ProjectListComponent implements OnInit {
       addNewVisibilityHandler: this.addNewVisibilityHandler.bind(this)
     };
 
-    this._projectListService.getProjects().pipe(takeWhile(() => this._isAlive)).subscribe(data => {
-      this.viewModel.projects = this.viewModel.projects.splice(0, this.viewModel.projects.length);
-      this.viewModel.projectsToList = this.viewModel.projectsToList.splice(0, this.viewModel.projectsToList.length);
+    this._projectListService
+      .getProjects()
+      .pipe(takeWhile(() => this._isAlive))
+      .subscribe(
+        data => {
+          this.viewModel.projects = this.viewModel.projects.splice(
+            0,
+            this.viewModel.projects.length
+          );
+          this.viewModel.projectsToList = this.viewModel.projectsToList.splice(
+            0,
+            this.viewModel.projectsToList.length
+          );
 
-      this.viewModel.projects = data;
+          this.viewModel.projects = data;
 
-      this.viewModel.projectsToList = this.viewModel.projects.map(item => {
-        {
-          return GenericListItemViewModel.new({id: item.id.toString(10), name: item.name});
+          this.viewModel.projectsToList = this.viewModel.projects.map(item => {
+            {
+              return GenericListItemViewModel.new({
+                id: item.id.toString(10),
+                name: item.name
+              });
+            }
+          });
+        },
+        () => {},
+        () => {
+          this._isAlive = true;
         }
-      });
-
-    }, () => {
-    }, () => {
-      this._isAlive = true;
-    });
+      );
   }
-
 
   addNewVisibilityHandler() {
     this._router.navigate(['../create'], { relativeTo: this._route });
@@ -53,5 +66,4 @@ export class ProjectListComponent implements OnInit {
   onAddProjectClick() {
     this._router.navigate(['../project-management']);
   }
-
 }
