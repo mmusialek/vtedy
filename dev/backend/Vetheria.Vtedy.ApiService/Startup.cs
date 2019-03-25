@@ -65,7 +65,6 @@ namespace Vetheria.Vtedy.ApiService
                 c.SwaggerDoc("v1", new Info { Title = "Vtedy API", Version = "v1" });
             });
 
-
             services.AddTransient<IConnectionFactory, ConnectionFactory>();
             services.AddTransient<IProjectDataProvider, ProjectDataProvider>();
             services.AddTransient<IUserAccountDataProvider, UserAccountDataProvider>();
@@ -76,39 +75,14 @@ namespace Vetheria.Vtedy.ApiService
             services.AddTransient<IResourceOwnerPasswordValidator, ResourceOwnerPasswordValidator>();
             services.AddTransient<IProfileService, ProfileService>();
 
-
-            //services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
-            services.AddAuthentication( cfg =>
-            {
-                cfg.DefaultScheme = IdentityServerAuthenticationDefaults.AuthenticationScheme;
-                cfg.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                cfg.DefaultSignOutScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            })
-            .AddIdentityServerAuthentication( options =>
-            {
-                options.SaveToken = true;
-                options.Authority = "http://localhost:5001";
-                options.RequireHttpsMetadata = false;
-                options.SupportedTokens = SupportedTokens.Jwt;
-            })
-            //.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
-            //.AddJwtBearer("Bearer", options =>
-            //{
-            //    options.SaveToken = true;
-            //    options.Authority = "http://localhost:5001";
-            //    options.RequireHttpsMetadata = false;
-
-            //    options.Audience = "api1";
-            //})
-            //.AddOpenIdConnect("oidc", options =>
-            //{
-            //    options.Authority = "http://localhost:5001";
-            //    options.RequireHttpsMetadata = false;
-            //    options.ClientId = "mvc";
-            //    options.SaveTokens = true;
-            //})
-            ;
-
+            services.AddAuthentication()
+                .AddIdentityServerAuthentication(options =>
+                {
+                    options.SaveToken = true;
+                    options.Authority = "http://localhost:5001";
+                    options.RequireHttpsMetadata = false;
+                    options.SupportedTokens = SupportedTokens.Jwt;
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
