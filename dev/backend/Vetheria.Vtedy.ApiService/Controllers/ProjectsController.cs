@@ -121,6 +121,7 @@ namespace Vetheria.Vtedy.ApiService.Controllers
 
             var item = _mapper.Map<ProjectComment>(comment);
             item.UserAccountId = userId;
+            item.ProjectId = id;
             var projectComment = await _projectsCommentDataProvider.Add(item);
             var resDto = _mapper.Map<ProjectCommentDto>(projectComment);
 
@@ -140,6 +141,7 @@ namespace Vetheria.Vtedy.ApiService.Controllers
 
             var item = _mapper.Map<ProjectComment>(comment);
             item.UserAccountId = userId;
+            item.ProjectId = id;
             var projectComment = await _projectsCommentDataProvider.Update(item);
             var resDto = _mapper.Map<ProjectCommentDto>(projectComment);
 

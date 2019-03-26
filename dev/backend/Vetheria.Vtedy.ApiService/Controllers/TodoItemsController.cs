@@ -15,11 +15,13 @@ namespace Vetheria.Vtedy.ApiService.Controllers
     public class TodoItemsController : ControllerBase
     {
         private ITodoItemDataProvider _dataProvider;
+        private ITodoItemsCommentDataProvider _todoItemsCommentDataProvider;
         private IMapper _mapper;
 
-        public TodoItemsController(ITodoItemDataProvider dataProvider, IMapper mapper)
+        public TodoItemsController(ITodoItemDataProvider dataProvider, ITodoItemsCommentDataProvider todoItemsCommentDataProvider, IMapper mapper)
         {
             _dataProvider = dataProvider;
+            _todoItemsCommentDataProvider = todoItemsCommentDataProvider;
             _mapper = mapper;
         }
 
@@ -92,6 +94,62 @@ namespace Vetheria.Vtedy.ApiService.Controllers
             var addedItem = await _dataProvider.Delete(todoItemId, userAccountId);
 
             return new NoContentResult();
+        }
+
+
+
+        // comments
+
+
+
+        // GET: api/Projects
+        [HttpGet("{id}/comments")]
+        public async Task<IActionResult> Get(string id)
+        {
+            var projectComments = await _todoItemsCommentDataProvider.Get(id);
+
+            var res = _mapper.Map<List<TodoItemCommentDto>>(projectComments);
+
+            var resObj = new ObjectResult(res);
+            return resObj;
+        }
+
+
+        // GET: api/Projects
+        [HttpPost("{id}/comments")]
+        public async Task<IActionResult> AddComment(string id, [FromBody] TodoItemCommentRequestDto comment)
+        {
+            // TODO get user id from token
+            var userId = 1;
+
+            var item = _mapper.Map<TodoItemComment>(comment);
+            item.UserAccountId = userId;
+            item.TodoitemId = Guid.Parse(id);
+            var projectComment = await _todoItemsCommentDataProvider.Add(item);
+            var resDto = _mapper.Map<TodoItemCommentDto>(projectComment);
+
+            var resObj = new ObjectResult(resDto);
+            return resObj;
+        }
+
+
+        // GET: api/Projects
+        [HttpPut("{id}/comments")]
+        public async Task<IActionResult> PutComment(string id, [FromBody] TodoItemCommentRequestDto comment)
+        {
+            // TODO get user id from token            
+            var userId = 1;
+
+            // TODO: Validation - check if request.userAccountId match comment.userAccountId
+
+            var item = _mapper.Map<TodoItemComment>(comment);
+            item.UserAccountId = userId;
+            item.TodoitemId = Guid.Parse(id);
+            var projectComment = await _todoItemsCommentDataProvider.Update(item);
+            var resDto = _mapper.Map<TodoItemCommentDto>(projectComment);
+
+            var resObj = new ObjectResult(resDto);
+            return resObj;
         }
     }
 }

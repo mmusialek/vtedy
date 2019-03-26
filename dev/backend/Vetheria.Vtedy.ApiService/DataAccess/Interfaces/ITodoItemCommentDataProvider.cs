@@ -8,7 +8,7 @@ namespace Vetheria.Vtedy.ApiService.DataAccess.DataProviders
 {
     public interface ITodoItemsCommentDataProvider
     {
-        Task<IEnumerable<TodoItemComment>> Get(int todoItemId);
+        Task<IEnumerable<TodoItemComment>> Get(string todoItemId);
         Task<TodoItemComment> Add(TodoItemComment comment);
         Task<TodoItemComment> Update(TodoItemComment comment);
     }

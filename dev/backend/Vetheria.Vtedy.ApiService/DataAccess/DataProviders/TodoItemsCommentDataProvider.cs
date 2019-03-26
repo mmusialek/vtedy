@@ -17,7 +17,7 @@ namespace Vetheria.Vtedy.ApiService.DataAccess.DataProviders
             _connectionFactory = connectionFactory;
         }
 
-        public async Task<IEnumerable<TodoItemComment>> Get(int todoItemId)
+        public async Task<IEnumerable<TodoItemComment>> Get(string todoItemId)
         {
             using (var sqlConnection = _connectionFactory.OpenSqlConnection())
             {
@@ -41,7 +41,7 @@ namespace Vetheria.Vtedy.ApiService.DataAccess.DataProviders
                     {
                         @userAccountId = item.UserAccountId,
                         @content = item.Content,
-                        @projectId = item.TodoitemId
+                        @todoItemId = item.TodoitemId
                     },
                     commandType: CommandType.StoredProcedure);
             }

@@ -23,8 +23,9 @@ namespace Vetheria.Vtedy.ApiService.Converters
                 .ForMember(p => p.ProjectId, o => o.ResolveUsing<TodoItemToModelResolver>());
 
             CreateMap<ProjectCommentRequestDto, ProjectComment>();
+            CreateMap<TodoItemCommentRequestDto, TodoItemComment>();
             CreateMap<ProjectCommentDto, ProjectComment>().ForAllMembers(p => p.AllowNull());
-            CreateMap<TodoitemCommentDto, TodoItemComment>().ForAllMembers(p => p.AllowNull());
+            CreateMap<TodoItemCommentDto, TodoItemComment>().ForAllMembers(p => p.AllowNull());
             CreateMap<CommentFilterDto, CommentFilter>();
         }
     }

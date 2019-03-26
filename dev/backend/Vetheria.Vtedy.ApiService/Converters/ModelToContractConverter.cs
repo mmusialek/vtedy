@@ -22,7 +22,7 @@ namespace Vetheria.Vtedy.ApiService.Converters
             CreateMap<TodoItem, TodoItemDto>().ForMember(p => p.Project, o => o.ResolveUsing<TodoItemToContractResolver>());
 
             CreateMap<ProjectComment, ProjectCommentDto>().IgnoreAllPropertiesWithAnInaccessibleSetter().IgnoreAllSourcePropertiesWithAnInaccessibleSetter();
-            CreateMap<TodoItemComment, TodoitemCommentDto>();
+            CreateMap<TodoItemComment, TodoItemCommentDto>();
             CreateMap<CommentFilter, CommentFilterDto>();
         }
     }

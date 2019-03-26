@@ -21,7 +21,7 @@ namespace Vetheria.Vtedy.ApiService.Dto
     }
 
 
-    public class TodoitemCommentDto : CommentDto
+    public class TodoItemCommentDto : CommentDto
     {
         public string TodoitemId { get; set; }
     }
