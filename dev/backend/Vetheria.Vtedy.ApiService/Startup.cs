@@ -69,7 +69,9 @@ namespace Vetheria.Vtedy.ApiService
             services.AddTransient<IProjectDataProvider, ProjectDataProvider>();
             services.AddTransient<IUserAccountDataProvider, UserAccountDataProvider>();
             services.AddTransient<ITodoItemDataProvider, TodoItemDataProvider>();
-            services.AddTransient<ICommentDataProvider, CommentDataProvider>();
+            services.AddTransient<ITodoItemsCommentDataProvider, TodoItemsCommentDataProvider>();
+            services.AddTransient<IProjectsCommentDataProvider, ProjectsCommentDataProvider>();
+            services.AddTransient<ITodoItemsCommentDataProvider, TodoItemsCommentDataProvider>();
 
             // identityserver
             services.AddTransient<IResourceOwnerPasswordValidator, ResourceOwnerPasswordValidator>();

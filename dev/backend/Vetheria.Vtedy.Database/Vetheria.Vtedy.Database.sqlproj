@@ -87,6 +87,12 @@
     <Build Include="StoredProcedures\UserAccounts\dbo.UserAccounts_get.sql" />
     <Build Include="StoredProcedures\UserAccounts\dbo.UserAccounts_get_by_id.sql" />
     <Build Include="StoredProcedures\UserAccounts\dbo.UserAccounts_get_by_usename.sql" />
+    <Build Include="StoredProcedures\Projects\dbo.ProjectsComment_get.sql" />
+    <Build Include="StoredProcedures\Projects\dbo.ProjectsComment_add.sql" />
+    <Build Include="StoredProcedures\Projects\dbo.ProjectsComment_update.sql" />
+    <Build Include="StoredProcedures\TodoItems\dbo.TodoItemsComment_add.sql" />
+    <Build Include="StoredProcedures\TodoItems\dbo.TodoItemsComment_get.sql" />
+    <Build Include="StoredProcedures\TodoItems\dbo.TodoItemsComment_update.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Vetheria.Vtedy.Database.refactorlog" />

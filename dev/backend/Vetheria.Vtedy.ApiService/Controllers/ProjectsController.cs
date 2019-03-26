@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Vetheria.Vtedy.ApiService.DataAccess.DataProviders;
 using Vetheria.Vtedy.ApiService.DataAccess.Queries;
 using Vetheria.Vtedy.ApiService.Dto;
 using Vetheria.Vtedy.ApiService.Models;
@@ -18,11 +19,13 @@ namespace Vetheria.Vtedy.ApiService.Controllers
     public class ProjectsController : ControllerBase
     {
         private IProjectDataProvider _dataProvider;
+        private IProjectsCommentDataProvider _projectsCommentDataProvider;
         private IMapper _mapper;
 
-        public ProjectsController(IProjectDataProvider dataProvider, IMapper mapper)
+        public ProjectsController(IProjectDataProvider dataProvider, IProjectsCommentDataProvider projectsCommentDataProvider, IMapper mapper)
         {
             _dataProvider = dataProvider;
+            _projectsCommentDataProvider = projectsCommentDataProvider;
             _mapper = mapper;
         }
 
@@ -90,5 +93,60 @@ namespace Vetheria.Vtedy.ApiService.Controllers
         {
             return null;
         }
+
+
+        // comments
+
+
+
+        // GET: api/Projects
+        [HttpGet("{id}/comments")]
+        public async Task<IActionResult> Get(int id)
+        {
+            var projectComments = await _projectsCommentDataProvider.Get(id);
+
+            var res = _mapper.Map<List<ProjectCommentDto>>(projectComments);
+
+            var resObj = new ObjectResult(res);
+            return resObj;
+        }
+
+
+        // GET: api/Projects
+        [HttpPost("{id}/comments")]
+        public async Task<IActionResult> AddComment(int id, [FromBody] ProjectCommentRequestDto comment)
+        {
+            // TODO get user id from token
+            var userId = 1;
+
+            var item = _mapper.Map<ProjectComment>(comment);
+            item.UserAccountId = userId;
+            var projectComment = await _projectsCommentDataProvider.Add(item);
+            var resDto = _mapper.Map<ProjectCommentDto>(projectComment);
+
+            var resObj = new ObjectResult(resDto);
+            return resObj;
+        }
+
+
+        // GET: api/Projects
+        [HttpPut("{id}/comments")]
+        public async Task<IActionResult> PutComment(int id, [FromBody] ProjectCommentRequestDto comment)
+        {
+            // TODO get user id from token            
+            var userId = 1;
+
+            // TODO: Validation - check if request.userAccountId match comment.userAccountId
+
+            var item = _mapper.Map<ProjectComment>(comment);
+            item.UserAccountId = userId;
+            var projectComment = await _projectsCommentDataProvider.Update(item);
+            var resDto = _mapper.Map<ProjectCommentDto>(projectComment);
+
+            var resObj = new ObjectResult(resDto);
+            return resObj;
+        }
+
+
     }
 }

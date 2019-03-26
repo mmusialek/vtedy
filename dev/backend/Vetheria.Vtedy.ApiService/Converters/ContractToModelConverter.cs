@@ -12,9 +12,8 @@ namespace Vetheria.Vtedy.ApiService.Converters
     {
         public ContractToModelConverter()
         {
-            CreateMap<Guid?, string>().ConvertUsing(g => g?.ToString());
-            CreateMap<Guid, string>().ConvertUsing(g => g.ToString());
-
+            //CreateMap<string, Guid>().ConvertUsing(Guid.Parse);
+            CreateMap<string, Guid?>().ConvertUsing(s => string.IsNullOrWhiteSpace(s) ? (Guid?)null : Guid.Parse(s));
 
             CreateMap<TagDto, Tag>();
             CreateMap<ProjectDto, Project>();
@@ -23,7 +22,9 @@ namespace Vetheria.Vtedy.ApiService.Converters
             CreateMap<TodoItemDto, TodoItem>()
                 .ForMember(p => p.ProjectId, o => o.ResolveUsing<TodoItemToModelResolver>());
 
-            CreateMap<CommentDto, Comment>();
+            CreateMap<ProjectCommentRequestDto, ProjectComment>();
+            CreateMap<ProjectCommentDto, ProjectComment>().ForAllMembers(p => p.AllowNull());
+            CreateMap<TodoitemCommentDto, TodoItemComment>().ForAllMembers(p => p.AllowNull());
             CreateMap<CommentFilterDto, CommentFilter>();
         }
     }
