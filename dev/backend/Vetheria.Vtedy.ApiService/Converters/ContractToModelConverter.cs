@@ -20,7 +20,7 @@ namespace Vetheria.Vtedy.ApiService.Converters
             CreateMap<ToDoItemFilterDto, ToDoItemFilter>();
 
             CreateMap<TodoItemDto, TodoItem>()
-                .ForMember(p => p.ProjectId, o => o.ResolveUsing<TodoItemToModelResolver>());
+                .ForMember(p => p.ProjectId, o => o.MapFrom<TodoItemToModelResolver>());
 
             CreateMap<ProjectCommentRequestDto, ProjectComment>();
             CreateMap<TodoItemCommentRequestDto, TodoItemComment>();

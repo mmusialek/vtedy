@@ -12,14 +12,14 @@ namespace Vetheria.Vtedy.ApiService.Converters
     {
         public ModelToContractConverter()
         {
-            CreateMap<Guid?, string>().ConvertUsing(g => g?.ToString());
+            CreateMap<Guid?, string>().ConvertUsing(g => g.ToString());
             CreateMap<Guid, string>().ConvertUsing(g => g.ToString());
 
             CreateMap<Tag, TagDto>();
             CreateMap<Project, ProjectDto>();
             CreateMap<ToDoItemFilter, ToDoItemFilterDto>();
 
-            CreateMap<TodoItem, TodoItemDto>().ForMember(p => p.Project, o => o.ResolveUsing<TodoItemToContractResolver>());
+            CreateMap<TodoItem, TodoItemDto>().ForMember(p => p.Project, o => o.MapFrom<TodoItemToContractResolver>());
 
             CreateMap<ProjectComment, ProjectCommentDto>().IgnoreAllPropertiesWithAnInaccessibleSetter().IgnoreAllSourcePropertiesWithAnInaccessibleSetter();
             CreateMap<TodoItemComment, TodoItemCommentDto>();
