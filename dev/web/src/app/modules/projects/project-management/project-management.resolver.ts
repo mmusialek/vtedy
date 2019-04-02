@@ -10,7 +10,6 @@ import { catchError } from 'rxjs/operators';
 })
 export class ProjectManagementResolver implements Resolve<ProjectDto> {
   constructor(
-    private _route: ActivatedRoute,
     private _projectApiService: ProjectsApiService
   ) {}
 
@@ -18,7 +17,7 @@ export class ProjectManagementResolver implements Resolve<ProjectDto> {
     route: import('@angular/router').ActivatedRouteSnapshot,
     state: import('@angular/router').RouterStateSnapshot
   ): ProjectDto | Observable<ProjectDto> | Promise<ProjectDto> {
-    const id = this._route.snapshot.params['id'] as number;
+    const id = route.params['id'] as number;
 
     return this._projectApiService.getProject(id).pipe(
       catchError(err => {

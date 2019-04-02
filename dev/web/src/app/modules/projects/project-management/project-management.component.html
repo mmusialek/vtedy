@@ -17,7 +17,9 @@
 
       <div class="vth-shared-layout__container__row">
         <mat-form-field class="example-full-width vth-item-list__container__body__header__new-item__input" floatLabel="never">
-          <input matInput name="releaseAt" type="date" placeholder="Release date*" [(ngModel)]="viewModel.project.releaseAt" required>
+          <input name="releaseAt" matInput [matDatepicker]="picker" placeholder="Release date" [(ngModel)]="viewModel.project.releaseAt" required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
       </div>
 

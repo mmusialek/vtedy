@@ -49,7 +49,7 @@ namespace Vetheria.Vtedy.ApiService.Controllers
             // TODO get user id from token
             var userId = 1;
             var projects = await _dataProvider.GetByProjectIdAsync(userId, projectId);
-            var res = _mapper.Map<List<ProjectDto>>(projects);
+            var res = _mapper.Map<ProjectDto>(projects);
 
             var resObj = new ObjectResult(res);
             return resObj;

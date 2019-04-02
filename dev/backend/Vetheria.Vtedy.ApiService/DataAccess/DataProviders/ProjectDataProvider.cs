@@ -32,11 +32,11 @@ namespace Vetheria.Vtedy.ApiService.DataAccess.Queries
             }
         }
 
-        public async Task<IEnumerable<Project>> GetByProjectIdAsync(int userId, int projectId)
+        public async Task<Project> GetByProjectIdAsync(int userId, int projectId)
         {
             using (var sqlConnection = _connectionFactory.OpenSqlConnection())
             {
-                return await sqlConnection.QueryAsync<Project>(
+                return await sqlConnection.QuerySingleAsync<Project>(
                     "[dbo].[Project_get_by_id]",
                     param: new
                     {

@@ -11,14 +11,14 @@ import { ProjectDto } from '../../../shared/dto/project.dto';
 export class ProjectManagementService {
   constructor(private _projectApiService: ProjectsApiService) {}
 
-  getProjets(): Observable<ProjectViewModel[]> {
+  getProjects(): Observable<ProjectViewModel[]> {
     return this._projectApiService
       .getProjects()
-      .pipe(map(item => ProjectViewModel.newInstance(item)));
+      .pipe(map(item => item.map(p => ProjectViewModel.newInstance(p))));
   }
 
   update(project: ProjectViewModel): Observable<ProjectViewModel> {
-    const projectDto = new ProjectDto();
+    const projectDto = ProjectDto.new(project);
 
     return this._projectApiService
       .update(projectDto)
@@ -26,7 +26,7 @@ export class ProjectManagementService {
   }
 
   add(project: ProjectViewModel): Observable<ProjectViewModel> {
-    const projectDto = new ProjectDto();
+    const projectDto = ProjectDto.new(project);
 
     return this._projectApiService
       .add(projectDto)

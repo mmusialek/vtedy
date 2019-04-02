@@ -11,7 +11,7 @@ export class GenericListItemViewModel {
     this.name = param.name;
   }
 
-  static new(param: { id?: string, name?: string }) {
-    return Object.create(param);
+  static new(param: any) {
+    return Object.assign(new GenericListItemViewModel(), param);
   }
 }

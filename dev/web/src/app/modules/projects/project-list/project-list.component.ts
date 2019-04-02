@@ -24,7 +24,8 @@ export class ProjectListComponent implements OnInit {
     this._isAlive = true;
 
     this.viewModel.genericListConfig = {
-      addNewVisibilityHandler: this.addNewVisibilityHandler.bind(this)
+      addNewVisibilityHandler: this.addNewVisibilityHandler.bind(this),
+      itemClickHandler: this.showProjectDetails.bind(this)
     };
 
     this._projectListService
@@ -45,10 +46,7 @@ export class ProjectListComponent implements OnInit {
 
           this.viewModel.projectsToList = this.viewModel.projects.map(item => {
             {
-              return GenericListItemViewModel.new({
-                id: item.id.toString(10),
-                name: item.name
-              });
+              return GenericListItemViewModel.new(item);
             }
           });
         },
@@ -61,6 +59,10 @@ export class ProjectListComponent implements OnInit {
 
   addNewVisibilityHandler() {
     this._router.navigate(['../create'], { relativeTo: this._route });
+  }
+
+  showProjectDetails(event: MouseEvent, item: GenericListItemViewModel) {
+    this._router.navigate(['../edit', item.id], { relativeTo: this._route });
   }
 
   onAddProjectClick() {
