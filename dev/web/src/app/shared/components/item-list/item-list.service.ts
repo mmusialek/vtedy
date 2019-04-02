@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
-import { VtedyClientService } from '../../client-services/vtedy.client-service';
+
 import { TodoItemDto } from '../../dto/todo-item.dto';
 import { ItemListFilter } from '../../models/item-list-filter';
 import { ItemListItemViewModel } from './item-list.view-model';
+import { TodoItemsApiService } from '../../client-services/todo-items-api.service';
 
 @Injectable()
 export class ItemListService {
-  constructor(private _vtedyService: VtedyClientService) {}
+  constructor(private _todoItemsApiServie: TodoItemsApiService) {}
 
   addItem(item: ItemListItemViewModel): Observable<ItemListItemViewModel> {
     return new Observable(obs => {
@@ -18,8 +19,8 @@ export class ItemListService {
       todoItem.name = item.name;
       let isAlive = true;
 
-      this._vtedyService
-        .addItem(todoItem)
+      this._todoItemsApiServie
+        .add(todoItem)
         .pipe(takeWhile(() => isAlive))
         .subscribe(
           (p: TodoItemDto) => {
@@ -44,13 +45,11 @@ export class ItemListService {
       const res: ItemListItemViewModel[] = [];
       let isAlive = true;
 
-      this._vtedyService
-        .getItems(filter)
+      this._todoItemsApiServie
+        .get(filter)
         .pipe(takeWhile(() => isAlive))
         .subscribe(
           (p: TodoItemDto[]) => {
-            obs.complete();
-            isAlive = false;
 
             if (p) {
               for (const item of p) {

@@ -21,9 +21,6 @@ export class VtedyClientService {
       if (filter.isCurrentItem) {
         params = params.set('isCurrentItem', filter.isCurrentItem.toString());
       }
-      if (filter.isNewItem) {
-        params = params.set('isNewItem', filter.isNewItem.toString());
-      }
     }
 
     return this._httpService.get<TodoItemDto[]>(

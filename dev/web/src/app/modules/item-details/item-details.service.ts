@@ -7,7 +7,7 @@ import {
   ProjectViewModel,
   TagViewModel
 } from './item-details.view-model';
-import { VtedyClientService } from '../../shared/client-services/vtedy.client-service';
+
 import { takeWhile, catchError } from 'rxjs/operators';
 
 @Injectable()
@@ -18,7 +18,7 @@ export class ItemDetailsService {
   >();
   private _isDialogPinned = false;
 
-  constructor(private _vtedyService: VtedyClientService) {}
+  constructor() {}
 
   get isDialogVisible() {
     return this._isDialogVisible;
@@ -58,65 +58,6 @@ export class ItemDetailsService {
     let result: ItemDataViewModel;
     let isAlive = true;
 
-    return new Observable<ItemDataViewModel>(obs => {
-      this._vtedyService
-        .getItem(id)
-        .pipe(
-          catchError(err => {
-            return of([]);
-          }),
-          takeWhile(() => isAlive)
-        )
-        .subscribe(
-          (p: TodoItemDto) => {
-            result = new ItemDataViewModel();
-            result.id = p.id;
-            result.title = p.name;
-            result.project = ProjectViewModel.newInstance({
-              id: p.project.id,
-              name: p.project.name,
-              description: p.project.description,
-              owner: 'Marcin'
-            });
-            result.comments = [];
-            result.comments.push(
-              new CommentViewModel({
-                author: 'Marcin',
-                comment: 'first comment',
-                date: new Date(Date.now())
-              })
-            );
-            result.comments.push(
-              new CommentViewModel({
-                author: 'Marcin',
-                comment: 'second comment',
-                date: new Date(Date.now())
-              })
-            );
-            result.date = new Date(Date.now());
-            result.tags = [];
-
-            if (p.tags) {
-              for (const tag of p.tags) {
-                result.tags.push(
-                  new TagViewModel({
-                    id: tag.id,
-                    name: tag.name,
-                    owner: 'Marcin'
-                  })
-                );
-              }
-            }
-
-            obs.next(result);
-            obs.complete();
-
-            isAlive = false;
-          },
-          err => {
-            console.error(err);
-          }
-        );
-    });
+    return of(result);
   }
 }

@@ -1,25 +1,28 @@
-import {Component, OnInit} from '@angular/core';
-import {Observable, SubscriptionLike as ISubscription} from 'rxjs';
-import {ActivatedRoute, ActivationEnd, Router} from '@angular/router';
-import {ItemListService} from '../../shared/components/item-list/item-list.service';
-import {PagesRoues} from '../../shared/components/item-list/item-list.view-model';
-import {TaskListItemViewModel, TaskListViewModel} from './task-list.view-model';
-import {ItemListFilter} from '../../shared/models/item-list-filter';
-import {takeWhile} from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+import { Observable, SubscriptionLike as ISubscription } from 'rxjs';
+import { ActivatedRoute, ActivationEnd, Router } from '@angular/router';
+import { ItemListService } from '../../shared/components/item-list/item-list.service';
+import { PagesRoues } from '../../shared/components/item-list/item-list.view-model';
+import {
+  TaskListItemViewModel,
+  TaskListViewModel
+} from './task-list.view-model';
+import { ItemListFilter } from '../../shared/models/item-list-filter';
+import { takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'vth-task-list',
   templateUrl: './task-list.component.html'
 })
 export class TaskListComponent implements OnInit {
-
   private _isAlive: boolean;
   viewModel: TaskListViewModel;
 
-  constructor(private _route: ActivatedRoute,
-              private _router: Router,
-              private _itemListService: ItemListService) {
-  }
+  constructor(
+    private _route: ActivatedRoute,
+    private _router: Router,
+    private _itemListService: ItemListService
+  ) {}
 
   ngOnInit() {
     this.viewModel = new TaskListViewModel();
@@ -29,7 +32,6 @@ export class TaskListComponent implements OnInit {
     const page = this._route.snapshot.data.type;
     this.refreshView(page);
   }
-
 
   // helper methods
 
@@ -46,27 +48,29 @@ export class TaskListComponent implements OnInit {
       });
     };
 
+    // remove current items
+    this.viewModel.items.splice(0, this.viewModel.items.length);
+
+    // prepare filter
     switch (page) {
-
       case PagesRoues.PriorityBox:
-        filter.date = new Date(Date.UTC(currDate.getFullYear(), currDate.getUTCMonth(), currDate.getUTCDate()));
-
-        this.viewModel.items.splice(0, this.viewModel.items.length);
-
-        // TODO ad filters
         filter.isCurrentItem = true;
-        getData(this._itemListService.getItems(filter));
         break;
 
       case PagesRoues.Inbox:
-        this.viewModel.items.splice(0, this.viewModel.items.length);
-
-        // TODO ad filters
-        filter.isNewItem = true;
-        getData(this._itemListService.getItems(filter));
+        filter.isCurrentItem = false;
+        // TODO add inbox project id
         break;
     }
 
+    // get data
+    let isAlive = true;
+    this._itemListService
+      .getItems(filter)
+      .pipe(takeWhile(() => isAlive))
+      .subscribe(data => {
+        this.viewModel.items = data;
+        isAlive = false;
+      });
   }
-
 }

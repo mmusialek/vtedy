@@ -1,40 +1,57 @@
 import { Injectable } from '@angular/core';
 import { ApiServiceBase } from './api-service-base';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { TodoItemDto } from '../dto/todo-item.dto';
 import { Observable } from 'rxjs';
+import { ItemListFilter } from '../models/item-list-filter';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class TodoItemsApiService extends ApiServiceBase {
-  constructor(private _httpService: HttpClient) {
-    super();
-  }
+    constructor(private _httpService: HttpClient) {
+        super();
+    }
 
-  getProjects(): Observable<TodoItemDto[]> {
-    return this._httpService.get<TodoItemDto[]>(`${this.baseApiUrl}/TodoItems`);
-  }
+    get(filter: ItemListFilter): Observable<TodoItemDto[]> {
+        let params = new HttpParams();
 
-  getProject(id: number): Observable<TodoItemDto> {
-    return this._httpService.get<TodoItemDto>(
-      this.baseApiUrl + `/TodoItems/${id}`
-    );
-  }
+        if (filter) {
+            if (filter.isCurrentItem) {
+                params = params.set(
+                    'isCurrentItem',
+                    filter.isCurrentItem.toString()
+                );
+            }
+        }
 
-  update(item: TodoItemDto): Observable<TodoItemDto> {
-    const request = item;
-    return this._httpService.put<TodoItemDto>(
-      `${this.baseApiUrl}/TodoItems/${item.id}`,
-      request
-    );
-  }
+        return this._httpService.get<TodoItemDto[]>(
+            `${this.baseApiUrl}/TodoItems`,
+            {
+                params: params
+            }
+        );
+    }
 
-  add(item: TodoItemDto): Observable<TodoItemDto> {
-    const request = item;
-    return this._httpService.put<TodoItemDto>(
-      `${this.baseApiUrl}/TodoItems`,
-      request
-    );
-  }
+    getById(id: number): Observable<TodoItemDto> {
+        return this._httpService.get<TodoItemDto>(
+            this.baseApiUrl + `/TodoItems/${id}`
+        );
+    }
+
+    update(item: TodoItemDto): Observable<TodoItemDto> {
+        const request = item;
+        return this._httpService.put<TodoItemDto>(
+            `${this.baseApiUrl}/TodoItems/${item.id}`,
+            request
+        );
+    }
+
+    add(item: TodoItemDto): Observable<TodoItemDto> {
+        const request = item;
+        return this._httpService.put<TodoItemDto>(
+            `${this.baseApiUrl}/TodoItems`,
+            request
+        );
+    }
 }
