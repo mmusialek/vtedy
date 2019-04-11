@@ -29,8 +29,8 @@ export class TaskListComponent implements OnInit {
     this._isAlive = true;
 
     // this is called first time
-    const page = this._route.snapshot.data.type;
-    this.refreshView(page);
+    this.viewModel.pageType = this._route.snapshot.data.type;
+    this.refreshView(this.viewModel.pageType);
   }
 
   // helper methods

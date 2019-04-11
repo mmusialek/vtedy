@@ -4,5 +4,6 @@
     [Name] NVARCHAR(100) NOT NULL,
     [Description] NVARCHAR(MAX) NULL,
     [UserAccountId] INT NOT NULL,
+    [IsDefault] BIT NULL,
     CONSTRAINT [FK_UserAccountId_UserAccounts_UserAccountId] FOREIGN KEY ([UserAccountId]) REFERENCES [UserAccounts] ([UserAccountId]) ON DELETE NO ACTION
 )

@@ -17,7 +17,7 @@ export class TodoItemsApiService extends ApiServiceBase {
         let params = new HttpParams();
 
         if (filter) {
-            if (filter.isCurrentItem) {
+            if (filter.isCurrentItem !== undefined) {
                 params = params.set(
                     'isCurrentItem',
                     filter.isCurrentItem.toString()
@@ -49,7 +49,7 @@ export class TodoItemsApiService extends ApiServiceBase {
 
     add(item: TodoItemDto): Observable<TodoItemDto> {
         const request = item;
-        return this._httpService.put<TodoItemDto>(
+        return this._httpService.post<TodoItemDto>(
             `${this.baseApiUrl}/TodoItems`,
             request
         );

@@ -11,73 +11,75 @@ import { ShellComponent } from './modules/shell/shell/shell.component';
 import { TaskListComponent } from './modules/task-list/task-list.component';
 import { PagesRoues } from './shared/components/item-list/item-list.view-model';
 import { ProjectManagementResolver } from './modules/projects/project-management/project-management.resolver';
+import { DataResolver } from './shared/resolvers/data-resolver.service';
 
 const routes: Routes = [
-  {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: 'login'
-  },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: 'panel',
-    component: ShellComponent,
-    canActivate: [IsUserAuthenticatedGuard],
-    children: [
-      {
+    {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'priority-box'
-      },
-      {
-        path: 'priority-box',
-        component: TaskListComponent,
-        data: { type: PagesRoues.PriorityBox }
-      },
-      {
-        path: 'inbox',
-        component: TaskListComponent,
-        data: { type: PagesRoues.Inbox }
-      },
-      {
-        path: 'projects',
-        component: ProjectsComponent,
+        redirectTo: 'login'
+    },
+    {
+        path: 'login',
+        component: LoginComponent
+    },
+    {
+        path: 'panel',
+        component: ShellComponent,
+        canActivate: [IsUserAuthenticatedGuard],
+        resolve: { data: DataResolver },
         children: [
-          {
-            path: '',
-            pathMatch: 'full',
-            redirectTo: 'list'
-          },
-          {
-            path: 'list',
-            component: ProjectListComponent
-          },
-          {
-            path: 'create',
-            component: ProjectManagementComponent
-          },
-          {
-            path: 'edit/:id',
-            component: ProjectManagementComponent,
-            resolve: { project: ProjectManagementResolver }
-          }
+            {
+                path: '',
+                pathMatch: 'full',
+                redirectTo: 'priority-box'
+            },
+            {
+                path: 'priority-box',
+                component: TaskListComponent,
+                data: { type: PagesRoues.PriorityBox }
+            },
+            {
+                path: 'inbox',
+                component: TaskListComponent,
+                data: { type: PagesRoues.Inbox }
+            },
+            {
+                path: 'projects',
+                component: ProjectsComponent,
+                children: [
+                    {
+                        path: '',
+                        pathMatch: 'full',
+                        redirectTo: 'list'
+                    },
+                    {
+                        path: 'list',
+                        component: ProjectListComponent
+                    },
+                    {
+                        path: 'create',
+                        component: ProjectManagementComponent
+                    },
+                    {
+                        path: 'edit/:id',
+                        component: ProjectManagementComponent,
+                        resolve: { project: ProjectManagementResolver }
+                    }
+                ]
+            },
+            {
+                path: 'notes',
+                component: NotesComponent
+            },
+            {
+                path: 'calendar',
+                component: CalendarComponent
+            }
         ]
-      },
-      {
-        path: 'notes',
-        component: NotesComponent
-      },
-      {
-        path: 'calendar',
-        component: CalendarComponent
-      }
-    ]
-  }
+    }
 ];
 
 export const AppRoutingModule: ModuleWithProviders = RouterModule.forRoot(
-  routes
+    routes
 );

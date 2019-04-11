@@ -3,6 +3,6 @@
 AS
     SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 
-    SELECT p.ProjectId AS Id, p.Name, p.Description, p.UserAccountId
+    SELECT p.ProjectId AS Id, p.Name, p.Description, p.UserAccountId, p.IsDefault
     FROM dbo.Projects p
     WHERE p.UserAccountId=@userId

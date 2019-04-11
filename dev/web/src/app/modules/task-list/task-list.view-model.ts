@@ -1,14 +1,14 @@
 export class TaskListViewModel {
 
-  items: TaskListItemViewModel[] = [];
-
+    pageType: string;
+    items: TaskListItemViewModel[] = [];
 }
 
 export class TaskListItemViewModel {
-  id: string;
-  name: string;
+    id: string;
+    name: string;
 
-  constructor(param?: Partial<TaskListViewModel>) {
-    Object.assign(this, param);
-  }
+    constructor(param?: Partial<TaskListViewModel>) {
+        Object.assign(this, param);
+    }
 }

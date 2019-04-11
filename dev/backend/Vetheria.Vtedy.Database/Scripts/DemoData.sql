@@ -4,10 +4,10 @@ INSERT INTO dbo.UserAccounts(UserName, Email, Password) VALUES('test', 'test@tes
 GO
 
 -- projects
-INSERT INTO dbo.Projects(Name, UserAccountId) VALUES('Project_1', 1);
-INSERT INTO dbo.Projects(Name, UserAccountId) VALUES('Project_2', 1);
-INSERT INTO dbo.Projects(Name, UserAccountId) VALUES('Project_3', 1);
-INSERT INTO dbo.Projects(Name, UserAccountId) VALUES('Project_4', 1);
+INSERT INTO dbo.Projects(Name, UserAccountId, IsDefault) VALUES('Project_1_default', 1, 1);
+INSERT INTO dbo.Projects(Name, UserAccountId, IsDefault) VALUES('Project_2', 1, 0);
+INSERT INTO dbo.Projects(Name, UserAccountId, IsDefault) VALUES('Project_3', 1, 0);
+INSERT INTO dbo.Projects(Name, UserAccountId, IsDefault) VALUES('Project_4', 1, 0);
 
 GO
 

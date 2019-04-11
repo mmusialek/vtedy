@@ -11,10 +11,14 @@ export class ItemListViewModel {
 export class ItemListItemViewModel {
   id: string;
   name: string;
+  isCurrent: boolean;
+  projectId: number;
 
-  constructor(param: { id?: string, name?: string } = {}) {
+  constructor(param: { id?: string, name?: string, isCurrent?: boolean, projectId?: number } = {}) {
     this.id = param.id;
     this.name = param.name;
+    this.isCurrent = param.isCurrent;
+    this.projectId = param.projectId;
   }
 }
 
