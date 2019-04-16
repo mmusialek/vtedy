@@ -42,7 +42,7 @@ export class ItemDetailsComponent implements OnInit, OnDestroy {
 
   onCloseHandler() {
     this._itemDetailsService.hideItemDetails();
-    this.closeEvent.emit(true);
+    this.closeEvent.emit(false);
   }
 
   onPinHandler() {

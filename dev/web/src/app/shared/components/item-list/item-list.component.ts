@@ -31,7 +31,8 @@ export class ItemListComponent implements OnInit, OnDestroy {
             addNewOutsideHandler: this.onClickOutsideInput.bind(this),
             addNewVisibilityHandler: this.toggleAddNewItemVisibility.bind(this),
             itemClickHandler: this.onListItemClickHandler.bind(this),
-            clickItemDetailsOutsideInputHandler: this.onClickItemDetailsOutsideInput.bind(this)
+            clickItemDetailsOutsideInputHandler: this.onClickItemDetailsOutsideInput.bind(this),
+            isItemDetailAvailable: true
         };
     }
 
@@ -60,6 +61,8 @@ export class ItemListComponent implements OnInit, OnDestroy {
 
     onListItemClickHandler(event, item) {
         const id = item.id;
+
+        // TODO pass object data which will be displayed
         this._itemDetailsService.showItemDetails(id);
     }
 
@@ -116,54 +119,6 @@ export class ItemListComponent implements OnInit, OnDestroy {
             this._itemDetailsService.hideItemDetails();
         }
     }
-
-    // helper methods
-
-    // private refreshView(page: string) {
-    //   const filter = new ItemListFilter();
-    //   const currDate = new Date(Date.now());
-    //
-    //   const getData = (data: Observable<ItemListItemViewModel[]>) => {
-    //     const subscription = data.subscribe(p => {
-    //       this.viewModel.items = p;
-    //       if (subscription) {
-    //         subscription.unsubscribe();
-    //       }
-    //     });
-    //   };
-    //
-    //   switch (page) {
-    //
-    //     default:
-    //     case PagesRoues.PriorityBox:
-    //       filter.date = new Date(Date.UTC(currDate.getFullYear(), currDate.getUTCMonth(), currDate.getUTCDate()));
-    //
-    //       this.viewModel.items.splice(0, this.viewModel.items.length);
-    //
-    //       // TODO ad filters
-    //       getData(this._itemListService.getItems());
-    //       break;
-    //
-    //     case PagesRoues.Inbox:
-    //       this.viewModel.items.splice(0, this.viewModel.items.length);
-    //
-    //       // TODO ad filters
-    //       getData(this._itemListService.getItems());
-    //       break;
-    //
-    //     case PagesRoues.Projects:
-    //       this.viewModel.items.splice(0, this.viewModel.items.length);
-    //
-    //       // TODO ad filters
-    //       getData(this._itemListService.getItems());
-    //       break;
-    //
-    //     case PagesRoues.Calendar:
-    //       this.viewModel.items.splice(0, this.viewModel.items.length);
-    //       break;
-    //   }
-    //
-    // }
 
 }
 
