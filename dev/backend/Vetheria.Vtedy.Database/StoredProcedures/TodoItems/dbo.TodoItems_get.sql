@@ -2,7 +2,8 @@
     @userAccountId INT,
     @projectId INT NULL,
     @isCurrent BIT,
-    @statusId INT
+    @statusId INT,
+    @todoItemId UNIQUEIDENTIFIER
 AS
     SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 
@@ -14,4 +15,5 @@ AS
         AND (p.ProjectId = @projectId OR @projectId IS NULL) 
         AND (ti.IsCurrent = @isCurrent OR @isCurrent IS NULL)
         AND (ti.StatusId = @statusId OR @statusId IS NULL)
+        AND (ti.TodoItemId = @todoItemId OR @todoItemId IS NULL)
 

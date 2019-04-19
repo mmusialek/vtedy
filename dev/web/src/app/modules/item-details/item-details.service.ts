@@ -36,14 +36,9 @@ export class ItemDetailsService {
         this._isDialogPinned = !this._isDialogPinned;
     }
 
-    showItemDetails(id: string) {
+    showItemDetails() {
         if (!this._isDialogPinned) {
-            let isAlive = true;
             this._isDialogVisible.next(true);
-            this.getItemDetails(id).pipe(takeWhile(_ => isAlive)).subscribe(p => {
-                this._newDataStream.next(p);
-                isAlive = false;
-            });
         }
     }
 

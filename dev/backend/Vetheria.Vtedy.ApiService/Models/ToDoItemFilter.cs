@@ -11,5 +11,6 @@ namespace Vetheria.Vtedy.ApiService.Models
         public int? ProjectId { get; set; }
         public bool? IsCurrentItem { get; set; }
         public int StatusId { get; set; }
+        public string TodoItemId { get; set; }
     }
 }

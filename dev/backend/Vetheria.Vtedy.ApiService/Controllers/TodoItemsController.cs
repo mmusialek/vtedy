@@ -47,7 +47,17 @@ namespace Vetheria.Vtedy.ApiService.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {
-            var resObj = new ObjectResult(null);
+            // TODO get user id from token
+            var userId = 1;
+
+            var filter = new ToDoItemFilter();
+            filter.UserAccountId = userId;
+            filter.TodoItemId = id;
+
+            var todos = await _dataProvider.Get(filter);
+            var res = _mapper.Map<TodoItemDto>(todos.FirstOrDefault());
+
+            var resObj = new ObjectResult(res);
             return resObj;
         }
 

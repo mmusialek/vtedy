@@ -1,10 +1,11 @@
+import { ItemDataViewModel } from './../../../modules/item-details/item-details.view-model';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { takeWhile } from 'rxjs/operators';
+import { takeWhile, map } from 'rxjs/operators';
 
 import { TodoItemDto } from '../../dto/todo-item.dto';
 import { ItemListFilter } from '../../models/item-list-filter';
-import { ItemListItemViewModel } from './item-list.view-model';
+import { ItemListItemViewModel, TodoItemViewModel } from './item-list.view-model';
 import { TodoItemsApiService } from '../../client-services/todo-items-api.service';
 import { ProjectDto } from '../../dto/project.dto';
 
@@ -74,5 +75,29 @@ export class ItemListService {
                     }
                 );
         });
+    }
+
+
+    getItemDetails(itemId: string) {
+        let isAlive = true;
+        return this._todoItemsApiServie.getById(itemId).pipe(
+            takeWhile(_ => isAlive),
+            map(item => {
+                const res = this.toItemDataViewModel(item);
+                isAlive = false;
+                return res;
+            }));
+    }
+
+    private toItemDataViewModel(dto: TodoItemDto) {
+        const res = new ItemDataViewModel();
+
+        if (dto) {
+            res.id = dto.id;
+            res.name = dto.name;
+            res.isCurrent = dto.isCurrent;
+        }
+
+        return res;
     }
 }

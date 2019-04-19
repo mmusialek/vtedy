@@ -33,7 +33,7 @@ export class TodoItemsApiService extends ApiServiceBase {
         );
     }
 
-    getById(id: number): Observable<TodoItemDto> {
+    getById(id: string): Observable<TodoItemDto> {
         return this._httpService.get<TodoItemDto>(
             this.baseApiUrl + `/TodoItems/${id}`
         );

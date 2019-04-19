@@ -28,7 +28,8 @@ namespace Vetheria.Vtedy.ApiService.DataAccess.DataProviders
                         @userAccountId = filter.UserAccountId,
                         @projectId = filter.ProjectId,
                         @isCurrent = filter.IsCurrentItem,
-                        @statusId = filter.StatusId
+                        @statusId = filter.StatusId,
+                        @todoItemId = filter.TodoItemId
                     },
                     commandType: CommandType.StoredProcedure);
             }

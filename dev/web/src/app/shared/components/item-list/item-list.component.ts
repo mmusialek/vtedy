@@ -5,6 +5,7 @@ import { ItemDetailsService } from '../../../modules/item-details/item-details.s
 import { ItemListService } from './item-list.service';
 import { ItemListItemViewModel, ItemListViewModel, PagesRoues } from './item-list.view-model';
 import { ProjectsService } from '../../services/projects.service';
+import { takeWhile } from 'rxjs/operators';
 
 @Component({
     selector: 'vth-item-list',
@@ -17,7 +18,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
     @Input() items: ItemListItemViewModel[];
     @Input() pageType: string;
 
-    private _routeSubs: ISubscription;
+    private _isAlive = true;
 
     constructor(private _route: ActivatedRoute,
         private _router: Router,
@@ -37,9 +38,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        if (this._routeSubs) {
-            this._routeSubs.unsubscribe();
-        }
+        this._isAlive = false;
     }
 
     onClickOutsideInput(event) {
@@ -60,10 +59,10 @@ export class ItemListComponent implements OnInit, OnDestroy {
     }
 
     onListItemClickHandler(event, item) {
-        const id = item.id;
-
-        // TODO pass object data which will be displayed
-        this._itemDetailsService.showItemDetails(id);
+        this._itemListService.getItemDetails(item.id).pipe(takeWhile(_ => this._isAlive)).subscribe(data => {
+            this.viewModel.itemDetails = data;
+            this._itemDetailsService.showItemDetails();
+        });
     }
 
     onCloseDetailsHandler(event) {
