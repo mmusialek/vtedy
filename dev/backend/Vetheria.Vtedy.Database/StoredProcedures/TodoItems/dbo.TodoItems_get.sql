@@ -17,3 +17,10 @@ AS
         AND (ti.StatusId = @statusId OR @statusId IS NULL)
         AND (ti.TodoItemId = @todoItemId OR @todoItemId IS NULL)
 
+
+
+    SELECT * 
+    FROM dbo.TodoItemTags tit INNER JOIN dbo.TodoItems ti ON tit.TodoItemId=ti.TodoItemId
+    WHERE ti.TodoItemId=@todoItemId
+
+

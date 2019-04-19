@@ -50,12 +50,8 @@ namespace Vetheria.Vtedy.ApiService.Controllers
             // TODO get user id from token
             var userId = 1;
 
-            var filter = new ToDoItemFilter();
-            filter.UserAccountId = userId;
-            filter.TodoItemId = id;
-
-            var todos = await _dataProvider.Get(filter);
-            var res = _mapper.Map<TodoItemDto>(todos.FirstOrDefault());
+            var todos = await _dataProvider.GetById(id, userId);
+            var res = _mapper.Map<TodoItemDto>(todos);
 
             var resObj = new ObjectResult(res);
             return resObj;

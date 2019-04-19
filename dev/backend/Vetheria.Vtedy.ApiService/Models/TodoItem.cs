@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Vetheria.Vtedy.ApiService.Models
 {
@@ -9,5 +10,8 @@ namespace Vetheria.Vtedy.ApiService.Models
         public bool IsCurrent { get; set; }
         public int ProjectId { get; set; }
         public int StatusId { get; set; }
+
+        public Project Project { get; set; }
+        public IEnumerable<Tag> Tags { get; set; }
     }
 }

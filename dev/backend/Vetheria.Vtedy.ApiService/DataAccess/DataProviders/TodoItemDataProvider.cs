@@ -35,6 +35,32 @@ namespace Vetheria.Vtedy.ApiService.DataAccess.DataProviders
             }
         }
 
+        public async Task<TodoItem> GetById(string todoItemId, int userAccountId)
+        {
+            using (var sqlConnection = _connectionFactory.OpenSqlConnection())
+            {
+                var reader = await sqlConnection.QueryMultipleAsync(
+                    "[dbo].[TodoItems_GetById]",
+                    param: new
+                    {
+                        @userAccountId = userAccountId,
+                        @todoItemId = todoItemId
+                    },
+                    commandType: CommandType.StoredProcedure);
+
+                var res = reader.Read<TodoItem, Project, TodoItem>((todoItem, project) =>
+                {
+                    todoItem.Project = project;
+                    return todoItem;
+                },
+                splitOn: "ProjectId").Single();
+
+                res.Tags = reader.Read<Tag>();
+
+                return res;
+            }
+        }
+
         public async Task<TodoItem> Add(TodoItem todoItem, int userAccountId)
         {
             using (var sqlConnection = _connectionFactory.OpenSqlConnection())
