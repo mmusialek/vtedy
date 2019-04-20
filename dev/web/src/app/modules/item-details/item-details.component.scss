@@ -1,57 +1,67 @@
 .vth-item-details__container {
-  height: 100%;
-  .vth-item-details__container__body {
-    display: flex;
-    flex-direction: column;
-    .vth-item-details__container__body__header {
-      //background-color: green;
-      padding: 5px;
-      .vth-item-details__container__body__header__close {
-        cursor: pointer;
-      }
-      .vth-item-details__container__body__header__pin {
-        cursor: pointer;
-        margin-left: 5px;
-      }
-    }
+    height: 100%;
 
-    .vth-item-details__container__body__content {
-      //background-color: greenyellow;
-      padding: 5px;
+    .vth-item-details__container__body {
+        display: flex;
+        flex-direction: column;
 
-      .vth-item-details__container__body__content__item-details {
-        .vth-item-details__container__body__content__item-details__header {
-          .vth-item-details__container__body__content__item-details__header__name {
+        .vth-item-details__container__body__header {
+            //background-color: green;
+            padding: 5px;
 
-          }
-          .vth-item-details__container__body__content__item-details__header__date {
-
-          }
-          .vth-item-details__container__body__content__item-details__header__tags {
-
-          }
-        }
-        .vth-item-details__container__body__content__item-details__comments {
-          .vth-item-details__container__body__content__item-details__comments__input-form {
-
-          }
-          .vth-item-details__container__body__content__item-details__comments__comment-entries {
-            .vth-item-details__container__body__content__item-details__comments__comment-entries__entry {
-              padding-bottom: 15px;
-              .vth-item-details__container__body__content__item-details__comments__comment-entries__entry__header{
-
-              }
-              .vth-item-details__container__body__content__item-details__comments__comment-entries__entry__actions{
-
-              }
-              .vth-item-details__container__body__content__item-details__comments__comment-entries__entry__body{
-
-              }
+            .vth-item-details__container__body__header__close {
+                cursor: pointer;
             }
 
-          }
+            .vth-item-details__container__body__header__pin {
+                cursor: pointer;
+                margin-left: 5px;
+            }
         }
-      }
+
+        .vth-item-details__container__body__content {
+            //background-color: greenyellow;
+            padding: 5px;
+
+            .vth-item-details__container__body__content__item-details {
+                .vth-item-details__container__body__content__item-details__title {
+                    font-size: 1.2em;
+                    font-weight: bold;
+                    padding-bottom: 5px;
+                }
+
+                .vth-item-details__container__body__content__item-details__header {
+
+                    .vth-item-details__container__body__content__item-details__header__name {
+                        font-size: 1.1em;
+                        padding-bottom: 5px;
+                    }
+
+                    .vth-item-details__container__body__content__item-details__header__date {
+                        font-size: 1.0em;
+                        padding-bottom: 5px;
+                    }
+
+                    .vth-item-details__container__body__content__item-details__header__tags {}
+                }
+
+                .vth-item-details__container__body__content__item-details__comments {
+                    .vth-item-details__container__body__content__item-details__comments__input-form {}
+
+                    .vth-item-details__container__body__content__item-details__comments__comment-entries {
+                        .vth-item-details__container__body__content__item-details__comments__comment-entries__entry {
+                            padding-bottom: 15px;
+
+                            .vth-item-details__container__body__content__item-details__comments__comment-entries__entry__header {}
+
+                            .vth-item-details__container__body__content__item-details__comments__comment-entries__entry__actions {}
+
+                            .vth-item-details__container__body__content__item-details__comments__comment-entries__entry__body {}
+                        }
+
+                    }
+                }
+            }
+        }
     }
-  }
 }

@@ -1,60 +1,65 @@
 <div class="vth-item-details__container" *ngIf="viewModel.isVisible">
-  <div class="vth-item-details__container__body">
-    <div class="vth-item-details__container__body__header">
-      <a class="vth-item-details__container__body__header__close" (click)="onCloseHandler()">X</a>
-      <a class="vth-item-details__container__body__header__pin" (click)="onPinHandler()"> {{viewModel.isDialogPinned? 'unpin' : 'pin'}} </a>
-    </div>
-    <div class="vth-item-details__container__body__content">
-      <div class="vth-item-details__container__body__content__item-details">
-        <h2>{{viewModel.item?.name}}</h2>
-        <div class="vth-item-details__container__body__content__item-details__header">
-          <div class="vth-item-details__container__body__content__item-details__header__name">
-            project: {{viewModel.item?.project?.name}}
-          </div>
-
-          <div class="vth-item-details__container__body__content__item-details__header__date">
-            planned for :{{viewModel.item?.date | date:'short'}}
-          </div>
-
-          <div class="vth-item-details__container__body__content__item-details__header__tags" *ngIf="viewModel.item">
-            <span *ngFor="let tag of viewModel.item.tags; let i = index">{{tag.name}}
-              <em *ngIf="i<viewModel.item.tags.length-1">, </em></span>
-          </div>
-
+    <div class="vth-item-details__container__body">
+        <div class="vth-item-details__container__body__header">
+            <a class="vth-item-details__container__body__header__close" (click)="onCloseHandler()">X</a>
+            <a class="vth-item-details__container__body__header__pin" (click)="onPinHandler()"> {{viewModel.isDialogPinned? 'unpin' : 'pin'}} </a>
         </div>
+        <div class="vth-item-details__container__body__content">
+            <div class="vth-item-details__container__body__content__item-details">
+                <h2 class="vth-item-details__container__body__content__item-details__title">{{viewModel.item?.name}}</h2>
+                <div class="vth-item-details__container__body__content__item-details__header">
+                    <div class="vth-item-details__container__body__content__item-details__header__name">
+                        project: {{viewModel.item?.project?.name}}
+                    </div>
 
-        <div class="vth-divider">
-          <mat-divider></mat-divider>
-        </div>
+                    <div class="vth-item-details__container__body__content__item-details__header__date">
+                        planned for :{{viewModel.item?.date | date:'short'}}
+                    </div>
 
-        <div class="vth-item-details__container__body__content__item-details__comments">
-          <div class="vth-item-details__container__body__content__item-details__comments__input-form">
-            <mat-form-field>
-              <textarea matInput placeholder="Enter comment" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
-            </mat-form-field>
-          </div>
+                    <div class="vth-item-details__container__body__content__item-details__header__tags" *ngIf="viewModel.item">
+                        <span *ngFor="let tag of viewModel.item.tags; let i = index">{{tag.name}}
+                            <em *ngIf="i<viewModel.item.tags.length-1">, </em></span>
+                    </div>
 
-          <div>
-            <button mat-button color="primary">Save</button>
-          </div>
-
-          <div class="vth-divider">
-            <mat-divider></mat-divider>
-          </div>
-
-          <div class="vth-item-details__container__body__content__item-details__comments__comment-entries" *ngIf="viewModel.item">
-            <ul>
-              <li *ngFor="let com of viewModel.item.comments">
-                <div class="vth-item-details__container__body__content__item-details__comments__comment-entries__entry">
-                  <span class="vth-item-details__container__body__content__item-details__comments__comment-entries__entry__header">{{com.author}} @ {{com.date | date:'short'}}</span>
-                  <span class="vth-item-details__container__body__content__item-details__comments__comment-entries__entry__actions">edit / delete</span>
-                  <div class="vth-item-details__container__body__content__item-details__comments__comment-entries__entry__body">{{com.comment}}</div>
                 </div>
-              </li>
-            </ul>
-          </div>
+
+                <div class="vth-divider">
+                    <mat-divider></mat-divider>
+                </div>
+
+                <div class="vth-item-details__container__body__content__item-details__comments">
+                    <div class="vth-item-details__container__body__content__item-details__comments__input-form">
+                        <mat-form-field>
+                            <textarea matInput placeholder="Enter comment" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
+                        </mat-form-field>
+                    </div>
+
+                    <div>
+                        <button mat-button color="primary">Save</button>
+                    </div>
+
+                    <div>
+
+                    </div>
+
+                    <div class="vth-divider">
+                        <mat-divider></mat-divider>
+                    </div>
+
+                    <div class="vth-item-details__container__body__content__item-details__comments__comment-entries" *ngIf="viewModel.item">
+                        <ul>
+                            <li *ngFor="let com of viewModel.item.comments">
+                                <div class="vth-item-details__container__body__content__item-details__comments__comment-entries__entry">
+                                    <span class="vth-item-details__container__body__content__item-details__comments__comment-entries__entry__header">{{com.author}} @
+                                        {{com.date | date:'short'}}</span>
+                                    <span class="vth-item-details__container__body__content__item-details__comments__comment-entries__entry__actions">edit / delete</span>
+                                    <div class="vth-item-details__container__body__content__item-details__comments__comment-entries__entry__body">{{com.comment}}</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>

@@ -63,6 +63,7 @@ vth-generic-list {
           right: 0;
           background-color: transparent;
           height: calc(100% - 41px - 43px);
+          width: 20%;
           display: none;
           flex-direction: row;
           overflow: hidden;
@@ -76,11 +77,11 @@ vth-generic-list {
           .vth-generic-list__container__body__content__details__content__shadow {
             width: 10px;
             height: 100%;
-            background-image: linear-gradient(90deg, transparent, rgba($primary-accent-color, 1));
+            background-image: linear-gradient(90deg, transparent, rgba($third-color, 1));
           }
 
           .vth-generic-list__container__body__content__details__content {
-            background-color: rgba($primary-accent-color, 1);
+            background-color: rgba($third-color, 1);
             width: 100%;
 
           }

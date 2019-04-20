@@ -1,4 +1,4 @@
-import { ItemDataViewModel } from './../../../modules/item-details/item-details.view-model';
+import { ItemDataViewModel, ProjectViewModel, TagViewModel } from './../../../modules/item-details/item-details.view-model';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { takeWhile, map } from 'rxjs/operators';
@@ -96,6 +96,13 @@ export class ItemListService {
             res.id = dto.id;
             res.name = dto.name;
             res.isCurrent = dto.isCurrent;
+            res.project = new ProjectViewModel();
+            res.project.id = dto.project.id;
+            res.project.name = dto.project.name;
+            res.project.description = dto.project.description;
+            res.project.releaseAt = dto.project.releaseAt;
+            res.project.owner = 'NA';
+            res.tags = dto.tags.map(item => new TagViewModel(item));
         }
 
         return res;

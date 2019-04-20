@@ -10,7 +10,7 @@ export class ItemDataViewModel {
     description: string;
     isCurrent: boolean;
     project: ProjectViewModel;
-    tags: TagViewModel[];
+    tags: TagViewModel[] = [];
     date: Date;
     comments: CommentViewModel[];
 }
@@ -43,7 +43,7 @@ export class TagViewModel {
     name: string;
     owner: string;
 
-    constructor(param: Partial<TagViewModel>) {
+    constructor(param: any) {
         Object.assign(this, param);
     }
 }
