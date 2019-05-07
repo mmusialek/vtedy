@@ -20,14 +20,25 @@
         }
 
         .vth-item-details__container__body__content {
-            //background-color: greenyellow;
             padding: 5px;
 
             .vth-item-details__container__body__content__item-details {
+                position: relative;
                 .vth-item-details__container__body__content__item-details__title {
                     font-size: 1.2em;
                     font-weight: bold;
                     padding-bottom: 5px;
+
+                    &--edit {
+                        padding: 5px;
+                        background-color: $third-color;
+                        position: absolute;
+                        top: 0;
+                        height: 100%;
+                        width: 100%;
+                        z-index: 100;
+                        box-sizing: border-box;
+                    }
                 }
 
                 .vth-item-details__container__body__content__item-details__header {

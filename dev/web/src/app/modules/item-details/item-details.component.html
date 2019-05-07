@@ -6,7 +6,19 @@
         </div>
         <div class="vth-item-details__container__body__content">
             <div class="vth-item-details__container__body__content__item-details">
-                <h2 class="vth-item-details__container__body__content__item-details__title">{{viewModel.item?.name}}</h2>
+                <h2 class="vth-item-details__container__body__content__item-details__title">{{viewModel.item?.name}} <a (click)="onItemEditClick()">edit</a></h2>
+                <div class="vth-item-details__container__body__content__item-details__title vth-item-details__container__body__content__item-details__title--edit"
+                    *ngIf="viewModel.isEditItemOpened">
+                    <div>
+                        <mat-form-field class="vth-item-list__container__input">
+                            <input matInput placeholder="Name" [(ngModel)]="viewModel.item.name">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <button mat-button (click)="onItemEditCancelClick($event)" class="vth-special__no-close" type="button">Cancel</button>
+                        <button mat-button color="primary" (click)="onItemEditSubmitClick($event)" class="vth-special__no-close" type="button">Submit</button>
+                    </div>
+                </div>
                 <div class="vth-item-details__container__body__content__item-details__header">
                     <div class="vth-item-details__container__body__content__item-details__header__name">
                         project: {{viewModel.item?.project?.name}}

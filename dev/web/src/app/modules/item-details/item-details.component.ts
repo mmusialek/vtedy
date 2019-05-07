@@ -54,4 +54,17 @@ export class ItemDetailsComponent implements OnInit, OnDestroy {
         this.viewModel.isDialogPinned = this._itemDetailsService.isDialogPinned;
     }
 
+    onItemEditClick() {
+        this.viewModel.isEditItemOpened = !this.viewModel.isEditItemOpened;
+    }
+
+    onItemEditCancelClick(event: MouseEvent) {
+        this.viewModel.isEditItemOpened = !this.viewModel.isEditItemOpened;
+    }
+
+    onItemEditSubmitClick(event: MouseEvent) {
+        this.viewModel.isEditItemOpened = !this.viewModel.isEditItemOpened;
+        // TODO update task, send request to API
+    }
+
 }

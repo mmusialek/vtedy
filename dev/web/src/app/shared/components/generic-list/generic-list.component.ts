@@ -30,19 +30,32 @@ export class GenericListComponent {
     }
 
     onClickItemDetailsOutsideInput(event) {
-        if (
-            event.className.indexOf(
-                'vth-option-panel__container__nav-container__hider'
-            ) > 0
-        ) {
+        // NOTE we have to skip some event emitters for causing closing the windows
+
+        const skipClasses = ['vth-option-panel__container__nav-container__hider', 'vth-special__no-close'];
+
+        if (skipClasses.includes(event.className)) {
             return;
         }
 
-        if (
-            this.viewModel.areDetailsVisible &&
-            event.className.indexOf('vth-generic-list__container__list__list-item') <
-            0
-        ) {
+        // condition for mat-button, material controls controls
+
+        if (event.parentElement) {
+            const matButtonClasses = event.parentElement.className.split(' ');
+            let stopProcessing = false;
+            for (const item of matButtonClasses) {
+                if (skipClasses.includes(item)) {
+                    stopProcessing = true;
+                    break;
+                }
+            }
+
+            if (stopProcessing) {
+                return;
+            }
+        }
+
+        if (this.viewModel.areDetailsVisible && event.className.indexOf('vth-generic-list__container__list__list-item') < 0) {
             this.closeDetails();
             if (this.config && this.config.clickItemDetailsOutsideInputHandler) {
                 this.config.clickItemDetailsOutsideInputHandler(event);
