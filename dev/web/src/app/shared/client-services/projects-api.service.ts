@@ -23,7 +23,7 @@ export class ProjectsApiService extends ApiServiceBase{
 
   update(project: ProjectDto): Observable<ProjectDto> {
     const request = project;
-    return this._httpService.put<ProjectDto>(`${this.baseApiUrl}/Projects/${project.id}`, request);
+    return this._httpService.put<ProjectDto>(`${this.baseApiUrl}/Projects/${project.projectId}`, request);
   }
 
   add(project: ProjectDto): Observable<ProjectDto> {

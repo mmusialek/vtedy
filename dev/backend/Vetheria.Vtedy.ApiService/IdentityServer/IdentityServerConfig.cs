@@ -4,12 +4,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IdentityServer4.Test;
+using Microsoft.Extensions.Configuration;
 
 namespace Vetheria.Vtedy.ApiService.IdentityServer
 {
     public class IdentityServerConfig
     {
-        public static IEnumerable<IdentityResource> GetIdentityResources()
+        private const string ApiName = "AWR.Api";
+        private const string ApiDisplayName = "Any Word Rotator API";
+        private const string ApiSecret = "4124330e-f303-4290-983e-52feae4ffb8b";
+
+        public IdentityServerConfig(IConfiguration config)
+        {
+            LoadOptions(config);
+        }
+
+        public string AuthorityUrl { get; private set; }
+
+        public IEnumerable<IdentityResource> GetIdentityResources()
         {
             return new List<IdentityResource>
             {
@@ -19,31 +31,41 @@ namespace Vetheria.Vtedy.ApiService.IdentityServer
             };
         }
 
-        public static IEnumerable<ApiResource> GetApis()
+        public IEnumerable<ApiResource> GetApiResources()
         {
             return new List<ApiResource>
             {
-                new ApiResource("api", "AWR API")
+                new ApiResource(ApiName, ApiDisplayName)
                 {
-                    ApiSecrets = { new Secret("4124330e-f303-4290-983e-52feae4ffb8b".Sha256()) }
+                    ApiSecrets = { new Secret(ApiSecret.Sha256()) }
                 }
             };
         }
 
-        public static IEnumerable<Client> GetClients()
-        {
-            return new List<Client>
-            {
-                new Client
-                {
-                    ClientId = "awr_desktop_app",
-                    ClientSecrets = { new Secret("d5e96873-3f37-4855-8e16-0a023ad9d4af".Sha256()) },
+        public IReadOnlyCollection<Client> Clients { get; private set; }
 
+
+        private void LoadOptions(IConfiguration config)
+        {
+            var options = config.GetSection("IdentityServer").Get<IdentityServerOptions>();
+
+            var clients = new List<Client>();
+            foreach (var item in options.Clients)
+            {
+                var client = new Client
+                {
+                    ClientId = item.ClientId,
+                    ClientSecrets = item.Secrets.Select(secret => new Secret(secret.Sha256())).ToList(),
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
-                    AllowedScopes = { "api" },
-                },
-            };
-        }    
+                    AllowedScopes = item.AllowedScopes,
+                };
+                clients.Add(client);
+            }
+
+            Clients = clients;
+
+            AuthorityUrl = options.AuthorityUrl;
+        }
 
     }
 }

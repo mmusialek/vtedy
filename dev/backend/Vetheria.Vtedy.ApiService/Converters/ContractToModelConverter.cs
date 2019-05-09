@@ -19,8 +19,7 @@ namespace Vetheria.Vtedy.ApiService.Converters
             CreateMap<ProjectDto, Project>();
             CreateMap<ToDoItemFilterDto, ToDoItemFilter>();
 
-            CreateMap<TodoItemDto, TodoItem>()
-                .ForMember(p => p.ProjectId, o => o.MapFrom<TodoItemToModelResolver>());
+            CreateMap<TodoItemDto, TodoItem>();
 
             CreateMap<ProjectCommentRequestDto, ProjectComment>();
             CreateMap<TodoItemCommentRequestDto, TodoItemComment>();
@@ -30,11 +29,4 @@ namespace Vetheria.Vtedy.ApiService.Converters
         }
     }
 
-    public class TodoItemToModelResolver : IValueResolver<TodoItemDto, TodoItem, int>
-    {
-        public int Resolve(TodoItemDto source, TodoItem destination, int destMember, ResolutionContext context)
-        {
-            return source.Project.Id;
-        }
-    }
 }

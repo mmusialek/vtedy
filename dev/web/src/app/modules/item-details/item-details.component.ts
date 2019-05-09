@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnDestroy, OnInit, Output, Input } from '@angu
 import { ItemDetailsService } from './item-details.service';
 import { ItemDetailsViewModel, ItemDataViewModel } from './item-details.view-model';
 import { SubscriptionLike as ISubscription } from 'rxjs';
+import { takeWhile } from 'rxjs/operators';
 
 @Component({
     selector: 'vth-item-details',
@@ -9,13 +10,12 @@ import { SubscriptionLike as ISubscription } from 'rxjs';
 })
 export class ItemDetailsComponent implements OnInit, OnDestroy {
 
-    viewModel: ItemDetailsViewModel = new ItemDetailsViewModel();;
+    viewModel: ItemDetailsViewModel = new ItemDetailsViewModel();
+    private _isAlive = true;
+
     @Input() set details(details: ItemDataViewModel) {
         this.viewModel.item = details;
     }
-
-    private _isDialogVisibleSubscription: ISubscription;
-    private _newDataSubscription: ISubscription;
 
     @Output() closeEvent: EventEmitter<any> = new EventEmitter<any>();
 
@@ -24,23 +24,17 @@ export class ItemDetailsComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
 
-        this._isDialogVisibleSubscription = this._itemDetailsService.isDialogVisible.subscribe(p => {
+        this._itemDetailsService.isDialogVisible.pipe(takeWhile(_ => this._isAlive)).subscribe(p => {
             this.viewModel.isVisible = p;
         });
 
-        this._newDataSubscription = this._itemDetailsService.newDataStream.subscribe(p => {
+        this._itemDetailsService.newDataStream.pipe(takeWhile(_ => this._isAlive)).subscribe(p => {
             this.viewModel.item = p;
         });
     }
 
     ngOnDestroy(): void {
-        if (this._isDialogVisibleSubscription) {
-            this._isDialogVisibleSubscription.unsubscribe();
-        }
-
-        if (this._newDataSubscription) {
-            this._newDataSubscription.unsubscribe();
-        }
+        this._isAlive = false;
     }
 
     onCloseHandler() {
@@ -63,8 +57,12 @@ export class ItemDetailsComponent implements OnInit, OnDestroy {
     }
 
     onItemEditSubmitClick(event: MouseEvent) {
+        this._itemDetailsService.updateTodoItem(this.viewModel.item)
+            .pipe(takeWhile(_ => this._isAlive))
+            .subscribe(data => { }, error => { console.error(error); });
+
         this.viewModel.isEditItemOpened = !this.viewModel.isEditItemOpened;
-        // TODO update task, send request to API
+
     }
 
 }

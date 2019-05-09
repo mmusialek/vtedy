@@ -29,9 +29,12 @@ namespace Vetheria.Vtedy.ApiService
 {
     public class Startup
     {
+        private IdentityServerConfig _identityConfig;
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            _identityConfig = new IdentityServerConfig(configuration);
         }
 
         public IConfiguration Configuration { get; }
@@ -41,9 +44,9 @@ namespace Vetheria.Vtedy.ApiService
         {
             services.AddIdentityServer()
                 .AddDeveloperSigningCredential()
-                .AddInMemoryIdentityResources(IdentityServerConfig.GetIdentityResources())
-                .AddInMemoryApiResources(IdentityServerConfig.GetApis())
-                .AddInMemoryClients(IdentityServerConfig.GetClients())
+                .AddInMemoryIdentityResources(_identityConfig.GetIdentityResources())
+                .AddInMemoryApiResources(_identityConfig.GetApiResources())
+                .AddInMemoryClients(_identityConfig.Clients)
                 .AddProfileService<ProfileService>();
             //.AddTestUsers(IdentityServerConfig.GetUsers());
 
@@ -81,7 +84,7 @@ namespace Vetheria.Vtedy.ApiService
                 .AddIdentityServerAuthentication(options =>
                 {
                     options.SaveToken = true;
-                    options.Authority = "http://localhost:5001";
+                    options.Authority = _identityConfig.AuthorityUrl;
                     options.RequireHttpsMetadata = false;
                     options.SupportedTokens = SupportedTokens.Jwt;
                 });

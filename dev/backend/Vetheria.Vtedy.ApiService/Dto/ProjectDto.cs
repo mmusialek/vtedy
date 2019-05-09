@@ -5,7 +5,7 @@ namespace Vetheria.Vtedy.ApiService.Dto
 {
     public class ProjectDto
     {
-        public int Id { get; set; }
+        public int ProjectId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime ReleaseAt { get; set; }

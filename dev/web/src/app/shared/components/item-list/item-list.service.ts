@@ -21,7 +21,7 @@ export class ItemListService {
             todoItem.name = item.name;
             todoItem.isCurrent = item.isCurrent;
             todoItem.project = new ProjectDto();
-            todoItem.project.id = item.projectId;
+            todoItem.project.projectId = item.projectId;
 
             let isAlive = true;
 
@@ -97,7 +97,7 @@ export class ItemListService {
             res.name = dto.name;
             res.isCurrent = dto.isCurrent;
             res.project = new ProjectViewModel();
-            res.project.id = dto.project.id;
+            res.project.id = dto.project.projectId;
             res.project.name = dto.project.name;
             res.project.description = dto.project.description;
             res.project.releaseAt = dto.project.releaseAt;

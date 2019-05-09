@@ -19,7 +19,7 @@ namespace Vetheria.Vtedy.ApiService.Converters
             CreateMap<Project, ProjectDto>();
             CreateMap<ToDoItemFilter, ToDoItemFilterDto>();
 
-            CreateMap<TodoItem, TodoItemDto>();//.ForMember(p => p.Project, o => o.MapFrom<TodoItemToContractResolver>());
+            CreateMap<TodoItem, TodoItemDto>();
 
             CreateMap<ProjectComment, ProjectCommentDto>().IgnoreAllPropertiesWithAnInaccessibleSetter().IgnoreAllSourcePropertiesWithAnInaccessibleSetter();
             CreateMap<TodoItemComment, TodoItemCommentDto>();
@@ -33,7 +33,7 @@ namespace Vetheria.Vtedy.ApiService.Converters
         {
             destination.Project = new ProjectDto
             {
-                Id = source.ProjectId
+                ProjectId = source.ProjectId
             };
 
 

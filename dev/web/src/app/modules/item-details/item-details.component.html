@@ -25,12 +25,15 @@
                     </div>
 
                     <div class="vth-item-details__container__body__content__item-details__header__date">
-                        planned for :{{viewModel.item?.date | date:'short'}}
+                        planned for :{{viewModel.item?.project?.releaseAt | date:'short'}}
                     </div>
 
                     <div class="vth-item-details__container__body__content__item-details__header__tags" *ngIf="viewModel.item">
-                        <span *ngFor="let tag of viewModel.item.tags; let i = index">{{tag.name}}
-                            <em *ngIf="i<viewModel.item.tags.length-1">, </em></span>
+                        <span *ngIf="viewModel.item.tags.length>0">Tags: </span>
+                        <span *ngFor="let tag of viewModel.item.tags; let i = index">
+                            {{tag.name}}
+                            <em *ngIf="i<viewModel.item.tags.length-1">, </em>
+                        </span>
                     </div>
 
                 </div>

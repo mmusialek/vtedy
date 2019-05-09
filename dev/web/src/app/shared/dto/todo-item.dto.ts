@@ -7,5 +7,5 @@ export class TodoItemDto {
   project: ProjectDto;
   isCurrent: boolean;
 
-  tags: TagDto[];
+  tags: TagDto[] = [];
 }

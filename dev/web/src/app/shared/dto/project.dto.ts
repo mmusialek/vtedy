@@ -1,5 +1,5 @@
 export class ProjectDto {
-  id: number;
+  projectId: number;
   name: string;
   description: string;
   releaseAt: Date;

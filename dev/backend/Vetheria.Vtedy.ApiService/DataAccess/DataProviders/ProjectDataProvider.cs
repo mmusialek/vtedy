@@ -71,7 +71,7 @@ namespace Vetheria.Vtedy.ApiService.DataAccess.Queries
                     "[dbo].[Projects_update]",
                     param: new
                     {
-                        @id = project.Id,
+                        @id = project.ProjectId,
                         @name = project.Name,
                         @description = project.Description,
                         @userAccountId = project.UserAccountId
