@@ -8,8 +8,10 @@ using IdentityServer4.AccessTokenValidation;
 using IdentityServer4.Services;
 using IdentityServer4.Validation;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -53,7 +55,13 @@ namespace Vetheria.Vtedy.ApiService
             services.AddAutoMapper();
             services.AddMvcCore(options =>
                 {
-                    options.RespectBrowserAcceptHeader = true; // false by default
+                    //options.RespectBrowserAcceptHeader = true;
+                    //var policy = new AuthorizationPolicyBuilder()
+                    // .RequireAuthenticatedUser()
+                    // .Build();
+                    //options.Filters.Add(new AuthorizeFilter(policy));
+                    var policy = ScopePolicy.Create("api");
+                    options.Filters.Add(new AuthorizeFilter(policy));
                 })
                 .AddAuthorization()
                 .AddJsonFormatters()
@@ -115,7 +123,7 @@ namespace Vetheria.Vtedy.ApiService
 
 
             app.UseIdentityServer();
-            app.UseMvc();
+            //app.UseMvc();
 
         }
     }
