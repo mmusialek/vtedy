@@ -8,6 +8,7 @@ using IdentityServer4.AccessTokenValidation;
 using IdentityServer4.Services;
 using IdentityServer4.Validation;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -50,7 +51,6 @@ namespace Vetheria.Vtedy.ApiService
                 .AddInMemoryApiResources(_identityConfig.GetApiResources())
                 .AddInMemoryClients(_identityConfig.Clients)
                 .AddProfileService<ProfileService>();
-            //.AddTestUsers(IdentityServerConfig.GetUsers());
 
             services.AddAutoMapper();
             services.AddMvcCore(options =>
@@ -63,6 +63,7 @@ namespace Vetheria.Vtedy.ApiService
                     var policy = ScopePolicy.Create("api");
                     options.Filters.Add(new AuthorizeFilter(policy));
                 })
+                //.SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_1)
                 .AddAuthorization()
                 .AddJsonFormatters()
                 .AddJsonOptions(options =>
@@ -88,8 +89,15 @@ namespace Vetheria.Vtedy.ApiService
             services.AddTransient<IResourceOwnerPasswordValidator, ResourceOwnerPasswordValidator>();
             services.AddTransient<IProfileService, ProfileService>();
 
-            services.AddAuthentication()
-                .AddIdentityServerAuthentication(options =>
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddIdentityServerAuthentication(JwtBearerDefaults.AuthenticationScheme, options =>
                 {
                     options.SaveToken = true;
                     options.Authority = _identityConfig.AuthorityUrl;
@@ -107,7 +115,6 @@ namespace Vetheria.Vtedy.ApiService
             }
 
 
-
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -123,7 +130,7 @@ namespace Vetheria.Vtedy.ApiService
 
 
             app.UseIdentityServer();
-            //app.UseMvc();
+            app.UseMvc();
 
         }
     }
