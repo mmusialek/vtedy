@@ -11,5 +11,9 @@ namespace Vetheria.Vtedy.ApiService.DataAccess.DataProviders
         Task<TodoItem> Add(TodoItem todoItem, int userAccountId);
         Task<TodoItem> Update(TodoItem item);
         Task<int> Delete(string todoitemId, int userAccountId);
+        Task<TodoItemTag> AddTag(string todoItemId, int tagId);
+        Task<TodoItemTag> AddTag(string todoItemId, string tagName);
+        Task<int> DeleteTag(string todoItemId, int todoItemTagId);
+        Task<IEnumerable<Tag>> GetTag(string todoItemId, string name);
     }
 }

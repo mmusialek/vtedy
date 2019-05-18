@@ -20,6 +20,7 @@ namespace Vetheria.Vtedy.ApiService.Converters
             CreateMap<ToDoItemFilterDto, ToDoItemFilter>();
 
             CreateMap<TodoItemDto, TodoItem>();
+            CreateMap<TodoItemTagDto, TodoItemTag>();
 
             CreateMap<ProjectCommentRequestDto, ProjectComment>();
             CreateMap<TodoItemCommentRequestDto, TodoItemComment>();

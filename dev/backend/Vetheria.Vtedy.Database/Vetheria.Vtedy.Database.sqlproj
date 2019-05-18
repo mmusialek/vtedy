@@ -64,6 +64,7 @@
     <Folder Include="StoredProcedures\Projects" />
     <Folder Include="StoredProcedures\TodoItems" />
     <Folder Include="StoredProcedures\UserAccounts" />
+    <Folder Include="StoredProcedures\Tag" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />
@@ -94,6 +95,10 @@
     <Build Include="StoredProcedures\TodoItems\dbo.TodoItemsComment_get.sql" />
     <Build Include="StoredProcedures\TodoItems\dbo.TodoItemsComment_update.sql" />
     <Build Include="StoredProcedures\TodoItems\dbo.TodoItems_GetById.sql" />
+    <Build Include="StoredProcedures\TodoItems\dbo.TodoItems_Tag_add.sql" />
+    <Build Include="StoredProcedures\TodoItems\dbo.TodoItems_Tag_delete.sql" />
+    <Build Include="StoredProcedures\TodoItems\dbo.TodoItems_Tag_get.sql" />
+    <Build Include="StoredProcedures\Tag\Tag_add.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Vetheria.Vtedy.Database.refactorlog" />

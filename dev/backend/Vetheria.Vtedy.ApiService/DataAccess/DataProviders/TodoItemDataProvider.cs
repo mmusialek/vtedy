@@ -112,5 +112,65 @@ namespace Vetheria.Vtedy.ApiService.DataAccess.DataProviders
                     commandType: CommandType.StoredProcedure);
             }
         }
+
+        public async Task<TodoItemTag> AddTag(string todoItemId, int tagId)
+        {
+            using (var sqlConnection = _connectionFactory.OpenSqlConnection())
+            {
+                return await sqlConnection.QuerySingleAsync<TodoItemTag>(
+                    "[dbo].[TodoItems_Tag_add]",
+                    param: new
+                    {
+                        @todoItemId = todoItemId,
+                        @tagId = tagId
+                    },
+                    commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public async Task<TodoItemTag> AddTag(string todoItemId, string tagName)
+        {
+            using (var sqlConnection = _connectionFactory.OpenSqlConnection())
+            {
+                return await sqlConnection.QuerySingleAsync<TodoItemTag>(
+                    "[dbo].[TodoItems_Tag_add]",
+                    param: new
+                    {
+                        @todoItemId = todoItemId,
+                        @tagName = tagName
+                    },
+                    commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public async Task<int> DeleteTag(string todoItemId, int todoItemTagId)
+        {
+            using (var sqlConnection = _connectionFactory.OpenSqlConnection())
+            {
+                return await sqlConnection.QuerySingleAsync<int>(
+                    "[dbo].[TodoItems_Tag_delete]",
+                    param: new
+                    {
+                        @todoItemId = todoItemId,
+                        @todoItemTagId = todoItemTagId
+                    },
+                    commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public async Task<IEnumerable<Tag>> GetTag(string todoItemId, string name)
+        {
+            using (var sqlConnection = _connectionFactory.OpenSqlConnection())
+            {
+                return await sqlConnection.QueryAsync<Tag>(
+                    "[dbo].[TodoItems_Tag_get]",
+                    param: new
+                    {
+                        @todoItemId = todoItemId,
+                        @name = name
+                    },
+                    commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }

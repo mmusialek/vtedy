@@ -60,8 +60,8 @@ namespace Vetheria.Vtedy.ApiService
                     // .RequireAuthenticatedUser()
                     // .Build();
                     //options.Filters.Add(new AuthorizeFilter(policy));
-                    var policy = ScopePolicy.Create("api");
-                    options.Filters.Add(new AuthorizeFilter(policy));
+                    //var policy = ScopePolicy.Create("api");
+                    //options.Filters.Add(new AuthorizeFilter(policy));
                 })
                 //.SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_1)
                 .AddAuthorization()

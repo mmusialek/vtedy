@@ -157,5 +157,58 @@ namespace Vetheria.Vtedy.ApiService.Controllers
             var resObj = new ObjectResult(resDto);
             return resObj;
         }
+
+
+        // tags
+
+
+        [HttpGet("{todoItemId}/tags/{name?}")]
+        public async Task<IActionResult> GetTodoItemTag(string todoItemId, string name)
+        {
+            var model = await _dataProvider.GetTag(todoItemId, name);
+            var dto = _mapper.Map<IEnumerable<Tag>>(model);
+
+            var resObj = new ObjectResult(dto);
+            return resObj;
+        }
+
+
+        [HttpPost("{todoItemId}/tags")]
+        public async Task<IActionResult> AddTodoItemTag(string todoItemId, [FromBody] TodoItemTagAddRequest tag)
+        {
+            TodoItemTagDto res = null;
+            TodoItemTag model = null;
+
+            try
+            {
+                if (string.IsNullOrEmpty(tag.TagName))
+                {
+                    model = await _dataProvider.AddTag(todoItemId, tag.TagId);
+                }
+                else
+                {
+                    model = await _dataProvider.AddTag(todoItemId, tag.TagName);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
+
+            res = _mapper.Map<TodoItemTagDto>(model);
+
+            var resObj = new ObjectResult(res);
+            return resObj;
+        }
+
+        [HttpDelete("{todoItemId}/tags/{todoItemTagId}")]
+        public async Task<IActionResult> DeleteTodoItemTag(string todoItemId, int todoItemTagId)
+        {
+            var model = await _dataProvider.DeleteTag(todoItemId, todoItemTagId);
+
+            var resObj = new ObjectResult(model);
+            return resObj;
+        }
     }
 }
