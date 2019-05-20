@@ -13,7 +13,8 @@ export class ItemDataViewModel {
     project: ProjectViewModel;
     tags: TagViewModel[] = [];
     date: Date;
-    comments: CommentViewModel[];
+    comments: CommentViewModel[] = [];
+    newComment: string;
 }
 
 export class ProjectViewModel {
@@ -34,8 +35,8 @@ export class CommentViewModel {
     author: string;
     date: Date;
 
-    constructor(param: Partial<CommentViewModel>) {
-        Object.assign(this, param);
+    static new(params: any) {
+        return Object.assign(new CommentViewModel(), params);
     }
 }
 

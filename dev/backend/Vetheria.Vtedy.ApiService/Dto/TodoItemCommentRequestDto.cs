@@ -7,7 +7,7 @@ namespace Vetheria.Vtedy.ApiService.Dto
 {
     public class TodoItemCommentRequestDto
     {
-        public string Id { get; set; }
+        //public string Id { get; set; }
         public string Content { get; set; }
     }
 }

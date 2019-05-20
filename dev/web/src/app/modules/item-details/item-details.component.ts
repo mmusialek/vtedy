@@ -1,8 +1,8 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output, Input } from '@angular/core';
 import { ItemDetailsService } from './item-details.service';
-import { ItemDetailsViewModel, ItemDataViewModel } from './item-details.view-model';
+import { ItemDetailsViewModel, ItemDataViewModel, CommentViewModel } from './item-details.view-model';
 import { SubscriptionLike as ISubscription } from 'rxjs';
-import { takeWhile } from 'rxjs/operators';
+import { takeWhile, switchMap } from 'rxjs/operators';
 
 @Component({
     selector: 'vth-item-details',
@@ -63,6 +63,27 @@ export class ItemDetailsComponent implements OnInit, OnDestroy {
 
         this.viewModel.isEditItemOpened = !this.viewModel.isEditItemOpened;
 
+    }
+
+    onCommentSaveClick() {
+        this._itemDetailsService.createComment({
+            todoItemId: this.viewModel.item.id,
+            comment: this.viewModel.item.newComment
+        })
+            .pipe(takeWhile(() => this._isAlive),
+                switchMap(() => {
+                    return this._itemDetailsService.getComments(this.viewModel.item.id);
+                }))
+            .subscribe(item => {
+                console.log(item);
+                this.viewModel.item.newComment = undefined;
+
+                this.viewModel.item.comments.splice(0, this.viewModel.item.comments.length);
+                this.viewModel.item.comments.push(...item);
+            }, error => {
+                // TODO error handling
+                console.error(error);
+            });
     }
 
 }

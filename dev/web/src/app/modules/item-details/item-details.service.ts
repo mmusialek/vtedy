@@ -1,10 +1,12 @@
+import { CommentCreateRequestDto } from './../../shared/dto/comment.dto';
 import { ProjectDto } from './../../shared/dto/project.dto';
 import { TodoItemDto } from './../../shared/dto/todo-item.dto';
 import { TagDto } from './../../shared/dto/tag.dto';
 import { TodoItemsApiService } from './../../shared/client-services/todo-items-api.service';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
-import { ItemDataViewModel } from './item-details.view-model';
+import { Subject, Observable } from 'rxjs';
+import { ItemDataViewModel, CommentViewModel } from './item-details.view-model';
+import { takeWhile, map } from 'rxjs/operators';
 
 
 @Injectable()
@@ -66,6 +68,24 @@ export class ItemDetailsService {
         });
 
         return this._todoApiService.update(dto);
+    }
+
+    createComment(params: { todoItemId: string, comment: string }) {
+
+        const dto = new CommentCreateRequestDto();
+        dto.content = params.comment;
+
+        // CommentCreateRequestDto
+        return this._todoApiService.addComment({
+            item: dto,
+            todoItemId: params.todoItemId
+        })
+            .pipe(map(item => CommentViewModel.new({ id: item.id, comment: item.content, date: item.createdDate })));
+    }
+
+    getComments(todoItemId: string): Observable<CommentViewModel[]> {
+        return this._todoApiService.getComments(todoItemId)
+            .pipe(map(item => item.map(comment => CommentViewModel.new({ id: comment.id, comment: comment.content, date: comment.createdDate }))));
     }
 
     // getItemDetails(id: string) {
