@@ -72,6 +72,7 @@
   <ItemGroup>
     <None Include="Scripts\DemoData.sql" />
     <None Include="localdb_VtedyDatabase.publish.xml" />
+    <None Include="Vetheria.Vtedy.Database.publish_nw.xml" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\dbo.Projects.sql" />

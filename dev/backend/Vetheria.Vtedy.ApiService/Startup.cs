@@ -23,6 +23,7 @@ using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
 using Vetheria.Vtedy.ApiService.DataAccess;
 using Vetheria.Vtedy.ApiService.DataAccess.DataProviders;
+using Vetheria.Vtedy.ApiService.DataAccess.Mappings;
 using Vetheria.Vtedy.ApiService.DataAccess.Queries;
 using Vetheria.Vtedy.ApiService.IdentityServer;
 using Vetheria.Vtedy.ApiService.Models;
@@ -76,6 +77,8 @@ namespace Vetheria.Vtedy.ApiService
             {
                 c.SwaggerDoc("v1", new Info { Title = "Vtedy API", Version = "v1" });
             });
+
+            MapRegister.Register();
 
             services.AddTransient<IConnectionFactory, ConnectionFactory>();
             services.AddTransient<IProjectDataProvider, ProjectDataProvider>();

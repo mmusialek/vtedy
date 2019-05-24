@@ -32,7 +32,6 @@ namespace Vetheria.Vtedy.ApiService.Controllers
             // TODO get user id from token
             var userId = 1;
 
-
             var filter = _mapper.Map<ToDoItemFilter>(filterDto);
             filter.UserAccountId = userId;
 

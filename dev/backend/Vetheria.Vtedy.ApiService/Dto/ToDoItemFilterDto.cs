@@ -11,7 +11,5 @@ namespace Vetheria.Vtedy.ApiService.Dto
         public int? ProjectId { get; set; }
         public bool? IsCurrentItem { get; set; }
         public int StatusId { get; set; }
-
-        // TODO add date, labels/tags
     }
 }

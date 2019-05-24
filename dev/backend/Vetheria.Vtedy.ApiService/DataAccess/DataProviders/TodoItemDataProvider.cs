@@ -1,5 +1,4 @@
 ﻿using Dapper;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -21,17 +20,37 @@ namespace Vetheria.Vtedy.ApiService.DataAccess.DataProviders
         {
             using (var sqlConnection = _connectionFactory.OpenSqlConnection())
             {
-                return await sqlConnection.QueryAsync<TodoItem>(
+                var reader = await sqlConnection.QueryMultipleAsync(
                     "[dbo].[TodoItems_get]",
                     param: new
                     {
                         @userAccountId = filter.UserAccountId,
                         @projectId = filter.ProjectId,
                         @isCurrent = filter.IsCurrentItem,
-                        @statusId = filter.StatusId,
-                        @todoItemId = filter.TodoItemId
+                        @statusId = filter.StatusId
                     },
                     commandType: CommandType.StoredProcedure);
+
+                var res = reader.Read<TodoItem, Project, TodoItem>((todoItem, project) =>
+                {
+                    todoItem.Project = project;
+                    return todoItem;
+                },
+                splitOn: "ProjectId");
+
+                var tags = reader.Read<Tag>();
+                var groupedTags = tags.GroupBy(p => p.TodoItemId);
+
+                foreach (var group in groupedTags)
+                {
+                    var todoItem = res.FirstOrDefault(p => p.Id == group.Key);
+                    if (todoItem != null)
+                    {
+                        todoItem.Tags = group.ToList();
+                    }
+                }
+
+                return res;
             }
         }
 
