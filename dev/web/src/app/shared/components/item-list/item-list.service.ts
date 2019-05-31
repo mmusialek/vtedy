@@ -90,33 +90,6 @@ export class ItemListService {
                         return todo;
                     }))
             ));
-
-        // map(item => {
-        //     const res = this.toItemDataViewModel(item);
-        //     isAlive = false;
-        //     return res;
-        // }),
-        // switchMap(data => this._todoItemsApiServie.getComments(itemId)
-        //     .pipe(map(commentItems => data.comments = commentItems.map(comment => this.toCommentViewModel(comment))))),
-        // catchError(error => of({} as ItemDataViewModel))
-        // );
-
-        // this._todoItemsApiServie.getById(itemId).pipe(
-        //     takeWhile(_ => isAlive),
-        //     map(item => {
-        //         const res = this.toItemDataViewModel(item);
-        //         isAlive = false;
-        //         return res;
-        //     }),
-        //     switchMap(data => this._todoItemsApiServie.getComments(itemId)
-        //         .pipe(map(commentItems => data.comments = commentItems.map(comment => this.toCommentViewModel(comment))),)),
-        //     catchError(error => of({} as ItemDataViewModel))
-        // );
-
-        // .pipe(
-        //     takeWhile(_ => isAlive),
-        //     switchMap(data => this._todoItemsApiServie.getComments(itemId))
-        // );
     }
 
     private toCommentViewModel(dto: CommentDto) {
@@ -143,8 +116,6 @@ export class ItemListService {
             res.project.releaseAt = dto.project.releaseAt;
             res.project.owner = 'NA';
             res.tags = dto.tags.map(item => new TagViewModel(item));
-
-            // res.comments = dto.
         }
 
         return res;

@@ -94,8 +94,4 @@ export class ItemDetailsService {
             }))));
     }
 
-    // getItemDetails(id: string) {
-    //     let result: ItemDataViewModel;
-    //     return of(result);
-    // }
 }
