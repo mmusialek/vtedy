@@ -21,12 +21,17 @@ namespace Vetheria.Vtedy.ApiService.DataAccess.DataProviders
         {
             using (var sqlConnection = _connectionFactory.OpenSqlConnection())
             {
-                return await sqlConnection.QueryAsync<ProjectComment>(
-                    "[dbo].[ProjectsComment_get]",
+                return await sqlConnection.QueryAsync<ProjectComment, UserAccount, ProjectComment>(
+                    "[dbo].[ProjectsComment_get]", (project, userAccount) =>
+                    {
+                        project.CreatedBy = userAccount;
+                        return project;
+                    },
                     param: new
                     {
                         @projectId = projectId
                     },
+                    splitOn: "UserAccountId",
                     commandType: CommandType.StoredProcedure);
             }
         }

@@ -22,6 +22,30 @@ INSERT INTO dbo.TodoItems(Name, IsCurrent, StatusId, ProjectId) VALUES('todoitem
 INSERT INTO dbo.TodoItems(Name, IsCurrent, StatusId, ProjectId) VALUES('todoitem_4', 0, 0, @project_id);
 INSERT INTO dbo.TodoItems(Name, IsCurrent, StatusId, ProjectId) VALUES('todoitem_5', 1, 1, @project_id);
 
+
+DECLARE @todoItemId UNIQUEIDENTIFIER;
+DECLARE @accountId INT;
+
+SELECT TOP(1) @todoItemId= TodoItemId FROM dbo.TodoItems
+SELECT TOP(1) @accountId= UserAccountId FROM dbo.UserAccounts
+
+
+INSERT INTO [dbo].[TodoItemComments]
+           ([Content], [UserAccountId], [TodoItemId], [CreatedDateUtc], [ModifiedDateUtc])
+     VALUES ('This is comment 1', @accountId, @todoItemId, GETDATE(), NULL)
+
+INSERT INTO [dbo].[TodoItemComments]
+           ([Content], [UserAccountId], [TodoItemId], [CreatedDateUtc], [ModifiedDateUtc])
+     VALUES ('This is comment 2', @accountId, @todoItemId, GETDATE(), NULL)
+     
+INSERT INTO [dbo].[TodoItemComments]
+           ([Content], [UserAccountId], [TodoItemId], [CreatedDateUtc], [ModifiedDateUtc])
+     VALUES ('This is comment 3', @accountId, @todoItemId, GETDATE(), NULL)
+
+GO
+
+
+
 GO
 
 -- tags

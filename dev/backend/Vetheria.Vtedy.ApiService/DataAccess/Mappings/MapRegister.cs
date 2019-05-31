@@ -14,6 +14,7 @@ namespace Vetheria.Vtedy.ApiService.DataAccess.Mappings
             {
                 config.AddMap(new TagMapping());
                 config.AddMap(new TodoItemMapping());
+                config.AddMap(new UserAccountMapping());
             });
         }
     }

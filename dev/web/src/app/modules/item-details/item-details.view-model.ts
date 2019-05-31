@@ -33,6 +33,7 @@ export class CommentViewModel {
     id: number;
     comment: string;
     author: string;
+    authorEmail: string;
     date: Date;
 
     static new(params: any) {

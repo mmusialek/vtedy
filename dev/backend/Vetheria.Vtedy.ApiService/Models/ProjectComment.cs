@@ -8,5 +8,6 @@ namespace Vetheria.Vtedy.ApiService.Models
     public class ProjectComment : Comment
     {
         public int ProjectId { get; set; }
+        public UserAccount CreatedBy { get; set; }
     }
 }

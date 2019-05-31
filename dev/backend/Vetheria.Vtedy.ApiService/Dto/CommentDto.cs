@@ -18,11 +18,13 @@ namespace Vetheria.Vtedy.ApiService.Dto
     public class ProjectCommentDto : CommentDto
     {
         public string ProjectId { get; set; }
+        public UserAccountDto CreatedBy { get; set; }
     }
 
 
     public class TodoItemCommentDto : CommentDto
     {
         public string TodoitemId { get; set; }
+        public UserAccountDto CreatedBy { get; set; }
     }
 }

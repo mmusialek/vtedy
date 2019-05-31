@@ -7,12 +7,11 @@ using Vetheria.Vtedy.ApiService.Models;
 
 namespace Vetheria.Vtedy.ApiService.DataAccess.Mappings
 {
-    internal class TodoItemMapping : EntityMap<TodoItem>
+    internal class UserAccountMapping : EntityMap<UserAccount>
     {
-        internal TodoItemMapping()
+        internal UserAccountMapping()
         {
-            Map(p => p.Id).ToColumn("TodoItemId");
+            Map(p => p.Id).ToColumn("UserAccountId");
         }
     }
-
 }

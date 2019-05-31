@@ -21,12 +21,18 @@ namespace Vetheria.Vtedy.ApiService.DataAccess.DataProviders
         {
             using (var sqlConnection = _connectionFactory.OpenSqlConnection())
             {
-                return await sqlConnection.QueryAsync<TodoItemComment>(
+                return await sqlConnection.QueryAsync<TodoItemComment, UserAccount, TodoItemComment>(
                     "[dbo].[TodoItemsComment_get]",
+                    (todoItem, userAccount) =>
+                    {
+                        todoItem.CreatedBy = userAccount;
+                        return todoItem;
+                    },
                     param: new
                     {
                         @todoitemId = todoItemId
                     },
+                    splitOn: "UserAccountId",
                     commandType: CommandType.StoredProcedure);
             }
         }

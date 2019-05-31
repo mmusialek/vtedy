@@ -85,7 +85,13 @@ export class ItemDetailsService {
 
     getComments(todoItemId: string): Observable<CommentViewModel[]> {
         return this._todoApiService.getComments(todoItemId)
-            .pipe(map(item => item.map(comment => CommentViewModel.new({ id: comment.id, comment: comment.content, date: comment.createdDate }))));
+            .pipe(map(item => item.map(comment => CommentViewModel.new({
+                id: comment.id,
+                comment: comment.content,
+                author: comment.createdBy.userName,
+                authorEmail: comment.createdBy.email,
+                date: comment.createdDate
+            }))));
     }
 
     // getItemDetails(id: string) {
