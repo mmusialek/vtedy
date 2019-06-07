@@ -48,7 +48,7 @@ namespace Vetheria.Vtedy.ApiService.IdentityServer
                 }
                 context.Result = new GrantValidationResult(TokenRequestErrors.InvalidGrant, "User does not exist.");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 context.Result = new GrantValidationResult(TokenRequestErrors.InvalidGrant, "Invalid username or password");
             }

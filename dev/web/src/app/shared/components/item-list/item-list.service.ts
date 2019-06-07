@@ -94,7 +94,7 @@ export class ItemListService {
 
     private toCommentViewModel(dto: CommentDto) {
         return CommentViewModel.new({
-            id: dto.createdBy.id,
+            id: dto.id,
             author: dto.createdBy.userName,
             authorEmail: dto.createdBy.email,
             comment: dto.content,

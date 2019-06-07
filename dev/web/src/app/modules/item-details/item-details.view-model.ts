@@ -14,7 +14,10 @@ export class ItemDataViewModel {
     tags: TagViewModel[] = [];
     date: Date;
     comments: CommentViewModel[] = [];
+
     newComment: string;
+    editedComment: CommentViewModel;
+    isEditedCommentEnabled = false;
 }
 
 export class ProjectViewModel {

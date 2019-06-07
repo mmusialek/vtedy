@@ -13,10 +13,10 @@ AS
 
     SELECT tit.TodoItemTagId, tit.TagId, t.Name, tit.TodoItemId
     FROM dbo.TodoItemTags tit 
-		INNER JOIN dbo.TodoItems ti 
-			ON tit.TodoItemId=ti.TodoItemId
-		INNER JOIN dbo.Tags as t
-			ON t.TagId=tit.TagId
+        INNER JOIN dbo.TodoItems ti 
+            ON tit.TodoItemId=ti.TodoItemId
+        INNER JOIN dbo.Tags as t
+            ON t.TagId=tit.TagId
     WHERE ti.TodoItemId=@todoItemId
 
 

@@ -76,11 +76,30 @@ export class ItemDetailsComponent implements OnInit, OnDestroy {
     }
 
     onCommentEditClick(comment: CommentViewModel) {
-        this.doActionWithCommentUpdate(this._itemDetailsService.updateComment(this.viewModel.item.id, comment));
+        this.viewModel.item.isEditedCommentEnabled = true;
+        this.viewModel.item.editedComment = comment;
     }
 
     onCommentDeleteClick(comment: CommentViewModel) {
         this.doActionWithCommentUpdate(this._itemDetailsService.deleteComment(this.viewModel.item.id, comment.id));
+    }
+
+    onCommentEditCancelClick() {
+        this.hideCommentEdit();
+    }
+
+    onCommentEditSubmitClick() {
+        this.doActionWithCommentUpdate(
+            this._itemDetailsService.updateComment(this.viewModel.item.id, this.viewModel.item.editedComment),
+            () => {
+                this.hideCommentEdit();
+            });
+    }
+
+
+    private hideCommentEdit() {
+        this.viewModel.item.isEditedCommentEnabled = false;
+        this.viewModel.item.editedComment = undefined;
     }
 
     private doActionWithCommentUpdate(observable: Observable<any>, successAction?: () => void) {

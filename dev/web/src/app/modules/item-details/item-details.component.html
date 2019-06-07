@@ -10,7 +10,7 @@
 
                 <ng-container *ngIf="!viewModel.isEditItemOpened; else itemEditOpened">
                     <div class="vth-item-details__container__body__content__item-details__title">
-                        {{viewModel.item?.name}} <a (click)="onItemEditClick()">edit</a>
+                        {{viewModel.item?.name}} <a class="vth-special__no-close" (click)="onItemEditClick()">edit</a>
                     </div>
                 </ng-container>
 
@@ -85,6 +85,21 @@
                                 </div>
                             </li>
                         </ul>
+
+                        <ng-container *ngIf="viewModel.item.isEditedCommentEnabled">
+                            <div class="vth-item-details__container__body__content__item-details__title
+                                    vth-item-details__container__body__content__item-details__title--edit">
+                                <div>
+                                    <mat-form-field class="vth-item-list__container__input">
+                                        <input matInput placeholder="Comment" [(ngModel)]="viewModel.item.editedComment.comment">
+                                    </mat-form-field>
+                                </div>
+                                <div>
+                                    <button mat-button (click)="onCommentEditCancelClick($event)" class="vth-special__no-close" type="button">Cancel</button>
+                                    <button mat-button color="primary" (click)="onCommentEditSubmitClick($event)" class="vth-special__no-close" type="button">Submit</button>
+                                </div>
+                            </div>
+                        </ng-container>
                     </div>
 
                 </div>
