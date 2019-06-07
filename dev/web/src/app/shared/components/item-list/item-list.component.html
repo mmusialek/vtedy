@@ -1,7 +1,7 @@
 <div class="vth-item-list__container  vth-remove-list-styles">
   <vth-generic-list [config]="viewModel.genericListConfig" [items]="items">
 
-    <div header>
+    <div class="vth-item-list__container__header" header>
       <div *ngIf="viewModel.isAddNewItemVisible" class="vth-display-inline">
         <mat-form-field class="vth-item-list__container__input" floatLabel="never">
           <input matInput placeholder="Item title" (keyup)="addNewItem($event)" [(ngModel)]="viewModel.newItem" #newItemInput>
@@ -10,7 +10,7 @@
       </div>
     </div>
 
-    <div details>
+    <div class="vth-item-list__container__details" details>
       <vth-item-details (closeEvent)="onCloseDetailsHandler($event)" [details]="viewModel.itemDetails" ></vth-item-details>
     </div>
   </vth-generic-list>

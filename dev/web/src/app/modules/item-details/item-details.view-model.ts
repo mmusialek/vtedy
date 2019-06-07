@@ -30,7 +30,7 @@ export class ProjectViewModel {
 }
 
 export class CommentViewModel {
-    id: number;
+    id: string;
     comment: string;
     author: string;
     authorEmail: string;

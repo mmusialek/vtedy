@@ -1,4 +1,4 @@
-import { CommentCreateRequestDto } from './../../shared/dto/comment.dto';
+import { CommentCreateRequestDto, CommentDto } from './../../shared/dto/comment.dto';
 import { ProjectDto } from './../../shared/dto/project.dto';
 import { TodoItemDto } from './../../shared/dto/todo-item.dto';
 import { TagDto } from './../../shared/dto/tag.dto';
@@ -92,6 +92,19 @@ export class ItemDetailsService {
                 authorEmail: comment.createdBy.email,
                 date: comment.createdDate
             }))));
+    }
+
+
+    updateComment(todoItemId: string, comment: CommentViewModel) {
+        const dto = new CommentDto();
+        dto.content = comment.comment;
+        dto.id = comment.id;
+        dto.todoitemId = todoItemId;
+        return this._todoApiService.updateComment(dto);
+    }
+
+    deleteComment(todoItemId: string, todoItemCommentId: string) {
+        return this._todoApiService.deleteComment(todoItemId, todoItemCommentId);
     }
 
 }

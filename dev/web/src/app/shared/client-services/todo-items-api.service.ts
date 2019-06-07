@@ -57,7 +57,6 @@ export class TodoItemsApiService extends ApiServiceBase {
     }
 
     addComment(params: { todoItemId: string, item: CommentCreateRequestDto }) {
-
         const request = params.item;
         return this._httpService.post<CommentDto>(
             `${this.baseApiUrl}/TodoItems/${params.todoItemId}/comments`,
@@ -66,10 +65,22 @@ export class TodoItemsApiService extends ApiServiceBase {
     }
 
     getComments(todoItemId: string) {
-
         return this._httpService.get<CommentDto[]>(
             `${this.baseApiUrl}/TodoItems/${todoItemId}/comments`
         );
-
     }
+
+    updateComment(comment: CommentDto) {
+        const todoItemId = comment.todoitemId;
+        return this._httpService.put(
+            `${this.baseApiUrl}/TodoItems/${todoItemId}/comments`, comment
+        );
+    }
+
+    deleteComment(todoItemId: string, commentId: string) {
+        return this._httpService.delete(
+            `${this.baseApiUrl}/TodoItems/${todoItemId}/comments/${commentId}`
+        );
+    }
+
 }

@@ -64,6 +64,7 @@ vth-generic-list {
           background-color: transparent;
           height: calc(100% - 41px - 43px);
           width: 20%;
+          min-width: 20vw;
           display: none;
           flex-direction: row;
           overflow: hidden;

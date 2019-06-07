@@ -1,8 +1,8 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output, Input } from '@angular/core';
 import { ItemDetailsService } from './item-details.service';
 import { ItemDetailsViewModel, ItemDataViewModel, CommentViewModel } from './item-details.view-model';
-import { SubscriptionLike as ISubscription } from 'rxjs';
-import { takeWhile, switchMap } from 'rxjs/operators';
+import { SubscriptionLike as ISubscription, of, Observable } from 'rxjs';
+import { takeWhile, switchMap, catchError } from 'rxjs/operators';
 
 @Component({
     selector: 'vth-item-details',
@@ -66,20 +66,38 @@ export class ItemDetailsComponent implements OnInit, OnDestroy {
     }
 
     onCommentSaveClick() {
-        this._itemDetailsService.createComment({
-            todoItemId: this.viewModel.item.id,
-            comment: this.viewModel.item.newComment
-        })
-            .pipe(takeWhile(() => this._isAlive),
+        this.doActionWithCommentUpdate(
+            this._itemDetailsService.createComment({
+                todoItemId: this.viewModel.item.id,
+                comment: this.viewModel.item.newComment
+            }),
+            () => { this.viewModel.item.newComment = undefined; }
+        );
+    }
+
+    onCommentEditClick(comment: CommentViewModel) {
+        this.doActionWithCommentUpdate(this._itemDetailsService.updateComment(this.viewModel.item.id, comment));
+    }
+
+    onCommentDeleteClick(comment: CommentViewModel) {
+        this.doActionWithCommentUpdate(this._itemDetailsService.deleteComment(this.viewModel.item.id, comment.id));
+    }
+
+    private doActionWithCommentUpdate(observable: Observable<any>, successAction?: () => void) {
+        observable
+            .pipe(
+                takeWhile(() => this._isAlive),
+                catchError(() => of({})),
                 switchMap(() => {
                     return this._itemDetailsService.getComments(this.viewModel.item.id);
-                }))
-            .subscribe(item => {
-                console.log(item);
-                this.viewModel.item.newComment = undefined;
-
+                })
+            )
+            .subscribe(data => {
+                if (successAction) {
+                    successAction();
+                }
                 this.viewModel.item.comments.splice(0, this.viewModel.item.comments.length);
-                this.viewModel.item.comments.push(...item);
+                this.viewModel.item.comments.push(...data);
             }, error => {
                 // TODO error handling
                 console.error(error);

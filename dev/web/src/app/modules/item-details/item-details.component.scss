@@ -4,6 +4,7 @@
     .vth-item-details__container__body {
         display: flex;
         flex-direction: column;
+        height: 100%;
 
         .vth-item-details__container__body__header {
             //background-color: green;
@@ -21,9 +22,15 @@
 
         .vth-item-details__container__body__content {
             padding: 5px;
+            height: 100%;
 
             .vth-item-details__container__body__content__item-details {
                 position: relative;
+                height: 100%;
+
+                .vth-item-details__container__body__content__item-details__item {}
+
+
                 .vth-item-details__container__body__content__item-details__title {
                     font-size: 1.2em;
                     font-weight: bold;
@@ -42,6 +49,8 @@
                 }
 
                 .vth-item-details__container__body__content__item-details__header {
+                    height: 20%;
+                    overflow-y: auto;
 
                     .vth-item-details__container__body__content__item-details__header__name {
                         font-size: 1.1em;
@@ -57,9 +66,15 @@
                 }
 
                 .vth-item-details__container__body__content__item-details__comments {
+                    height: 55%;
+
                     .vth-item-details__container__body__content__item-details__comments__input-form {}
 
                     .vth-item-details__container__body__content__item-details__comments__comment-entries {
+                        height: 70%;
+                        overflow-y: auto;
+                        padding-bottom: 42px;
+
                         .vth-item-details__container__body__content__item-details__comments__comment-entries__entry {
                             padding-bottom: 15px;
 
@@ -75,4 +90,9 @@
             }
         }
     }
+}
+
+vth-item-details {
+    display: block;
+    height: 100%;
 }

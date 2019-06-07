@@ -1,19 +1,31 @@
 .vth-item-list__container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
 
+    .vth-item-list__container__header {
+        height: 100%;
+    }
 
-  .vth-item-list__container__input {
-    font-size: 1.1em;
-    width: 30vw;
-  }
+    .vth-item-list__container__details {
+        height: 100%;
+    }
 
-  .vth-item-list__container__close {
-    transform: rotate(45deg);
-    display: inline-block;
-    font-size: 1.2em;
-  }
+    .vth-item-list__container__input {
+        font-size: 1.1em;
+        width: 30vw;
+    }
 
+    .vth-item-list__container__close {
+        transform: rotate(45deg);
+        display: inline-block;
+        font-size: 1.2em;
+    }
+
+}
+
+vth-generic-list {
+    display: block;
+    height: 100%
 }
