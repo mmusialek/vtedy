@@ -12,6 +12,9 @@ export class GenericListItemViewModel {
   }
 
   static new(param: any) {
-    return Object.assign(new GenericListItemViewModel(), param);
+    const res =  Object.assign(new GenericListItemViewModel(), param);
+    res.id = param.projectId;
+
+    return res;
   }
 }
