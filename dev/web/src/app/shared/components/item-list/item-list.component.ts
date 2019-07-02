@@ -1,6 +1,5 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SubscriptionLike as ISubscription } from 'rxjs';
 import { ItemDetailsService } from '../../../modules/item-details/item-details.service';
 import { ItemListService } from './item-list.service';
 import { ItemListItemViewModel, ItemListViewModel, PagesRoues } from './item-list.view-model';
@@ -61,12 +60,16 @@ export class ItemListComponent implements OnInit, OnDestroy {
     onListItemClickHandler(event, item) {
         this._itemListService.getItemDetails(item.id).pipe(takeWhile(_ => this._isAlive)).subscribe(data => {
             this.viewModel.itemDetails = data;
-            this._itemDetailsService.showItemDetails();
+            this.viewModel.areDetailsVisible = true;
         });
     }
 
     onCloseDetailsHandler(event) {
         this.closeDetails();
+    }
+
+    onItemDeleted() {
+        // TODO: refresj item list
     }
 
     onCloseNewItemClick(event) {
@@ -80,7 +83,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
         }
 
         if (this.viewModel.isAddNewItemVisible) {
-            this._itemDetailsService.hideItemDetails();
+            this.viewModel.areDetailsVisible = false;
             const timerId = setTimeout(() => {
                 this.newItemInput.nativeElement.focus();
                 clearTimeout(timerId);
@@ -115,7 +118,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
 
     private closeDetails() {
         if (!this._itemDetailsService.isDialogPinned) {
-            this._itemDetailsService.hideItemDetails();
+            this.viewModel.areDetailsVisible = false;
         }
     }
 

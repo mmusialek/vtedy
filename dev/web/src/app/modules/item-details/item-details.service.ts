@@ -11,16 +11,10 @@ import { takeWhile, map } from 'rxjs/operators';
 
 @Injectable()
 export class ItemDetailsService {
-    private _isDialogVisible: Subject<boolean> = new Subject<boolean>();
     private _newDataStream: Subject<ItemDataViewModel> = new Subject<ItemDataViewModel>();
     private _isDialogPinned = false;
 
     constructor(private _todoApiService: TodoItemsApiService) { }
-
-    get isDialogVisible() {
-        return this._isDialogVisible;
-    }
-
     get newDataStream() {
         return this._newDataStream;
     }
@@ -31,18 +25,6 @@ export class ItemDetailsService {
 
     togglePinDialog() {
         this._isDialogPinned = !this._isDialogPinned;
-    }
-
-    showItemDetails() {
-        if (!this._isDialogPinned) {
-            this._isDialogVisible.next(true);
-        }
-    }
-
-    hideItemDetails() {
-        if (!this._isDialogPinned) {
-            this._isDialogVisible.next(false);
-        }
     }
 
     updateTodoItem(item: ItemDataViewModel) {
@@ -68,6 +50,10 @@ export class ItemDetailsService {
         });
 
         return this._todoApiService.update(dto);
+    }
+
+    deleteTodoItem(todoItemId: string) {
+        return this._todoApiService.delete(todoItemId);
     }
 
     createComment(params: { todoItemId: string, comment: string }) {

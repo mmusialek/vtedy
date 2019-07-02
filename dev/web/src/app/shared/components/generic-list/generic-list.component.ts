@@ -17,6 +17,8 @@ export class GenericListComponent {
     @Input() items: GenericListItemViewModel[];
     @Input() config: IGenericListComponentConfig;
 
+    @Input() areDetailsVisible = false;
+
     onClickOutsideInput(event) {
         if (this.config && this.config.addNewOutsideHandler) {
             this.config.addNewOutsideHandler(event);
@@ -34,25 +36,35 @@ export class GenericListComponent {
 
         const skipClasses = ['vth-option-panel__container__nav-container__hider', 'vth-special__no-close'];
 
-        if (skipClasses.includes(event.className)) {
+        const canBeSkipped = (cssClasses: string) => {
+            let classNamesSplit: string | string[] = cssClasses;
+
+            let stopProcessing = false;
+
+            if (cssClasses.includes(' ')) {
+                classNamesSplit = cssClasses.split(' ');
+
+                for (const item of classNamesSplit) {
+                    if (skipClasses.includes(item)) {
+                        stopProcessing = true;
+                        break;
+                    }
+                }
+            } else {
+                stopProcessing = skipClasses.includes(event.className);
+            }
+
+            return stopProcessing;
+        };
+
+
+        if (canBeSkipped(event.className)) {
             return;
         }
 
         // condition for mat-button, material controls controls
-
-        if (event.parentElement) {
-            const matButtonClasses = event.parentElement.className.split(' ');
-            let stopProcessing = false;
-            for (const item of matButtonClasses) {
-                if (skipClasses.includes(item)) {
-                    stopProcessing = true;
-                    break;
-                }
-            }
-
-            if (stopProcessing) {
-                return;
-            }
+        if (event.parentElement && canBeSkipped(event.parentElement.className)) {
+            return;
         }
 
         if (this.viewModel.areDetailsVisible && event.className.indexOf('vth-generic-list__container__list__list-item') < 0) {
@@ -74,7 +86,6 @@ export class GenericListComponent {
     private closeDetails() {
         if (!this._itemDetailsService.isDialogPinned) {
             this.viewModel.areDetailsVisible = false;
-            this._itemDetailsService.hideItemDetails();
         }
     }
 }

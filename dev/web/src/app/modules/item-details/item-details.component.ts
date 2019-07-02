@@ -18,16 +18,12 @@ export class ItemDetailsComponent implements OnInit, OnDestroy {
     }
 
     @Output() closeEvent: EventEmitter<any> = new EventEmitter<any>();
+    @Output() itemDeletedEvent: EventEmitter<any> = new EventEmitter<any>();
 
     constructor(private _itemDetailsService: ItemDetailsService) {
     }
 
     ngOnInit() {
-
-        this._itemDetailsService.isDialogVisible.pipe(takeWhile(_ => this._isAlive)).subscribe(p => {
-            this.viewModel.isVisible = p;
-        });
-
         this._itemDetailsService.newDataStream.pipe(takeWhile(_ => this._isAlive)).subscribe(p => {
             this.viewModel.item = p;
         });
@@ -38,7 +34,6 @@ export class ItemDetailsComponent implements OnInit, OnDestroy {
     }
 
     onCloseHandler() {
-        this._itemDetailsService.hideItemDetails();
         this.viewModel.item = undefined;
         this.closeEvent.emit(false);
     }
@@ -93,6 +88,15 @@ export class ItemDetailsComponent implements OnInit, OnDestroy {
             this._itemDetailsService.updateComment(this.viewModel.item.id, this.viewModel.item.editedComment),
             () => {
                 this.hideCommentEdit();
+            });
+    }
+
+    onTodoItemDeleteClick() {
+        this._itemDetailsService.deleteTodoItem(this.viewModel.item.id)
+            .pipe(takeWhile(() => this._isAlive))
+            .subscribe(item => {
+                this.itemDeletedEvent.emit();
+                this.onCloseHandler();
             });
     }
 

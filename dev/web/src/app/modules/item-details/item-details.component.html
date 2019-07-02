@@ -1,4 +1,4 @@
-<div class="vth-item-details__container" *ngIf="viewModel.isVisible">
+<div class="vth-item-details__container">
     <div class="vth-item-details__container__body">
         <div class="vth-item-details__container__body__header">
             <a class="vth-item-details__container__body__header__close" (click)="onCloseHandler()">X</a>
@@ -10,7 +10,8 @@
 
                 <ng-container *ngIf="!viewModel.isEditItemOpened; else itemEditOpened">
                     <div class="vth-item-details__container__body__content__item-details__title">
-                        {{viewModel.item?.name}} <a class="vth-special__no-close" (click)="onItemEditClick()">edit</a>
+                        {{viewModel.item?.name}} <a class="vth-special__no-close vth-link" (click)="onItemEditClick()">edit</a>
+                        <a (click)="onTodoItemDeleteClick()" class="vth-link">!del!</a>
                     </div>
                 </ng-container>
 
@@ -104,8 +105,13 @@
 
                 </div>
 
-
             </div>
         </div>
+
+
+
+        <!-- <div class="vth-item-details__container__body__footer">
+            <a (click)="onTodoItemDeleteClick()" class="vth-link">delete</a>
+        </div> -->
     </div>
 </div>

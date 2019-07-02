@@ -1,5 +1,5 @@
 <div class="vth-item-list__container  vth-remove-list-styles">
-  <vth-generic-list [config]="viewModel.genericListConfig" [items]="items">
+  <vth-generic-list [config]="viewModel.genericListConfig" [items]="items" [areDetailsVisible]="viewModel.areDetailsVisible">
 
     <div class="vth-item-list__container__header" header>
       <div *ngIf="viewModel.isAddNewItemVisible" class="vth-display-inline">
@@ -10,8 +10,11 @@
       </div>
     </div>
 
-    <div class="vth-item-list__container__details" details>
-      <vth-item-details (closeEvent)="onCloseDetailsHandler($event)" [details]="viewModel.itemDetails" ></vth-item-details>
+    <div class="vth-item-list__container__details" details *ngIf="viewModel.areDetailsVisible">
+      <vth-item-details
+      (closeEvent)="onCloseDetailsHandler($event)"
+      (itemDeletedEvent)="onItemDeleted()"
+      [details]="viewModel.itemDetails" ></vth-item-details>
     </div>
   </vth-generic-list>
 </div>

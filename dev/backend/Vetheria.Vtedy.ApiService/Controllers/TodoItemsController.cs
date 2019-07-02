@@ -96,7 +96,7 @@ namespace Vetheria.Vtedy.ApiService.Controllers
             // TODO get user id from token
             var userAccountId = 1;
 
-            var addedItem = await _dataProvider.Delete(todoItemId, userAccountId);
+            var item = await _dataProvider.Delete(todoItemId, userAccountId);
 
             return new NoContentResult();
         }

@@ -1,5 +1,5 @@
 .vth-item-details__container {
-    height: 100%;
+    height: calc(100% - 30px);
 
     .vth-item-details__container__body {
         display: flex;
@@ -97,6 +97,10 @@
 
             }
 
+        }
+
+        &__footer {
+            padding-bottom: 5px;
         }
     }
 }

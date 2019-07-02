@@ -56,6 +56,12 @@ export class TodoItemsApiService extends ApiServiceBase {
         );
     }
 
+    delete(todoItemId: string) {
+        return this._httpService.delete(
+            `${this.baseApiUrl}/TodoItems/${todoItemId}`
+        );
+    }
+
     addComment(params: { todoItemId: string, item: CommentCreateRequestDto }) {
         const request = params.item;
         return this._httpService.post<CommentDto>(
