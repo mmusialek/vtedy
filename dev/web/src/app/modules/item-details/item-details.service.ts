@@ -34,6 +34,7 @@ export class ItemDetailsService {
         dto.id = item.id;
         dto.isCurrent = item.isCurrent;
         dto.name = item.name;
+        dto.projectId = item.project.id;
 
         dto.project = new ProjectDto();
         dto.project.projectId = item.project.id;

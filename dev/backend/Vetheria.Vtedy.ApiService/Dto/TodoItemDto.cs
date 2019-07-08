@@ -8,6 +8,7 @@ namespace Vetheria.Vtedy.ApiService.Dto
         public string Name { get; set; }
         public bool IsCurrent { get; set; }
         public int StatusId { get; set; }
+        public int ProjectId { get; set; }
 
         public ProjectDto Project { get; set; }
         public List<TagDto> Tags { get; set; } = new List<TagDto>();
