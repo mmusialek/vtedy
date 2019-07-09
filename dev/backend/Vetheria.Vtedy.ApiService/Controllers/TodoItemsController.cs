@@ -158,6 +158,17 @@ namespace Vetheria.Vtedy.ApiService.Controllers
         }
 
 
+
+        [HttpDelete("{todoItemId}/comments/{todoItemCommentId}")]
+        public async Task<IActionResult> DeleteTodoItemComment(string todoItemId, string todoItemCommentId)
+        {
+            var model = await _todoItemsCommentDataProvider.Delete(todoItemId, todoItemCommentId);
+
+            var resObj = new ObjectResult(model);
+            return resObj;
+        }
+
+
         // tags
 
 

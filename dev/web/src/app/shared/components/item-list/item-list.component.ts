@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ItemDetailsService } from '../../../modules/item-details/item-details.service';
 import { ItemListService } from './item-list.service';
@@ -16,6 +16,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
     @ViewChild('newItemInput') newItemInput;
     @Input() items: ItemListItemViewModel[];
     @Input() pageType: string;
+    @Output() itemDeletedEvent: EventEmitter<any> = new EventEmitter<any>();
 
     private _isAlive = true;
 
@@ -69,7 +70,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
     }
 
     onItemDeleted() {
-        // TODO: refresj item list
+        this.itemDeletedEvent.emit();
     }
 
     onCloseNewItemClick(event) {

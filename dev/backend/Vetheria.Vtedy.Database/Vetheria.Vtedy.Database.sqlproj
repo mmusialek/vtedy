@@ -100,6 +100,7 @@
     <Build Include="StoredProcedures\TodoItems\dbo.TodoItems_Tag_delete.sql" />
     <Build Include="StoredProcedures\TodoItems\dbo.TodoItems_Tag_get.sql" />
     <Build Include="StoredProcedures\Tag\Tag_add.sql" />
+    <Build Include="StoredProcedures\TodoItems\dbo.TodoItemsComment_delete.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Vetheria.Vtedy.Database.refactorlog" />

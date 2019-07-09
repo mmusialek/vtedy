@@ -33,6 +33,11 @@ export class TaskListComponent implements OnInit {
         this.refreshView(this.viewModel.pageType);
     }
 
+    onItemDeleted() {
+        // TODO show progress indicator
+        this.refreshView(this.viewModel.pageType);
+    }
+
     // helper methods
 
     private refreshView(page: string) {
