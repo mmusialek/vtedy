@@ -1,5 +1,4 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { ItemDetailsService } from '../../../modules/item-details/item-details.service';
 import { ItemListService } from './item-list.service';
 import { ItemListItemViewModel, ItemListViewModel, PagesRoues } from './item-list.view-model';
@@ -20,8 +19,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
 
     private _isAlive = true;
 
-    constructor(private _route: ActivatedRoute,
-        private _router: Router,
+    constructor(
         private _itemListService: ItemListService,
         private _itemDetailsService: ItemDetailsService,
         private _projectsService: ProjectsService) {

@@ -2,7 +2,7 @@ import { ProjectsService } from './../services/projects.service';
 import { Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Observable, merge, of } from 'rxjs';
-import { map, mergeMap } from 'rxjs/operators';
+import { mergeMap } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'

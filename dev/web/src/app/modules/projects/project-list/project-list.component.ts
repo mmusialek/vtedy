@@ -1,9 +1,7 @@
 import { ProjectsService } from './../../../shared/services/projects.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { takeWhile } from 'rxjs/operators';
 import { GenericListItemViewModel } from '../../../shared/components/generic-list/generic-list.view-model';
-import { ProjectListService } from './project-list.service';
 import { ProjectListViewModel } from './project-list.view-model';
 
 @Component({
@@ -12,7 +10,6 @@ import { ProjectListViewModel } from './project-list.view-model';
 })
 export class ProjectListComponent implements OnInit {
     viewModel: ProjectListViewModel;
-    private _isAlive: boolean;
 
     constructor(
         private _router: Router,
@@ -22,7 +19,6 @@ export class ProjectListComponent implements OnInit {
 
     ngOnInit(): void {
         this.viewModel = new ProjectListViewModel();
-        this._isAlive = true;
 
         this.viewModel.genericListConfig = {
             addNewVisibilityHandler: this.addNewVisibilityHandler.bind(this),

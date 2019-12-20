@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output, Input } from '@angular/core';
 import { ItemDetailsService } from './item-details.service';
 import { ItemDetailsViewModel, ItemDataViewModel, CommentViewModel } from './item-details.view-model';
-import { SubscriptionLike as ISubscription, of, Observable } from 'rxjs';
+import { of, Observable } from 'rxjs';
 import { takeWhile, switchMap, catchError } from 'rxjs/operators';
 
 @Component({

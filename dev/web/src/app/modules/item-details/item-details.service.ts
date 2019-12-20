@@ -6,7 +6,7 @@ import { TodoItemsApiService } from './../../shared/client-services/todo-items-a
 import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { ItemDataViewModel, CommentViewModel } from './item-details.view-model';
-import { takeWhile, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 
 @Injectable()

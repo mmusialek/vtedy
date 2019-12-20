@@ -1,7 +1,7 @@
-import { ProjectDto } from '../dto/project.dto';
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { ProjectDto } from '../dto/project.dto';
+import { Observable } from 'rxjs';
 import { ApiServiceBase } from './api-service-base';
 
 @Injectable({

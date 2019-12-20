@@ -1,12 +1,12 @@
 import { CommentDto } from './../../dto/comment.dto';
-import { ItemDataViewModel, ProjectViewModel, TagViewModel, CommentViewModel, ItemDetailsViewModel } from './../../../modules/item-details/item-details.view-model';
+import { ItemDataViewModel, ProjectViewModel, TagViewModel, CommentViewModel } from './../../../modules/item-details/item-details.view-model';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { takeWhile, map, switchMap, mergeMap, catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { takeWhile, map, switchMap } from 'rxjs/operators';
 
 import { TodoItemDto } from '../../dto/todo-item.dto';
 import { ItemListFilter } from '../../models/item-list-filter';
-import { ItemListItemViewModel, TodoItemViewModel } from './item-list.view-model';
+import { ItemListItemViewModel } from './item-list.view-model';
 import { TodoItemsApiService } from '../../client-services/todo-items-api.service';
 import { ProjectDto } from '../../dto/project.dto';
 

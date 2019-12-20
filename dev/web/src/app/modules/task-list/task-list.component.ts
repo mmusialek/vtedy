@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, SubscriptionLike as ISubscription } from 'rxjs';
-import { ActivatedRoute, ActivationEnd, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ItemListService } from '../../shared/components/item-list/item-list.service';
 import { PagesRoues } from '../../shared/components/item-list/item-list.view-model';
-import {
-    TaskListItemViewModel,
-    TaskListViewModel
-} from './task-list.view-model';
+import { TaskListViewModel } from './task-list.view-model';
 import { ItemListFilter } from '../../shared/models/item-list-filter';
 import { takeWhile } from 'rxjs/operators';
 
@@ -15,18 +11,15 @@ import { takeWhile } from 'rxjs/operators';
     templateUrl: './task-list.component.html'
 })
 export class TaskListComponent implements OnInit {
-    private _isAlive: boolean;
     viewModel: TaskListViewModel;
 
     constructor(
         private _route: ActivatedRoute,
-        private _router: Router,
         private _itemListService: ItemListService
     ) { }
 
     ngOnInit() {
         this.viewModel = new TaskListViewModel();
-        this._isAlive = true;
 
         // this is called first time
         this.viewModel.pageType = this._route.snapshot.data.type;

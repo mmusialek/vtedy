@@ -1,6 +1,6 @@
 import { ProjectDto } from '../../../shared/dto/project.dto';
 import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRoute } from '@angular/router';
+import { Resolve } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { ProjectsApiService } from '../../../shared/client-services/projects-api.service';
 import { catchError } from 'rxjs/operators';
