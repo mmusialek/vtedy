@@ -13,7 +13,7 @@ import { takeWhile } from 'rxjs/operators';
 export class ItemListComponent implements OnInit, OnDestroy {
 
     viewModel: ItemListViewModel = new ItemListViewModel();
-    @ViewChild('newItemInput') newItemInput;
+    @ViewChild('newItemInput', { static: false }) newItemInput;
     @Input() items: ItemListItemViewModel[];
     @Input() pageType: string;
     @Output() itemDeletedEvent: EventEmitter<any> = new EventEmitter<any>();

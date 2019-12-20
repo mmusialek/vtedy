@@ -13,7 +13,7 @@ export class GenericListComponent {
     constructor(private _itemDetailsService: ItemDetailsService) { }
 
     viewModel: GenericListViewModel = new GenericListViewModel();
-    @ViewChild('newItemInput') newItemInput;
+    @ViewChild('newItemInput', { static: false }) newItemInput;
     @Input() items: GenericListItemViewModel[];
     @Input() config: IGenericListComponentConfig;
 
